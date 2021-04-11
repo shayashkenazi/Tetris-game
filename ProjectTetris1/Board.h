@@ -1,0 +1,33 @@
+#pragma once
+#include <iostream>
+using namespace std;
+#include"Point.h"
+
+class Board
+{
+private:    
+    char boardGame[Rows][Cols];
+    Color BoardColors[Rows][Cols];
+
+public: 
+    Board() ;
+    ~Board() {};
+    char getCharAtBoard(int row, int col) { return boardGame[row][col]; } // Returns the char at the wanted place on the board
+    void setPointAtBoard(Point point,Color c); //Sets a given point in the board
+    
+    void UpdateBoardByRow(int row); //Erases the wanted row by index and fixes the board
+    void ResetBoard();
+
+    //Printing functions
+    
+    void PrintBoardGame(int player);
+    
+};
+
+
+
+
+
+
+
+  
