@@ -1,11 +1,11 @@
 #include "Point.h"
 
-void Point::draw(char ch) {
+void Point::draw(char ch) const{
     gotoxy(x, y);
     cout << ch << endl;
 }
 
-void Point::draw()
+void Point::draw() const
 {
     gotoxy(x, y);
     cout << ch << endl;

@@ -15,7 +15,5 @@ public:
 
     Shape getShape(int idx) { return AllShapesArray[idx]; } //Returns shape by index
     void InitColorsShapesArray(); //Sets color to each shape
-
-
 };
 

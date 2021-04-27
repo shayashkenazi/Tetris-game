@@ -16,14 +16,15 @@ public:
     ~TetrisGame();
 
     void run(Shape& S1, Shape& S2);
-    void PresentMenu(int pause); //Presents menu to the screen
-    void PresentInstructions();//Presents instructions and controls to the screen
+
+    void PresentMenu(int pause) const; //Presents menu to the screen
+    void PresentInstructions() const;//Presents instructions and controls to the screen
     void menu(int Pause); //Game menu
-    bool IsKeyboard1(char ch); //check if the key is of player 1
-    bool IsKeyboard2(char ch); //check if the key is of player 2
+    bool IsKeyboard1(char ch) const; //check if the key is of player 1
+    bool IsKeyboard2(char ch) const; //check if the key is of player 2
 
     void pauseGame(Shape& S1, Shape& S2);
-    void printGameOver();//Prints GAME OVER to the screen
+    void printGameOver()const;//Prints GAME OVER to the screen
     void InitPlayersBoards();//Resets players boards to default
     void InitColors();//Sets colors to all shapes
     void DropShape(Shape& S, int player_num, char key);//Drops shape as long as its possible

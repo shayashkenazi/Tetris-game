@@ -36,12 +36,12 @@ Board::Board()
     }
 }
 
-void Board::setPointAtBoard(Point point,Color c)
+void Board::setPointAtBoard(const Point& point,Color c)
 {
     int x, y;
     x = point.getx();
     y = point.gety();
-    if (x > 13)
+    if (x > rightBoardPlayer1)
 	   x = x - LeftBoardPlayer2;
     boardGame[y][x] = point.getCh();
     BoardColors[y][x] = c;
@@ -71,7 +71,7 @@ void Board::ResetBoard()
 	*this = Board();
 }
 
-void Board::PrintBoardGame(int player)
+void Board::PrintBoardGame(int player) const
 {
      
     

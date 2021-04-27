@@ -127,7 +127,7 @@ void TetrisGame::run(Shape& S1 , Shape& S2)
 
 }
 
-void TetrisGame::PresentMenu(int pause)
+void TetrisGame::PresentMenu(int pause) const
 	{
 		Color c = LIGHTGREY;
 		setTextColor(c);
@@ -152,7 +152,7 @@ void TetrisGame::PresentMenu(int pause)
 		cout << "(9) EXIT " << endl;
 	}
 
-void TetrisGame::PresentInstructions()
+void TetrisGame::PresentInstructions() const
 	{
 		gotoxy(5, 7);
 		cout << "GAME INSTRUCTIONS\n";
@@ -255,9 +255,9 @@ void TetrisGame::menu(int pause)
     
 }
 
-bool TetrisGame::IsKeyboard1( char ch)
+bool TetrisGame::IsKeyboard1(char ch)const
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < CommandLoop; i++)
     {
 	   if (keyboardString1[i] == ch)
 		  return true;
@@ -265,9 +265,9 @@ bool TetrisGame::IsKeyboard1( char ch)
     return false;
 }
 
-bool TetrisGame::IsKeyboard2(char ch)
+bool TetrisGame::IsKeyboard2(char ch)const
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < CommandLoop; i++)
     {
 	   if (keyboardString2[i] == ch)
 		  return true;
@@ -280,7 +280,7 @@ void TetrisGame::pauseGame(Shape& S1, Shape& S2)
     menu(1);
 }
 
-void TetrisGame::printGameOver()
+void TetrisGame::printGameOver()const
 {
     gotoxy(rightBoardPlayer1 + 2, (TopBoard + Bottom) / 2);
 	if (!ThePlayers[Player1].getWinner())

@@ -7,26 +7,26 @@ Player::Player(int player) : boardGameForPlayer(), shapesarray(player), playerNu
 Player::~Player()
 {
 }
-int Player::getWinner()
+const int Player::getWinner() const
 {
     return winner;
 }
 
-void Player::printboard()
+void const Player::printboard() const
 {
     boardGameForPlayer.PrintBoardGame(playerNumber);
 }
 
-void Player::UpdateBoard( Shape& shape)
+void Player::UpdateBoard(const Shape& shape)
 {
     for (int i = 0; i < 4; i++)
     {
-        boardGameForPlayer.setPointAtBoard(shape.getPointByIdx(i),shape.getColor());
+        boardGameForPlayer.setPointAtBoard(shape.getPointByIdx(i), shape.getColor());
     }
 
 }
 
-bool Player::IsPossible(Shape& shape, char movement)
+bool Player::IsPossible(const Shape& shape, char movement)
 {
     int serialNum = shape.getSerialNumber();
     int x, y;

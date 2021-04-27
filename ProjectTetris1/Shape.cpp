@@ -20,7 +20,7 @@ Shape::~Shape()
 
 }
 
-Shape Shape::Square(Point StartPoint, int direction)
+Shape& Shape::Square(Point StartPoint, int direction)
 {
     
     body[0] = StartPoint;
@@ -32,7 +32,7 @@ Shape Shape::Square(Point StartPoint, int direction)
     return *this;
 }
 
-Shape Shape::LleftShape(Point StartPoint, int direction)
+Shape& Shape::LleftShape(Point StartPoint, int direction)
 {
     StartPoint.setCh('@');
     
@@ -88,7 +88,7 @@ Shape Shape::LleftShape(Point StartPoint, int direction)
     return *this;
 }
 
-Shape Shape::LrightShape(Point StartPoint, int direction)
+Shape& Shape::LrightShape(Point StartPoint, int direction)
 {
  
     switch (direction)
@@ -143,7 +143,7 @@ Shape Shape::LrightShape(Point StartPoint, int direction)
 
 }
 
-Shape Shape::RowShape(Point StartPoint, int direction)
+Shape& Shape::RowShape(Point StartPoint, int direction)
 {
  //send body[1]
     switch (direction)
@@ -178,7 +178,7 @@ Shape Shape::RowShape(Point StartPoint, int direction)
     
 }
 
-Shape Shape::ZleftShape(Point StartPoint, int direction)
+Shape& Shape::ZleftShape(Point StartPoint, int direction)
 {
     switch (direction)
     {
@@ -212,7 +212,7 @@ Shape Shape::ZleftShape(Point StartPoint, int direction)
     return *this;
 }
 
-Shape Shape::ZrightShape(Point StartPoint,int direction)
+Shape& Shape::ZrightShape(Point StartPoint,int direction)
 {
  
     switch (direction)
@@ -250,7 +250,7 @@ Shape Shape::ZrightShape(Point StartPoint,int direction)
     return *this;
 }
 
-Shape Shape::PlusShape(Point StartPoint, int direction)
+Shape& Shape::PlusShape(Point StartPoint, int direction)
 {
     
     switch (direction)
@@ -317,7 +317,7 @@ void Shape::initShape()
     }
 }
 
-void Shape::draw()
+void Shape::draw() const
 {
     setTextColor(color);
 
@@ -351,7 +351,7 @@ void Shape::move(char direction)
     draw();
 }
 
- bool Shape ::CheckLleftRotateClockWise(int playerNumber, Board& boardGameForPlayer)
+ bool Shape ::CheckLleftRotateClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
     switch (direction)
@@ -505,7 +505,7 @@ void Shape::move(char direction)
 
 }
 
-bool Shape::CheckLRightRotateClockWise(int playerNumber, Board& boardGameForPlayer)
+bool Shape::CheckLRightRotateClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
     switch (direction)
@@ -672,7 +672,7 @@ bool Shape::CheckLRightRotateClockWise(int playerNumber, Board& boardGameForPlay
     return true;
 }
 
-bool Shape::CheckRowShapeRotateClockWise(int playerNumber, Board& boardGameForPlayer)
+bool Shape::CheckRowShapeRotateClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
     switch (direction)
@@ -769,7 +769,7 @@ bool Shape::CheckRowShapeRotateClockWise(int playerNumber, Board& boardGameForPl
 
 }
 
-bool Shape::CheckZleftRotateClockWise(int playerNumber, Board& boardGameForPlayer)
+bool Shape::CheckZleftRotateClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
     switch (direction)
@@ -841,7 +841,7 @@ bool Shape::CheckZleftRotateClockWise(int playerNumber, Board& boardGameForPlaye
     return true;
 }
 
-bool Shape::CheckZRightRotateClockWise(int playerNumber, Board& boardGameForPlayer)
+bool Shape::CheckZRightRotateClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
     switch (direction)
@@ -915,7 +915,7 @@ bool Shape::CheckZRightRotateClockWise(int playerNumber, Board& boardGameForPlay
     
 }
 
-bool Shape::CheckPlusRotateClockWise(int playerNumber, Board& boardGameForPlayer)
+bool Shape::CheckPlusRotateClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
     switch (direction)
@@ -1018,7 +1018,7 @@ bool Shape::CheckPlusRotateClockWise(int playerNumber, Board& boardGameForPlayer
     return true;
 }
 
-bool Shape::CheckLleftRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)
+bool Shape::CheckLleftRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
     switch (direction)
@@ -1167,7 +1167,7 @@ bool Shape::CheckLleftRotateCounterClockWise(int playerNumber, Board& boardGameF
     return true;
 }
 
-bool Shape::CheckLRightRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)
+bool Shape::CheckLRightRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
     switch (direction)
@@ -1298,7 +1298,7 @@ bool Shape::CheckLRightRotateCounterClockWise(int playerNumber, Board& boardGame
     return true;
 }
 
-bool Shape::CheckPlusRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)
+bool Shape::CheckPlusRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
 
     int x, y;

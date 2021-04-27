@@ -19,6 +19,5 @@ void main()
     g.menu(0); 
 
     gotoxy(20, 20);
-
 }
 
