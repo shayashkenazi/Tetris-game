@@ -37,30 +37,43 @@ void TetrisGame::DropShape(Shape& S, int player_num, char key)
 	}
 }
 
-void TetrisGame::run(Shape& S1 , Shape& S2)
+void TetrisGame::RandomShape(Shape** S)
+{
+    int randShape;
+    randShape = rand() % RAND;
+   
+    *S =  ThePlayers[Player1].getShapesarray().getShape(randShape);
+}
+
+void TetrisGame::run(Shape* S1 , Shape* S2)
 {
     char key = 0;
     int randShape = rand() % RAND;
 	
-	if (S1.getPointByIdx(0).getCh() == ' ' && S2.getPointByIdx(0).getCh() == ' ') // Checks if the shapes are initiated or not
+	/*if (S1.getPointByIdx(0).getCh() == ' ' && S2.getPointByIdx(0).getCh() == ' ') // Checks if the shapes are initiated or not
 	{                                                                             // if initiated, we continue a paused game
 		 S1 = ThePlayers[Player1].getShapesarray().getShape(randShape);
 		 S2 = ThePlayers[Player2].getShapesarray().getShape(randShape);
-	}
-	//Prints boards
+	}*/
+    if (S1 == nullptr && S2 == nullptr) {
+	   
+	   RandomShape(&S1);
+	   RandomShape(&S2);
+    }
+    //Prints boards
 	ThePlayers[Player1].getBoardGame().PrintBoardGame(Player1);
 	gotoxy(LeftBoardPlayer2, 0);
     ThePlayers[Player2].getBoardGame().PrintBoardGame(Player2);
 
     do {
 	   //Checks if a shape reached the top of the board
-	   if (!ThePlayers[Player1].CheckGameOver(S1) || !ThePlayers[Player2].CheckGameOver(S2))
+	   if (!ThePlayers[Player1].CheckGameOver(*S1) || !ThePlayers[Player2].CheckGameOver(*S2))
 	   {
 		  printGameOver();
 		  return;
 	   }
-	   S1.draw();
-	   S2.draw();
+	   S1->draw();
+	   S2->draw();
 	 
 	//Clears the input buffer for more fluid gaming
 	 HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
@@ -81,42 +94,40 @@ void TetrisGame::run(Shape& S1 , Shape& S2)
 			 {
 				if (Drop1 == key || Drop1B == key)
 				{
-					DropShape(S1, Player1, key);//Drops shape while possible
+					DropShape(*S1, Player1, key);//Drops shape while possible
 				    i = CommandLoop; // quit from the loop
 				}
-				else if (ThePlayers[Player1].IsPossible(S1, key))//Checks if a given move input is possible (any move but down)
-				    S1.move(key);//Moves shape according to given input
+				else if (ThePlayers[Player1].IsPossible(*S1, key))//Checks if a given move input is possible (any move but down)
+				    S1->move(key);//Moves shape according to given input
 			 }
 			 if (IsKeyboard2(key)) {
 				if (Drop2 == key || Drop2B == key)
 				{
-					DropShape(S2, Player2, key);//Drops shape while possible
+					DropShape(*S2, Player2, key);//Drops shape while possible
 				    i = CommandLoop; // quit from the loop
 				}
-				else if (ThePlayers[Player2].IsPossible(S2, key))//Checks if a given move input is possible (any move but down)
-				    S2.move(key);//Moves shape according to given input
+				else if (ThePlayers[Player2].IsPossible(*S2, key))//Checks if a given move input is possible (any move but down)
+				    S2->move(key);//Moves shape according to given input
 			 }
 		  }
 		  Sleep(50);
 	   }	   		
-		  if (ThePlayers[Player1].IsPossible(S1, MoveDown))//Drops shape by one step
-			 S1.move(MoveDown);
+		  if (ThePlayers[Player1].IsPossible(*S1, MoveDown))//Drops shape by one step
+			 S1->move(MoveDown);
 		  else //If shape reached bottom, update the shape in the board and randomly pick new shape
 		  {
-			 ThePlayers[Player1].UpdateBoard(S1);
-			 randShape = rand() % RAND;
-			 S1 = ThePlayers[Player1].getShapesarray().getShape(randShape);
+			 ThePlayers[Player1].UpdateBoard(*S1);
+			 RandomShape(&S1);
 			 ThePlayers[Player1].CheckRow(); //Checks if there is any rows that are full, if so deletes row
 			 gotoxy(0, 0);
 			 ThePlayers[Player1].getBoardGame().PrintBoardGame(Player1);//Prints updated board
 		  }
-		  if (ThePlayers[Player2].IsPossible(S2, MoveDown))//Drops shape by one step
-			 S2.move(MoveDown);
+		  if (ThePlayers[Player2].IsPossible(*S2, MoveDown))//Drops shape by one step
+			 S2->move(MoveDown);
 		  else//If shape reached bottom, update the shape in the board and randomly pick new shape
 		  {
-			 ThePlayers[Player2].UpdateBoard(S2);
-			 randShape = rand() % RAND;
-			 S2 = ThePlayers[Player2].getShapesarray().getShape(randShape);
+			 ThePlayers[Player2].UpdateBoard(*S2);
+			 RandomShape(&S2);
 			 ThePlayers[Player2].CheckRow(); //Checks if there is any rows that are full, if so deletes row
 			 gotoxy(LeftBoardPlayer2, 0);
 			 ThePlayers[Player2].getBoardGame().PrintBoardGame(Player2);//Prints updated board
@@ -135,7 +146,7 @@ void TetrisGame::Start()
     _kbhit();
     colorsInput = _getch() - '0';
     
-    Shape S1, S2;
+    Shape *S1 = nullptr, *S2=nullptr;
 
 	   while (input != EXIT)
 	   {
@@ -151,8 +162,8 @@ void TetrisGame::Start()
 			 InitPlayersBoards();
 			 if (colorsInput == 1)
 				InitColors();
-			 S1.initShape();
-			 S2.initShape();
+			 // S1->initShape();
+			  //S2->initShape();
 
 			 run(S1, S2);
 			 gameoverflag = conGame;
@@ -160,7 +171,7 @@ void TetrisGame::Start()
 		  }
 		  case Continue:
 		  {
-			 run(S1, S2);
+			 run(S1,S2);
 			 break;
 		  }
 		  case PresentInstructionskeys:

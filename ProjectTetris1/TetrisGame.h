@@ -22,7 +22,7 @@ public:
     TetrisGame();
     ~TetrisGame();
 
-    void run(Shape& S1, Shape& S2);
+    void run(Shape* S1, Shape* S2);
 
     void Start(); //Game menu
     bool IsKeyboard1(char ch) const; //check if the key is of player 1
@@ -32,5 +32,8 @@ public:
     void InitPlayersBoards();//Resets players boards to default
     void InitColors();//Sets colors to all shapes
     void DropShape(Shape& S, int player_num, char key);//Drops shape as long as its possible
+
+    void RandomShape(Shape** S);
+
 };
 

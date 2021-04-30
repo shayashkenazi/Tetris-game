@@ -141,26 +141,38 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="gotoxy.cpp" />
+    <ClCompile Include="LleftShape.cpp" />
+    <ClCompile Include="LrightShape.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlusShape.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="RowShape.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="ShapesArray.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="TetrisGame.cpp" />
+    <ClCompile Include="ZleftShape.cpp" />
+    <ClCompile Include="ZrightShape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="enum.h" />
     <ClInclude Include="gotoxy.h" />
+    <ClInclude Include="LleftShape.h" />
+    <ClInclude Include="LrightShape.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlusShape.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="RowShape.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapesArray.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="TetrisGame.h" />
+    <ClInclude Include="ZleftShape.h" />
+    <ClInclude Include="ZrightShape.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

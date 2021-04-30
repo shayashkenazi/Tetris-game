@@ -20,7 +20,7 @@ Shape::~Shape()
 
 }
 
-Shape& Shape::Square(Point StartPoint, int direction)
+/*Shape& Shape::Square(Point StartPoint, int direction)
 {
     
     body[0] = StartPoint;
@@ -308,9 +308,11 @@ Shape& Shape::PlusShape(Point StartPoint, int direction)
     return *this;   
     
 }
+*/
 
 void Shape::initShape()
 {
+
     for (int i = 0; i < SIZE; i++)
     {
         body[i] = Point(0, 0, ' ');
@@ -1402,197 +1404,12 @@ bool Shape::CheckPlusRotateCounterClockWise(int playerNumber, Board& boardGameFo
 
 void Shape::RotateClockWise()
 {
-    if (serialNumber == _RowShape || serialNumber == _ZrightShape || serialNumber == _ZleftShape)
-    {
-        if (direction == 1) // TO DO : IF ROW == 1 ->> 0
-            direction = 0;
-        else
-            direction++;
-    }
-    else if (direction == 3) // TO DO : IF ROW == 1 ->> 0
-        direction = 0;
-    else
-        direction++;
-    switch (serialNumber)
-    {
-    case _Square :
-        break;
-    case _LleftShape :
-    {
-        this->LleftShape(body[0], direction );
-        break;
-    }
-    case _LrightShape:
-    {
-        this->LrightShape(body[0], direction);
-        break;
-
-    }
-    case _RowShape:
-    {
-        this->RowShape(body[0], direction);
-        break;
-
-    }
-    case _ZleftShape:
-    {
-
-        this->ZleftShape(body[0], direction);
-        break;
-
-    }
-    case _ZrightShape:
-    {
-        this->ZrightShape(body[0], direction);
-        break;
-    }    
-    case _PlusShape:
-    {
-        this->PlusShape(body[0], direction);
-        break;
-    }
     
-    }
 }
 
 void Shape::RotateCounterWise()
 {
-    if (serialNumber == _RowShape || serialNumber == _ZrightShape || serialNumber == _ZleftShape)
-    {
-        if (direction == 0) // TO DO : IF ROW == 1 ->> 0
-            direction = 1;
-        else
-            direction--;
-    }
-    else if (direction == 0) // TO DO : IF ROW == 1 ->> 0
-        direction = 3;
-    else
-        direction--;
-    switch (serialNumber)
-    {
-    case _Square:
-        break;
-    case _LleftShape:
-    {
-        switch (direction)
-        {
-       case Rotate0: 
-            {
-                this->LleftShape(body[1], direction);                
-                break;
-            }
-       case Rotate1:
-            {
-                this->LleftShape(body[1], direction);
-                break;
-            }
-        case Rotate2:
-            {
-                body[0] = Point(body[0].getx(), body[0].gety() - 1, body[0].getCh());
-                this->LleftShape (body[0], direction);
-                break;
-
-            }
-         case Rotate3:
-            {
-                body[0] = Point(body[0].getx()-1, body[0].gety() , body[0].getCh());
-                this->LleftShape(body[0], direction);
-                break;
-            }
-        }
-        break;
-    }
-    case _LrightShape:
-    {
-        switch (direction)
-        {
-        case Rotate0: //from 1 -> 0
-        {
-            body[0] = Point(body[1].getx() , body[1].gety() -1 , body[1].getCh());
-            this->LrightShape(body[0], direction);
-          
-            break;
-        }
-        case Rotate1: //from 2 -> 1
-        {
-            this->LrightShape(body[1], direction);
-
-            break;
-        }
-        case Rotate2: //from 3 -> 2
-        {
-            body[0] = Point(body[1].getx() - 1, body[1].gety() , body[1].getCh());
-            this->LrightShape(body[0], direction);
-
-            break;
-
-        }
-        case Rotate3: //from 0 -> 3
-        {
-            body[0] = Point(body[0].getx() - 1, body[0].gety() , body[0].getCh());
-            this->LrightShape(body[0], direction);
-            break;
-        }
-        }
-        break;
-
-        
-
-    }
-    case _RowShape:
-    {
-        
-        this->RowShape(body[0], direction);
-        break;
-
-    }
-    case _ZleftShape:
-    {
-        this->ZleftShape(body[0], direction);
-        break;
-
-    }
-    case _ZrightShape:
-    {
-     
-        this->ZrightShape(body[0], direction);
-        break;
-    }
-    case _PlusShape:
-    {
-        switch (direction)
-        {
-        case Rotate0: //from 1 -> 0
-        {
-            this->PlusShape(body[0], direction);
-            break;
-        }
-        case Rotate1://from 2 -> 1
-
-        {
-            //body[0] = Point(body[0].getx()+ 1, body[0].gety() - 1, body[0].getCh());
-            this->PlusShape(body[0], direction);
-
-            break;
-        }
-        case Rotate2://from 3 -> 2
-        {
-          //  body[0] = Point(body[0].getx() , body[0].gety() + 1, body[0].getCh());
-            this->PlusShape(body[0], direction);
-
-            break;
-
-        }
-        case Rotate3://from 0 -> 3
-        {
-            //body[0] = Point(body[0].getx() - 1, body[0].gety(), body[0].getCh());
-            this->PlusShape(body[0], direction);
-            break;
-        }
-        }
-        break;
-    }
-    }
+   
 }
 
 const Shape& Shape::operator=(const Shape& other)
