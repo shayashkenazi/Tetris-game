@@ -11,7 +11,9 @@ enum GameZoneBoard {
     TopBoard = 0,
     Bottom = 19,
 
-    Start = 1,
+    startGame = 0,
+    conGame = 1,
+    start = 1,
     Continue =2,
     PresentInstructionskeys = 8,
     EXIT=9,

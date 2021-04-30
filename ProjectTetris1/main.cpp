@@ -16,7 +16,7 @@ void main()
     setTextColor(c);
     TetrisGame g;
     hideCursor();
-    g.menu(0); 
+    g.Start();
 
     gotoxy(20, 20);
 }

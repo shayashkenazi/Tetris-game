@@ -142,20 +142,24 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="gotoxy.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="ShapesArray.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="TetrisGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="enum.h" />
     <ClInclude Include="gotoxy.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapesArray.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="TetrisGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

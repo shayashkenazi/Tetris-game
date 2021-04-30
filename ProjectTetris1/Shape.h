@@ -5,7 +5,6 @@ class Shape
 private:
 
     enum { SIZE = 4 };
-   // Point* body = new Point[SIZE] ;
     Point body[SIZE];
     int direction = Down;
     int serialNumber;
