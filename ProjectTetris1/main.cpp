@@ -7,6 +7,8 @@ using namespace std;
 #include "gotoxy.h"
 #include"ShapesArray.h"
 
+
+
 void gotoxy(int, int); // prototype
 void clrscr(); // prototype
 
@@ -14,6 +16,7 @@ void main()
 {
     Color c = LIGHTGREY;
     setTextColor(c);
+    
     TetrisGame g;
     hideCursor();
     g.Start();

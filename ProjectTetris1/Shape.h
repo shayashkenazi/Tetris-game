@@ -12,7 +12,8 @@ protected:
      
 public:
     Shape();
-    Shape(Shape& other);
+    Shape(const Shape& other);
+   
     ~Shape();
      
     const int getSerialNumber() const{ return serialNumber; } //Returns the shape's serial number
@@ -60,5 +61,6 @@ public:
 
     const Shape& operator=(const Shape& other);
 
+    virtual Shape* Clone()const = 0 {};
 };
 

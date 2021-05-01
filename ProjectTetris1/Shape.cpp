@@ -4,7 +4,7 @@ Shape::Shape()
 {
 }
 
-Shape::Shape(Shape& other)
+Shape::Shape(const Shape& other)
 {
 
     for (int i = 0; i < SIZE; i++)

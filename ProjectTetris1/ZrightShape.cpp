@@ -1,6 +1,17 @@
 #include "ZrightShape.h"
 
-ZrightShape :: ZrightShape(Point StartPoint, int direction)
+ZrightShape::ZrightShape(Point StartPoint, int direction)
+{
+    StartPoint = Point(StartPoint.getx(), StartPoint.gety() + 1, StartPoint.getCh());
+    body[0] = StartPoint;
+    body[1] = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());
+    body[2] = Point(StartPoint.getx() + 1, StartPoint.gety() - 1, StartPoint.getCh());
+    body[3] = Point(StartPoint.getx() + 2, StartPoint.gety() - 1, StartPoint.getCh());
+    serialNumber = _ZrightShape; // update the serial number of the shape
+    this->direction = direction;
+}
+
+void ZrightShape :: UpdateZrightShape(Point StartPoint, int direction)
 {
 
     switch (direction)
@@ -8,10 +19,12 @@ ZrightShape :: ZrightShape(Point StartPoint, int direction)
     case Rotate0:
     {
 
-        if (body[0].getx() != 0)  //if it is not the start row
+        /*if (body[0].getx() != 0)  //if it is not the start row
             StartPoint = Point(StartPoint.getx() - 1, StartPoint.gety() + 2, StartPoint.getCh());
         else
             StartPoint = Point(StartPoint.getx(), StartPoint.gety() + 1, StartPoint.getCh());
+        */
+        StartPoint = Point(StartPoint.getx() - 1, StartPoint.gety() + 2, StartPoint.getCh());
         body[0] = StartPoint;
         body[1] = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());
         body[2] = Point(StartPoint.getx() + 1, StartPoint.gety() - 1, StartPoint.getCh());
@@ -43,7 +56,7 @@ void ZrightShape::RotateClockWise()
     else
         direction++;
 
-    *this = ZrightShape(body[0], direction);
+    this->UpdateZrightShape(body[0], direction);
 }
 
 void ZrightShape::RotateCounterWise()
@@ -52,6 +65,6 @@ void ZrightShape::RotateCounterWise()
         direction = 1;
     else
         direction--;
-    *this = ZrightShape(body[0], direction);
+    this->  UpdateZrightShape(body[0], direction);
 }
 

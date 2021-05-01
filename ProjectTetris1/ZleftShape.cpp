@@ -1,7 +1,17 @@
 #include "ZleftShape.h"
 
 
-ZleftShape :: ZleftShape(Point StartPoint, int direction)
+ZleftShape::ZleftShape(Point StartPoint, int direction)
+{
+    body[0] = StartPoint;
+    body[1] = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());
+    body[2] = Point(StartPoint.getx() + 1, StartPoint.gety() + 1, StartPoint.getCh());
+    body[3] = Point(StartPoint.getx() + 2, StartPoint.gety() + 1, StartPoint.getCh());
+    serialNumber = _ZleftShape; // update the serial number of the shape     
+    this->direction = direction;
+}
+
+void ZleftShape :: UpdateZleftShape(Point StartPoint, int direction)
 {
     switch (direction)
     {
@@ -40,7 +50,7 @@ void ZleftShape::RotateClockWise()
     else
         direction++;
 
-    *this = ZleftShape(body[0], direction);
+    this-> UpdateZleftShape(body[0], direction);
 }
 
 void ZleftShape::RotateCounterWise()
@@ -49,5 +59,5 @@ void ZleftShape::RotateCounterWise()
         direction = 1;
     else
         direction--;
-    *this = ZleftShape(body[0], direction);
+    this -> UpdateZleftShape(body[0], direction);
 }

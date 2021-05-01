@@ -1,6 +1,6 @@
 #pragma once
 #include"Shape.h"
-
+#include "Bomb.h"
 
 
 class ShapesArray

@@ -1,7 +1,17 @@
 #include "RowShape.h"
 
 
- RowShape::RowShape(Point StartPoint, int direction)
+RowShape::RowShape(Point StartPoint, int direction)
+{
+    body[0] = StartPoint;
+    body[1] = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());
+    body[2] = Point(StartPoint.getx() + 2, StartPoint.gety(), StartPoint.getCh());
+    body[3] = Point(StartPoint.getx() + 3, StartPoint.gety(), StartPoint.getCh());
+    serialNumber = _RowShape; // update the serial number of the shape
+    this->direction = direction;
+}
+
+void RowShape::UpdateRowShape(Point StartPoint, int direction)
 {
     //send body[1]
     switch (direction)
@@ -41,7 +51,7 @@
      else
          direction++;
 
-     *this = RowShape(body[0], direction);
+     this->UpdateRowShape(body[0], direction);
  }
 
  void RowShape::RotateCounterWise()
@@ -50,6 +60,6 @@
          direction = 1;
      else
          direction--;
-     *this = RowShape(body[0], direction);
+    this->UpdateRowShape(body[0], direction);
      
  }
