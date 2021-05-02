@@ -146,6 +146,7 @@
     <ClCompile Include="LrightShape.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Objects.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlusShape.cpp" />
     <ClCompile Include="Point.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="LleftShape.h" />
     <ClInclude Include="LrightShape.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Objects.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlusShape.h" />
     <ClInclude Include="Point.h" />

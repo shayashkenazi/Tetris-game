@@ -10,7 +10,7 @@
 
 ShapesArray::ShapesArray(int _player) : player(_player)
 {
-    AllShapesArray = new Shape*[NumOfShapes];
+    AllShapesArray = new Objects *[NumOfShapes];
     if (player == Player1) {
 
         AllShapesArray[0] = new Square(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard +1));
@@ -20,6 +20,8 @@ ShapesArray::ShapesArray(int _player) : player(_player)
         AllShapesArray[4] = new ZleftShape(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1));
         AllShapesArray[5] = new ZrightShape(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1));
         AllShapesArray[6] = new PlusShape(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1));
+        AllShapesArray[7] = new Bomb(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1,'O'));
+
     }
     if (player == Player2)
     {
@@ -30,11 +32,14 @@ ShapesArray::ShapesArray(int _player) : player(_player)
         AllShapesArray[4] = new ZleftShape(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1));
         AllShapesArray[5] = new ZrightShape(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1));
         AllShapesArray[6] = new PlusShape(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1));
+        AllShapesArray[7] = new Bomb(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1,'O'));
+
     }
 }
 
 ShapesArray::~ShapesArray()
 {
+    
     delete[] AllShapesArray;
 }
 
@@ -44,8 +49,9 @@ void ShapesArray::InitColorsShapesArray()
     AllShapesArray[1]->setColor(BROWN);
     AllShapesArray[2]->setColor(BLUE);
     AllShapesArray[3]->setColor(LIGHTBLUE);
-    AllShapesArray[4]->setColor(RED);
+    AllShapesArray[4]->setColor(CYAN);
     AllShapesArray[5]->setColor(GREEN);
     AllShapesArray[6]->setColor(MAGENTA);
+    AllShapesArray[7]->setColor(RED);
 
 }

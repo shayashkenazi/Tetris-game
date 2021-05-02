@@ -15,5 +15,9 @@ public:
     {
         return new RowShape(*this);
     }
+    virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer)const override;
+    virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const override;
+
+
 };
 

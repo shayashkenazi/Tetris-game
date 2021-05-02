@@ -45,6 +45,8 @@ void Board::setPointAtBoard(const Point& point,Color c)
 	   x = x - LeftBoardPlayer2;
     boardGame[y][x] = point.getCh();
     BoardColors[y][x] = c;
+
+    
 }
 
 void Board::UpdateBoardByRow(int row)
@@ -69,6 +71,50 @@ void Board::UpdateBoardByRow(int row)
 void Board::ResetBoard()
 {
 	*this = Board();
+}
+
+void Board::Explosion(const Point& point)
+{
+    int x, y;
+    x = point.getx() - _BombExplosion;
+    y = point.gety() - _BombExplosion;
+    if (x > rightBoardPlayer1)
+	   x = x - LeftBoardPlayer2;
+
+    for (int i= 0; i < _BombExplosionLoop; i++)
+    {
+	   for (int j = 0; j < _BombExplosionLoop; j++)
+	   {
+		  if ((y + i) > TopBoard && (y + i) < Bottom && (x + j) > LeftBoardPlayer1 && (x + j) < rightBoardPlayer1)
+		  {
+			 boardGame[y + i][x + j] = ' ';
+			 BoardColors[y + i][x + j] = LIGHTGREY;
+		  }
+	   }
+    
+    }
+
+
+
+
+}
+
+void Board::DropPoint(int x, int y)
+{
+    char ch;
+    Color color;
+    if (boardGame[y][x] == ' ')
+	   return;
+    else 
+    {
+	   ch = boardGame[y][x];
+	   color = BoardColors[y][x];
+	   boardGame[y][x] = ' ';
+	   while (y < Bottom && boardGame[y + 1][x] == ' ' )
+		  y++;
+    }
+    boardGame[y][x] = ch;
+    BoardColors[y][x] = color;
 }
 
 void Board::PrintBoardGame(int player) const

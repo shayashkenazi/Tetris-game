@@ -14,5 +14,8 @@ public :
     {
         return new ZrightShape(*this);
     }
+
+    virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer)const override;
+    virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const override;
 };
 

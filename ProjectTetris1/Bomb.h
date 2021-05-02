@@ -1,18 +1,33 @@
 
 #pragma once
-#include"Shape.h"
 
-class Bomb : public Shape
+#include"Objects.h"
+#include "Point.h"
+class Bomb : public Objects
 {
 private:
-    int num;
+    
     Point body ;
 
 public:
-    Bomb() { num = 2; };
+    //Bomb() { body = Point(); }
+    Bomb(const Point& point, int _direction = Rotate0);
 
-    virtual void RotateClockWise() override {};
-    virtual void RotateCounterWise() override {};
-    virtual Shape* Clone()const override { return nullptr; };
+    virtual Bomb* Clone()const override
+    {
+        return new Bomb(*this);
+    }
+  
+    virtual void move(char direction = Drop1)override;
+
+    virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer) const { return true; };
+    virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const { return true; };
+
+    virtual void draw() const override {
+        setTextColor(color);
+        body.draw();
+    }
+    virtual const Point& getPointByIdx(int idx) const override { return body; };
+
 };
 

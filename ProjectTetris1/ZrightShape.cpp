@@ -68,3 +68,87 @@ void ZrightShape::RotateCounterWise()
     this->  UpdateZrightShape(body[0], direction);
 }
 
+
+bool ZrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
+{
+    int x, y;
+    switch (direction)
+    {
+    case Rotate0:
+    {
+        if (playerNumber == Player1)
+        {
+            y = getPointByIdx(2).gety() - 1;
+            x = getPointByIdx(2).getx();
+        }
+        else
+        {
+            y = getPointByIdx(2).gety() - 1;
+            x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
+        }
+
+        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            return false;
+        if (playerNumber == Player1)
+        {
+            y = getPointByIdx(3).gety() + 1;
+            x = getPointByIdx(3).getx();
+        }
+        else
+        {
+            y = getPointByIdx(3).gety() + 1;
+            x = getPointByIdx(3).getx() - LeftBoardPlayer2;;
+        }
+        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            return false;
+
+        break;
+
+    }
+    case Rotate1:
+    {
+
+        if (playerNumber == Player1)
+        {
+            y = getPointByIdx(1).gety() + 1;
+            x = getPointByIdx(1).getx();
+        }
+        else
+        {
+            y = getPointByIdx(1).gety() + 1;
+            x = getPointByIdx(1).getx() - LeftBoardPlayer2;;
+        }
+
+        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            return false;
+        if (playerNumber == Player1)
+        {
+            y = getPointByIdx(1).gety() + 1;
+            x = getPointByIdx(1).getx() - 1;
+        }
+        else
+        {
+            y = getPointByIdx(1).gety() + 1;
+            x = getPointByIdx(1).getx() - 1 - LeftBoardPlayer2;;
+        }
+        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            return false;
+
+
+        break;
+    }
+    }
+    return true;
+
+
+}
+
+bool ZrightShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) const
+{
+    return CheckRotate(playerNumber, boardGameForPlayer);
+}
+
+
+
+
+

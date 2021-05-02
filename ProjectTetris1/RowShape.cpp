@@ -63,3 +63,108 @@ void RowShape::UpdateRowShape(Point StartPoint, int direction)
     this->UpdateRowShape(body[0], direction);
      
  }
+
+
+ bool RowShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
+ {
+     int x, y;
+     switch (direction)
+     {
+     case Rotate0:
+     {
+         if (playerNumber == Player1)
+         {
+             y = getPointByIdx(2).gety() - 1;
+             x = getPointByIdx(2).getx();
+         }
+         else
+         {
+             y = getPointByIdx(2).gety() - 1;
+             x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
+         }
+
+         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+             return false;
+         if (playerNumber == Player1)
+         {
+             y = getPointByIdx(2).gety() - 2;
+             x = getPointByIdx(2).getx();
+         }
+         else
+         {
+             y = getPointByIdx(2).gety() - 2;
+             x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
+         }
+         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+             return false;
+         if (playerNumber == Player1)
+         {
+             y = getPointByIdx(2).gety() + 1;
+             x = getPointByIdx(2).getx();
+         }
+         else
+         {
+             y = getPointByIdx(2).gety() + 1;
+             x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
+         }
+         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+             return false;
+
+         break;
+
+     }
+     case Rotate1:
+     {
+
+         if (playerNumber == Player1)
+         {
+             y = getPointByIdx(2).gety();
+             x = getPointByIdx(2).getx() - 1;
+         }
+         else
+         {
+             y = getPointByIdx(2).gety();
+             x = getPointByIdx(2).getx() - 1 - LeftBoardPlayer2;;
+         }
+
+         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+             return false;
+         if (playerNumber == Player1)
+         {
+             y = getPointByIdx(2).gety();
+             x = getPointByIdx(2).getx() + 1;
+         }
+         else
+         {
+             y = getPointByIdx(2).gety();
+             x = getPointByIdx(2).getx() + 1 - LeftBoardPlayer2;;
+         }
+         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+             return false;
+         if (playerNumber == Player1)
+         {
+             y = getPointByIdx(2).gety();
+             x = getPointByIdx(2).getx() - 2;
+         }
+         else
+         {
+             y = getPointByIdx(2).gety();
+             x = getPointByIdx(2).getx() - 2 - LeftBoardPlayer2;;
+         }
+         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+             return false;
+
+         break;
+     }
+     }
+     return true;
+
+
+ }
+
+ bool RowShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) const
+ {
+     return CheckRotate(playerNumber, boardGameForPlayer); 
+ }
+
+ 

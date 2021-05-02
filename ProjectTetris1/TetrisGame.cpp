@@ -28,7 +28,7 @@ void TetrisGame::InitColors()
 
 }
 
-void TetrisGame::DropShape(Shape& S, int player_num, char key)
+void TetrisGame::DropShape(Objects& S, int player_num, char key)
 {
 	while (ThePlayers[player_num].IsPossible(S, key))
 	{
@@ -37,11 +37,11 @@ void TetrisGame::DropShape(Shape& S, int player_num, char key)
 	}
 }
 
-void TetrisGame::RandomShape(Shape** S,int player)
+void TetrisGame::RandomShape(Objects** S,int player)
 {
     int randShape;
     randShape = rand() % RAND;
-    Shape* TempPointerShape;
+    Objects* TempPointerShape;
     TempPointerShape = *S;
    if(player == Player1)
 	  *S =  ThePlayers[Player1].getShapesarray().getShape(randShape)->Clone();
@@ -51,12 +51,12 @@ void TetrisGame::RandomShape(Shape** S,int player)
    delete TempPointerShape;
 }
 
-void TetrisGame::run(Shape** S1 , Shape** S2)
+void TetrisGame::run(Objects** S1 , Objects** S2)
 {
     char key = 0;
     int randShape = rand() % RAND;
 	
-    Bomb b;
+   
 
 	/*if (S1.getPointByIdx(0).getCh() == ' ' && S2.getPointByIdx(0).getCh() == ' ') // Checks if the shapes are initiated or not
 	{                                                                             // if initiated, we continue a paused game
@@ -124,6 +124,7 @@ void TetrisGame::run(Shape** S1 , Shape** S2)
 			 (*S1)->move(MoveDown);
 		  else //If shape reached bottom, update the shape in the board and randomly pick new shape
 		  {
+
 			 ThePlayers[Player1].UpdateBoard(**S1);
 			 RandomShape(S1, Player1);
 			 ThePlayers[Player1].CheckRow(); //Checks if there is any rows that are full, if so deletes row
@@ -155,7 +156,7 @@ void TetrisGame::Start()
     _kbhit();
     colorsInput = _getch() - '0';
     
-    Shape *S1 = nullptr, *S2=nullptr;
+    Objects *S1 = nullptr, *S2=nullptr;
 
 	   while (input != EXIT)
 	   {

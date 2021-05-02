@@ -1,14 +1,14 @@
 #pragma once
 #include "Board.h"
-class Shape
+#include"Objects.h"
+
+class Shape  : public Objects
 {
 protected:
 
     enum { SIZE = 4 };
     Point body[SIZE];
-    int direction = Down;
-    int serialNumber;
-    Color color = LIGHTGREY;
+    
      
 public:
     Shape();
@@ -16,11 +16,11 @@ public:
    
     ~Shape();
      
-    const int getSerialNumber() const{ return serialNumber; } //Returns the shape's serial number
-    const Point& getPointByIdx(int idx) const{ return body[idx]; } //Returns the wanted point in the body of the shape
-    const Color getColor() const{ return color; } //Returns shapes color
+   // const int getSerialNumber() const{ return serialNumber; } //Returns the shape's serial number
+  virtual const Point& getPointByIdx(int idx) const override{ return body[idx]; } //Returns the wanted point in the body of the shape
+ //   const Color getColor() const{ return color; } //Returns shapes color
 
-    void setSerialNumber(int serialNum) { serialNumber = serialNum; } //Sets the shape's serial number
+    //void setSerialNumber(int serialNum) { serialNumber = serialNum; } //Sets the shape's serial number
     //void setDirection(int dir) { direction = dir; }
 
     /* Shape& Square(Point StartPoint, int direction = Rotate0); //Creates Square by direction
@@ -34,13 +34,17 @@ public:
     */
 
     void initShape();
-    void draw() const; // Printing the shape to the screen
+    virtual void draw() const override ; // Printing the shape to the screen
 
 
-    void move(char direction = Drop1); //Moving the shape by direction (?)
+    virtual void move(char direction = Drop1) override; //Moving the shape by direction (?)
 
-    void setColor(Color c) {color = c;}
+    virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer)const = 0;
+    virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const = 0;
 
+
+
+    /*
     bool CheckLleftRotateClockWise(int playerNumber, Board& boardGameForPlayer)const; //Returns true if a clockwise rotation of L left is possible according to the current board
     bool CheckLRightRotateClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a clockwise rotation of L right is possible according to the current board
     bool CheckRowShapeRotateClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a clockwise rotation of Row is possible according to the current board
@@ -48,10 +52,10 @@ public:
     bool CheckZRightRotateClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a clockwise rotation of Z right is possible according to the current board
     bool CheckPlusRotateClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a clockwise rotation of Plus is possible according to the current board
 
+    */
+
     bool CheckLleftRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a counter clockwise rotation of L left is possible according to the current board
     bool CheckLRightRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a counter clockwise rotation of L right is possible according to the current board
-  
-
     bool CheckPlusRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a counter clockwise rotation of Plus is possible according to the current board
 
     virtual void RotateClockWise () = 0  ; //Rotates the shape clock wise

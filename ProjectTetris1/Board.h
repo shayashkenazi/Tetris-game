@@ -17,6 +17,8 @@ public:
     
     void UpdateBoardByRow(int row); //Erases the wanted row by index and fixes the board
     void ResetBoard();
+    void Explosion(const Point& point);
+    void DropPoint(int x , int y);
 
     //Printing functions
     void PrintBoardGame(int player) const;

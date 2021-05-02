@@ -61,3 +61,84 @@ void ZleftShape::RotateCounterWise()
         direction--;
     this -> UpdateZleftShape(body[0], direction);
 }
+
+
+bool ZleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
+{
+    int x, y;
+    switch (direction)
+    {
+    case Rotate0:
+    {
+        if (playerNumber == Player1)
+        {
+            y = getPointByIdx(1).gety() - 1;
+            x = getPointByIdx(1).getx() + 1;
+        }
+        else
+        {
+            y = getPointByIdx(1).gety() - 1;
+            x = getPointByIdx(1).getx() + 1 - LeftBoardPlayer2;;
+        }
+
+        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            return false;
+        if (playerNumber == Player1)
+        {
+            y = getPointByIdx(1).gety();
+            x = getPointByIdx(1).getx() + 1;
+        }
+        else
+        {
+            y = getPointByIdx(1).gety();
+            x = getPointByIdx(1).getx() + 1 - LeftBoardPlayer2;;
+        }
+        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            return false;
+
+        break;
+
+    }
+    case Rotate1:
+    {
+
+        if (playerNumber == Player1)
+        {
+            y = getPointByIdx(2).gety();
+            x = getPointByIdx(2).getx() - 1;
+        }
+        else
+        {
+            y = getPointByIdx(2).gety();
+            x = getPointByIdx(2).getx() - 1 - LeftBoardPlayer2;;
+        }
+
+        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            return false;
+        if (playerNumber == Player1)
+        {
+            y = getPointByIdx(3).gety();
+            x = getPointByIdx(3).getx() + 1;
+        }
+        else
+        {
+            y = getPointByIdx(3).gety();
+            x = getPointByIdx(3).getx() + 1 - LeftBoardPlayer2;;
+        }
+        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            return false;
+
+
+        break;
+    }
+    }
+    return true;
+}
+
+bool ZleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) const
+{
+    return CheckRotate(playerNumber, boardGameForPlayer);
+}
+
+
+

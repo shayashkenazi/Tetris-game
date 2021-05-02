@@ -14,14 +14,14 @@ enum GameZoneBoard {
     startGame = 0,
     conGame = 1,
     start = 1,
-    Continue =2,
+    Continue = 2,
     PresentInstructionskeys = 8,
-    EXIT=9,
+    EXIT = 9,
 
     Rows = 20,
     Cols = 14,
 
-    RAND = 7,
+    RAND = 8,
 
     Down = 0,
     Right = 1,
@@ -41,7 +41,10 @@ enum GameZoneBoard {
     _ZleftShape = 4,
     _ZrightShape = 5,
     _PlusShape = 6,
-    
+    _Bomb = 7,
+
+    _BombExplosion =4,
+    _BombExplosionLoop = 9,
     Rotate0 = 0,
     Rotate1 =1,
     Rotate2 = 2,

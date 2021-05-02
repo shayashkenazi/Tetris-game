@@ -353,6 +353,8 @@ void Shape::move(char direction)
     draw();
 }
 
+/*
+
  bool Shape ::CheckLleftRotateClockWise(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
@@ -1019,6 +1021,8 @@ bool Shape::CheckPlusRotateClockWise(int playerNumber, Board& boardGameForPlayer
 }
     return true;
 }
+
+*/
 
 bool Shape::CheckLleftRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const
 {

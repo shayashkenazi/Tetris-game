@@ -17,31 +17,57 @@ void const Player::printboard() const
     boardGameForPlayer.PrintBoardGame(playerNumber);
 }
 
-void Player::UpdateBoard(const Shape& shape)
+void Player::UpdateBoard(const Objects& shape)
 {
-    for (int i = 0; i < 4; i++)
+    if (typeid(shape) == typeid(Bomb))
     {
-        boardGameForPlayer.setPointAtBoard(shape.getPointByIdx(i), shape.getColor());
+        boardGameForPlayer.Explosion(shape.getPointByIdx(0));
+    //    UpdateBoardExplosion(shape.getPointByIdx(0));
+        
+    }
+    else {
+        for (int i = 0; i < 4; i++)
+        {
+            boardGameForPlayer.setPointAtBoard(shape.getPointByIdx(i), shape.getColor());
+        }
     }
 
 }
 
-bool Player::IsPossible(const Shape& shape, char movement)
+void Player::UpdateBoardExplosion(const Point& point)
+{
+   
+  
+
+    for (int i =Bottom-2 ; i > TopBoard ; i--)
+    {
+        for (int j =1; j < rightBoardPlayer1; j++)
+        {        
+                boardGameForPlayer.DropPoint(j, i);
+            
+        }
+
+    }
+  
+
+}
+
+bool Player::IsPossible(const Objects& shape, char movement)
 {
     int serialNum = shape.getSerialNumber();
     int x, y;
-   if(Right1 == movement || Right1B == movement || Right2 == movement || Right2B == movement){
-       for (int i = 0; i < BodyPointSize; i++) {
-           if (playerNumber == Player1)
-               x = shape.getPointByIdx(i).getx() + 1;
-           else
-               x = shape.getPointByIdx(i).getx() + 1 - LeftBoardPlayer2;
-           y = shape.getPointByIdx(i).gety();
-           if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
-               return false;
-       }
-   }
-    if (Left1  == movement || Left1B == movement || Left2 == movement || Left2B == movement){
+    if (Right1 == movement || Right1B == movement || Right2 == movement || Right2B == movement) {
+        for (int i = 0; i < BodyPointSize; i++) {
+            if (playerNumber == Player1)
+                x = shape.getPointByIdx(i).getx() + 1;
+            else
+                x = shape.getPointByIdx(i).getx() + 1 - LeftBoardPlayer2;
+            y = shape.getPointByIdx(i).gety();
+            if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+                return false;
+        }
+    }
+    if (Left1 == movement || Left1B == movement || Left2 == movement || Left2B == movement) {
         for (int i = 0; i < BodyPointSize; i++) {
             if (playerNumber == Player1)
                 x = shape.getPointByIdx(i).getx() - 1;
@@ -52,7 +78,7 @@ bool Player::IsPossible(const Shape& shape, char movement)
                 return false;
         }
     }
-    if( Drop1 == movement || Drop1B == movement || Drop2 == movement || Drop2B == movement || MoveDown == movement){
+    if (Drop1 == movement || Drop1B == movement || Drop2 == movement || Drop2B == movement || MoveDown == movement) {
         for (int i = 0; i < BodyPointSize; i++) {
             if (playerNumber == Player1)
                 x = shape.getPointByIdx(i).getx();
@@ -67,7 +93,8 @@ bool Player::IsPossible(const Shape& shape, char movement)
 
     if (RotateClockWise1 == movement || RotateClockWise1B == movement || RotateClockWise2 == movement || RotateClockWise2B == movement)
     {
-        switch (shape.getSerialNumber())
+        return  shape.CheckRotate(playerNumber, boardGameForPlayer);
+        /*switch (shape.getSerialNumber())
         {
         case _Square:
         {
@@ -107,12 +134,12 @@ bool Player::IsPossible(const Shape& shape, char movement)
 
             break;
         }
-        }
+        }*/
     }
-
     if (RotateCounterClockWise1 == movement || RotateCounterClockWise1B == movement || RotateCounterClockWise2 == movement || RotateCounterClockWise2B == movement)
     {
-        switch (shape.getSerialNumber())
+        return  shape.CheckCounterRotate(playerNumber, boardGameForPlayer);
+        /*switch (shape.getSerialNumber())
         {
         case _Square:
         {
@@ -152,13 +179,14 @@ bool Player::IsPossible(const Shape& shape, char movement)
 
             break;
         }
-        }
+        }*/
     }
 
     return true;
 }
 
-bool Player::CheckGameOver(Shape& shape)
+
+bool Player::CheckGameOver(Objects& shape)
 {
     int col;
     
