@@ -2,13 +2,9 @@
 #include "TetrisGame.h"
 
 
-
-
-
-TetrisGame::TetrisGame()
+TetrisGame::TetrisGame(int gameType)
 {
-
-    
+	createPlayers(gameType);
 }
 TetrisGame::~TetrisGame()
 {
@@ -17,20 +13,20 @@ TetrisGame::~TetrisGame()
 
 void TetrisGame:: InitPlayersBoards()
 {
-	ThePlayers[Player1].getBoardGame().ResetBoard();
-	ThePlayers[Player2].getBoardGame().ResetBoard();
+	ThePlayers[Player1]->getBoardGame().ResetBoard();
+	ThePlayers[Player2]->getBoardGame().ResetBoard();
 }
 
 void TetrisGame::InitColors()
 {
-    ThePlayers[Player1].getShapesarray().InitColorsShapesArray();
-    ThePlayers[Player2].getShapesarray().InitColorsShapesArray();
+    ThePlayers[Player1]->getShapesarray().InitColorsShapesArray();
+    ThePlayers[Player2]->getShapesarray().InitColorsShapesArray();
 
 }
 
 void TetrisGame::DropShape(Objects& S, int player_num, char key)
 {
-	while (ThePlayers[player_num].IsPossible(S, key))
+	while (ThePlayers[player_num]->IsPossible(S, key))
 	{
 		S.move(key);
 		Sleep(10);
@@ -44,11 +40,21 @@ void TetrisGame::RandomShape(Objects** S,int player)
     Objects* TempPointerShape;
     TempPointerShape = *S;
    if(player == Player1)
-	  *S =  ThePlayers[Player1].getShapesarray().getShape(randShape)->Clone();
+	  *S =  ThePlayers[Player1]->getShapesarray().getShape(randShape)->Clone();
    else
-	*S = ThePlayers[Player2].getShapesarray().getShape(randShape)->Clone();
+	*S = ThePlayers[Player2]->getShapesarray().getShape(randShape)->Clone();
  
    delete TempPointerShape;
+}
+
+void TetrisGame::createPlayers(int gameType)
+{
+	if (gameType == HumanVsHuman)
+	{
+		ThePlayers[0] = new HumanPlayer(Player1);
+		ThePlayers[1] = new HumanPlayer(Player2);
+	}
+
 }
 
 void TetrisGame::run(Objects** S1 , Objects** S2)
@@ -56,26 +62,19 @@ void TetrisGame::run(Objects** S1 , Objects** S2)
     char key = 0;
     int randShape = rand() % RAND;
 	
-   
-
-	/*if (S1.getPointByIdx(0).getCh() == ' ' && S2.getPointByIdx(0).getCh() == ' ') // Checks if the shapes are initiated or not
-	{                                                                             // if initiated, we continue a paused game
-		 S1 = ThePlayers[Player1].getShapesarray().getShape(randShape);
-		 S2 = ThePlayers[Player2].getShapesarray().getShape(randShape);
-	}*/
     if (*S1 == nullptr && *S2 == nullptr) {
 	   
 	   RandomShape(S1,Player1);
 	   RandomShape(S2, Player2);
     }
     //Prints boards
-	ThePlayers[Player1].getBoardGame().PrintBoardGame(Player1);
+	ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
 	gotoxy(LeftBoardPlayer2, 0);
-    ThePlayers[Player2].getBoardGame().PrintBoardGame(Player2);
+    ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
 
     do {
 	   //Checks if a shape reached the top of the board
-	   if (!ThePlayers[Player1].CheckGameOver(**S1) || !ThePlayers[Player2].CheckGameOver(**S2))
+	   if (!ThePlayers[Player1]->CheckGameOver(**S1) || !ThePlayers[Player2]->CheckGameOver(**S2))
 	   {
 		  printGameOver();
 		  return;
@@ -84,11 +83,12 @@ void TetrisGame::run(Objects** S1 , Objects** S2)
 	   (*S2)->draw();
 	 
 	//Clears the input buffer for more fluid gaming
-	 HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
-	 FlushConsoleInputBuffer(hStdIn);
+		HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
+		FlushConsoleInputBuffer(hStdIn);
 	   
-	   for (int i = 0; i < CommandLoop; i++)
+	   /*for (int i = 0; i < CommandLoop; i++)
 	   {
+	      
 		  if (_kbhit())
 		  {
 			 hideCursor();
@@ -119,28 +119,29 @@ void TetrisGame::run(Objects** S1 , Objects** S2)
 			 }
 		  }
 		  Sleep(50);
-	   }	   		
-		  if (ThePlayers[Player1].IsPossible(**S1, MoveDown))//Drops shape by one step
+	   }	 */
+			key = PlayerVsPlayer(S1, S2);
+		  if (ThePlayers[Player1]->IsPossible(**S1, MoveDown))//Drops shape by one step
 			 (*S1)->move(MoveDown);
 		  else //If shape reached bottom, update the shape in the board and randomly pick new shape
 		  {
 
-			 ThePlayers[Player1].UpdateBoard(**S1);
+			 ThePlayers[Player1]->UpdateBoard(**S1);
 			 RandomShape(S1, Player1);
-			 ThePlayers[Player1].CheckRow(); //Checks if there is any rows that are full, if so deletes row
+			 ThePlayers[Player1]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 			 gotoxy(0, 0);
-			 ThePlayers[Player1].getBoardGame().PrintBoardGame(Player1);//Prints updated board
+			 ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);//Prints updated board
 		  }
-		  if (ThePlayers[Player2].IsPossible(**S2, MoveDown))//Drops shape by one step
+		  if (ThePlayers[Player2]->IsPossible(**S2, MoveDown))//Drops shape by one step
 			 
 			 (*S2)->move(MoveDown);
 		  else//If shape reached bottom, update the shape in the board and randomly pick new shape
 		  {
-			 ThePlayers[Player2].UpdateBoard(**S2);
+			 ThePlayers[Player2]->UpdateBoard(**S2);
 			 RandomShape(S2, Player2);
-			 ThePlayers[Player2].CheckRow(); //Checks if there is any rows that are full, if so deletes row
+			 ThePlayers[Player2]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 			 gotoxy(LeftBoardPlayer2, 0);
-			 ThePlayers[Player2].getBoardGame().PrintBoardGame(Player2);//Prints updated board
+			 ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
 		  }
 		  Sleep(200);
     } while (key != ESC);
@@ -198,31 +199,30 @@ void TetrisGame::Start()
 	   }
 }
 
-bool TetrisGame::IsKeyboard1(char ch)const
+bool TetrisGame::IsKeyboard1(char ch)
 {
     for (int i = 0; i < CommandLoop; i++)
     {
-	   if (keyboardString1[i] == ch)
+	   if (ThePlayers[Player1]->getKeys()[i] == ch)
 		  return true;
     }
     return false;
 }
 
-bool TetrisGame::IsKeyboard2(char ch)const
+bool TetrisGame::IsKeyboard2(char ch)
 {
     for (int i = 0; i < CommandLoop; i++)
     {
-	   if (keyboardString2[i] == ch)
+	   if (ThePlayers[Player2]->getKeys()[i] == ch)
 		  return true;
     }
     return false;
 }
-
 
 void TetrisGame::printGameOver()
 {
     gotoxy(rightBoardPlayer1 + 2, (TopBoard + Bottom) / 2);
-	if (!ThePlayers[Player1].getWinner())
+	if (!ThePlayers[Player1]->getWinner())
 	{
 		cout << "PLAYER 2";
 		gotoxy(rightBoardPlayer1 + 2, (TopBoard + Bottom) / 2+1);
@@ -242,4 +242,82 @@ void TetrisGame::printGameOver()
 	gameoverflag = startGame;
 
 	return;
+}
+
+char TetrisGame::PlayerVsPlayer(Objects** S1, Objects** S2)
+{
+	char key = 0;
+	for (int i = 0; i < CommandLoop; i++)
+	{
+		if (_kbhit())
+		{
+			hideCursor();
+			key = _getch();
+			if (key == ESC)
+			{
+				clrscr();
+				return key;
+			}
+			if (IsKeyboard1(key))
+			{
+				if (Drop1 == key || Drop1B == key)
+				{
+					DropShape(**S1, Player1, key);//Drops shape while possible
+					i = CommandLoop; // quit from the loop
+				}
+				else if (ThePlayers[Player1]->IsPossible(**S1, key))//Checks if a given move input is possible (any move but down)
+					(*S1)->move(key);//Moves shape according to given input
+			}
+			if (IsKeyboard2(key)) {
+				if (Drop2 == key || Drop2B == key)
+				{
+					DropShape(**S2, Player2, key);//Drops shape while possible
+					i = CommandLoop; // quit from the loop
+				}
+				else if (ThePlayers[Player2]->IsPossible(**S2, key))//Checks if a given move input is possible (any move but down)
+					(*S2)->move(key);//Moves shape according to given input
+			}
+		}
+		Sleep(50);
+	}
+	return key;
+}
+
+char TetrisGame::PlayerVsComputer(Objects** S1, Objects** S2)
+{
+	char key;
+	for (int i = 0; i < CommandLoop; i++)
+	{
+		if (_kbhit())
+		{
+			hideCursor();
+			key = _getch();
+			if (key == ESC)
+			{
+				clrscr();
+				return key;
+			}
+			if (IsKeyboard1(key))
+			{
+				if (Drop1 == key || Drop1B == key)
+				{
+					DropShape(**S1, Player1, key);//Drops shape while possible
+					i = CommandLoop; // quit from the loop
+				}
+				else if (ThePlayers[Player1]->IsPossible(**S1, key))//Checks if a given move input is possible (any move but down)
+					(*S1)->move(key);//Moves shape according to given input
+			}
+			if (IsKeyboard2(key)) {
+				if (Drop2 == key || Drop2B == key)
+				{
+					DropShape(**S2, Player2, key);//Drops shape while possible
+					i = CommandLoop; // quit from the loop
+				}
+				else if (ThePlayers[Player2]->IsPossible(**S2, key))//Checks if a given move input is possible (any move but down)
+					(*S2)->move(key);//Moves shape according to given input
+			}
+		}
+		Sleep(50);
+	}
+	return key;
 }

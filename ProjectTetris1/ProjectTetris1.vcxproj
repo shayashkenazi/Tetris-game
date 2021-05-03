@@ -141,7 +141,9 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="ComputerPlayer.cpp" />
     <ClCompile Include="gotoxy.cpp" />
+    <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="LleftShape.cpp" />
     <ClCompile Include="LrightShape.cpp" />
     <ClCompile Include="main.cpp" />
@@ -161,8 +163,10 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="ComputerPlayer.h" />
     <ClInclude Include="enum.h" />
     <ClInclude Include="gotoxy.h" />
+    <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="LleftShape.h" />
     <ClInclude Include="LrightShape.h" />
     <ClInclude Include="Menu.h" />

@@ -2,7 +2,34 @@
 
 Player::Player(int player) : boardGameForPlayer(), shapesarray(player), playerNumber(player)
 {
+    if (playerNumber == Player1)
+    {
+        KeyboardKeys[0] = Drop1;
+        KeyboardKeys[1] = Drop1B;
+        KeyboardKeys[2] = Right1;
+        KeyboardKeys[3] = Right1B;
+        KeyboardKeys[4] = Left1;
+        KeyboardKeys[5] = Left1B;
+        KeyboardKeys[6] = RotateClockWise1;
+        KeyboardKeys[7] = RotateClockWise1B;
+        KeyboardKeys[8] = RotateCounterClockWise1;
+        KeyboardKeys[9] = RotateCounterClockWise1B;
+    }
+    if (playerNumber == Player2)
+    {
+        KeyboardKeys[0] = Drop2;
+        KeyboardKeys[1] = Drop2B;
+        KeyboardKeys[2] = Right2;
+        KeyboardKeys[3] = Right2B;
+        KeyboardKeys[4] = Left2;
+        KeyboardKeys[5] = Left2B;
+        KeyboardKeys[6] = RotateClockWise2;
+        KeyboardKeys[7] = RotateClockWise2B;
+        KeyboardKeys[8] = RotateCounterClockWise2;
+        KeyboardKeys[9] = RotateCounterClockWise2B;
+    }
 }
+
 
 Player::~Player()
 {
@@ -22,7 +49,7 @@ void Player::UpdateBoard(const Objects& shape)
     if (typeid(shape) == typeid(Bomb))
     {
         boardGameForPlayer.Explosion(shape.getPointByIdx(0));
-    //    UpdateBoardExplosion(shape.getPointByIdx(0));
+        UpdateBoardExplosion(shape.getPointByIdx(0));
         
     }
     else {
@@ -36,20 +63,20 @@ void Player::UpdateBoard(const Objects& shape)
 
 void Player::UpdateBoardExplosion(const Point& point)
 {
-   
-  
+    int x = point.getx() - _BombExplosion;
+    int y = point.gety() + _BombExplosion;
 
-    for (int i =Bottom-2 ; i > TopBoard ; i--)
+    if (x > rightBoardPlayer1)
+        x = x - LeftBoardPlayer2;
+
+    for (int i =y ; i > TopBoard ; i--)
     {
-        for (int j =1; j < rightBoardPlayer1; j++)
-        {        
+        for (int j = x; j < rightBoardPlayer1; j++)
+        {   
+            if(x < LeftBoardPlayer1)
                 boardGameForPlayer.DropPoint(j, i);
-            
         }
-
     }
-  
-
 }
 
 bool Player::IsPossible(const Objects& shape, char movement)
@@ -94,94 +121,11 @@ bool Player::IsPossible(const Objects& shape, char movement)
     if (RotateClockWise1 == movement || RotateClockWise1B == movement || RotateClockWise2 == movement || RotateClockWise2B == movement)
     {
         return  shape.CheckRotate(playerNumber, boardGameForPlayer);
-        /*switch (shape.getSerialNumber())
-        {
-        case _Square:
-        {
-            return true;
-            break;
-        }
-
-        case _LleftShape:
-        {
-            return shape.CheckLleftRotateClockWise(playerNumber,boardGameForPlayer);
-            break;
-        }
-        case _LrightShape:
-        {
-            return shape.CheckLRightRotateClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-
-        case _RowShape:
-        {
-            return shape.CheckRowShapeRotateClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-        case _ZleftShape:
-        {
-            return shape.CheckZleftRotateClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-        case _ZrightShape:
-        {
-            return shape.CheckZRightRotateClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-        case _PlusShape:
-        {
-            return shape.CheckPlusRotateClockWise(playerNumber, boardGameForPlayer);
-
-            break;
-        }
-        }*/
     }
     if (RotateCounterClockWise1 == movement || RotateCounterClockWise1B == movement || RotateCounterClockWise2 == movement || RotateCounterClockWise2B == movement)
     {
         return  shape.CheckCounterRotate(playerNumber, boardGameForPlayer);
-        /*switch (shape.getSerialNumber())
-        {
-        case _Square:
-        {
-            return true;
-            break;
-        }
-
-        case _LleftShape:
-        {
-            return shape.CheckLleftRotateCounterClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-        case _LrightShape:
-        {
-            return shape.CheckLRightRotateCounterClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-
-        case _RowShape:
-        {
-            return shape.CheckRowShapeRotateClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-        case _ZleftShape:
-        {
-            return shape.CheckZleftRotateClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-        case _ZrightShape:
-        {
-            return shape.CheckZRightRotateClockWise(playerNumber, boardGameForPlayer);
-            break;
-        }
-        case _PlusShape:
-        {
-            return shape.CheckPlusRotateCounterClockWise(playerNumber, boardGameForPlayer);
-
-            break;
-        }
-        }*/
     }
-
     return true;
 }
 

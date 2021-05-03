@@ -1,5 +1,6 @@
 #pragma once
 #include"Player.h"
+#include "HumanPlayer.h"
 #include "Menu.h"
 
 class TetrisGame
@@ -7,26 +8,22 @@ class TetrisGame
 private:
 
     enum { NumOfPlayers =2};
-    Player ThePlayers[NumOfPlayers] = { Player(Player1),Player(Player2) };
-
-    char keyboardString1[10] = { Drop1,Drop1B,Right1 ,Right1B,Left1 ,Left1B,RotateClockWise1,RotateClockWise1B,
-        RotateCounterClockWise1 ,RotateCounterClockWise1B };
-    char keyboardString2[10] = { Drop2,Drop2B,Right2 ,Right2B,Left2 ,Left2B,RotateClockWise2,RotateClockWise2B,
-        RotateCounterClockWise2 ,RotateCounterClockWise2B };
+    Player** ThePlayers = new Player*[NumOfPlayers];
 
     Menu GameMenu;
     int gameoverflag = startGame;
 
 public:
-
-    TetrisGame();
+    //TetrisGame() {};
+    TetrisGame(int gameType = 0);
     ~TetrisGame();
 
+    void createPlayers(int gameType);
     void run(Objects** S1, Objects** S2);
 
     void Start(); //Game menu
-    bool IsKeyboard1(char ch) const; //check if the key is of player 1
-    bool IsKeyboard2(char ch) const; //check if the key is of player 2
+    bool IsKeyboard1(char ch); //check if the key is of player 1
+    bool IsKeyboard2(char ch); //check if the key is of player 2
 
     void printGameOver();//Prints GAME OVER to the screen
     void InitPlayersBoards();//Resets players boards to default
@@ -34,6 +31,10 @@ public:
     void DropShape(Objects& S, int player_num, char key);//Drops shape as long as its possible
 
     void RandomShape(Objects** S,int player);
+
+    char PlayerVsPlayer(Objects** S1, Objects** s2);
+
+    char PlayerVsComputer(Objects** S1, Objects** S2);
 
 };
 

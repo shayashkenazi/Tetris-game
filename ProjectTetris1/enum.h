@@ -4,6 +4,7 @@ enum GameZoneBoard {
 
     Player1 = 0,
     Player2 = 1,
+    Computer_Player = 2,
     LeftBoardPlayer1 = 0,
     rightBoardPlayer1 = 13,
     LeftBoardPlayer2 = 25,
@@ -11,6 +12,9 @@ enum GameZoneBoard {
     TopBoard = 0,
     Bottom = 19,
 
+    easy = 0, 
+    medium = 1, 
+    hard = 2,
     startGame = 0,
     conGame = 1,
     start = 1,
@@ -49,6 +53,11 @@ enum GameZoneBoard {
     Rotate1 =1,
     Rotate2 = 2,
     Rotate3 = 3,
+
+
+    HumanVsHuman = 0,
+    HumanVsComputer = 1,
+    ComputerVsComputer = 2,
 
     ESC = 27
 }; //  only the game zone area
