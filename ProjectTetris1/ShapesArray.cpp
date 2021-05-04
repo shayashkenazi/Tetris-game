@@ -23,7 +23,7 @@ ShapesArray::ShapesArray(int _player) : player(_player)
         AllShapesArray[7] = new Bomb(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1,'O'));
 
     }
-    if (player == Player2)
+    if (player == Player2 || player == Computer_Player)
     {
         AllShapesArray[0] = new Square(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard +1));
         AllShapesArray[1] = new LleftShape(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1));

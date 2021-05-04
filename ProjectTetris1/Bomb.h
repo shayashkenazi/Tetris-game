@@ -28,6 +28,7 @@ public:
         body.draw();
     }
     virtual const Point& getPointByIdx(int idx) const override { return body; };
+    virtual char* FindBestSpot(Board& playerBoard);
 
 };
 

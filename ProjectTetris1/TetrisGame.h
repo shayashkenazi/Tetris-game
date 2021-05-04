@@ -1,6 +1,7 @@
 #pragma once
 #include"Player.h"
 #include "HumanPlayer.h"
+#include "ComputerPlayer.h"
 #include "Menu.h"
 
 class TetrisGame
@@ -19,7 +20,9 @@ public:
     ~TetrisGame();
 
     void createPlayers(int gameType);
-    void run(Objects** S1, Objects** S2);
+    void RunPlayerVsPlayer(Objects** S1, Objects** S2);
+    void RunPlayerVsComputer(Objects** S1, Objects** S2);
+
 
     void Start(); //Game menu
     bool IsKeyboard1(char ch); //check if the key is of player 1
@@ -34,7 +37,7 @@ public:
 
     char PlayerVsPlayer(Objects** S1, Objects** s2);
 
-    char PlayerVsComputer(Objects** S1, Objects** S2);
+    char PlayerVsComputerLoop(Objects** S1, Objects** S2, int index);
 
 };
 

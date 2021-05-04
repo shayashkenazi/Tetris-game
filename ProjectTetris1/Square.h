@@ -16,5 +16,7 @@ public:
     }
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer)const override { return true; };
     virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const override { return true; };
+    virtual char* FindBestSpot(Board& playerBoard);
+    char* FindPath(int row, int col, Board& playerBoard);
 };
 

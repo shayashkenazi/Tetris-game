@@ -27,6 +27,7 @@ public:
 
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer) const = 0;
     virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const = 0;
+    virtual char* FindBestSpot(Board& playerBoard) = 0;
 
 
 

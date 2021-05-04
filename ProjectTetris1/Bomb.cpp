@@ -15,3 +15,8 @@ void Bomb::move(char direction)
     draw();
 
 }
+
+char* Bomb::FindBestSpot(Board& playerBoard)
+{
+    return nullptr;
+}

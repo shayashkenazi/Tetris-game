@@ -58,6 +58,7 @@ enum GameZoneBoard {
     HumanVsHuman = 0,
     HumanVsComputer = 1,
     ComputerVsComputer = 2,
+    space = ' ',
 
     ESC = 27
 }; //  only the game zone area
