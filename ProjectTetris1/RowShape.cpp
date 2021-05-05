@@ -218,7 +218,7 @@ void RowShape::UpdateRowShape(Point StartPoint, int direction)
              }
          }
          else if (rotate == Rotate1) {
-             if (this->CheckRotate(Computer_Player, playerBoard))
+             if ( playerBoard.getCharAtBoard(x, y-1) == space)
              {
                  commands[i] = RotateClockWise2;
                  rotate--;
