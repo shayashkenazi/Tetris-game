@@ -37,7 +37,7 @@ public:
 
     char PlayerVsPlayer(Objects** S1, Objects** s2);
 
-    char PlayerVsComputerLoop(Objects** S1, Objects** S2, int index);
+    char PlayerVsComputerLoop(Objects** S1, Objects** S2, char key);
 
 };
 

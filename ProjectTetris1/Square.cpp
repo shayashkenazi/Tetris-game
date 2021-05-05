@@ -29,7 +29,6 @@ char* Square::FindBestSpot(Board& playerBoard)
         {
             if (playerBoard.getCharAtBoard(i, j) == space && playerBoard.getCharAtBoard(i, j + 1) == space)
             {
-                row_rating = 2;
                 if (playerBoard.getCharAtBoard(i - 1, j) == space && playerBoard.getCharAtBoard(i - 1, j + 1) == space)
                 {
                     if(path = FindPath(i, j, playerBoard))
@@ -43,20 +42,20 @@ char* Square::FindBestSpot(Board& playerBoard)
 char* Square::FindPath(int row, int col, Board& playerBoard)
 {
     char* commands = new char[10];
-    int x = body[3].getx() - LeftBoardPlayer2;
-    int y = body[3].gety();
+    int x = body[2].getx() - LeftBoardPlayer2;
+    int y = body[2].gety();
     int i = 0;
 
     while (x != col && y != row)
     {
-        if (row < x && playerBoard.getCharAtBoard(x - 1, y + 1) == space)
+        if (col < x && playerBoard.getCharAtBoard(x - 1, y) == space)
         {
-            commands[i] = Left;
+            commands[i] = Left1;
             x--;
         }
-        else if (row > x && playerBoard.getCharAtBoard(x + 1, y + 1) == space)
+        else if (col > x && playerBoard.getCharAtBoard(x + 1, y) == space)
         {
-            commands[i] = Right;
+            commands[i] = Right1;
             x++;
         }
         y++;
