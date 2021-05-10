@@ -56,7 +56,7 @@ void Bomb::UpdateBestCurPosition(Objects& obj, int* x, int* y)
 {
     
     *x = obj.getPointByIdx(0).getx();
-    if(*x > rightBoardPlayer1)
+    if(*x > rightBoardPlayer1 + 5)
         *x = *x -LeftBoardPlayer2;
     
     *y = obj.getPointByIdx(0).gety();

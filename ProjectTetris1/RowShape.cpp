@@ -216,7 +216,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
      case Rotate0:
      {
          *x = obj.getPointByIdx(0).getx();
-         if (*x > rightBoardPlayer1)
+         if (*x > rightBoardPlayer1 + 5)
              *x = *x - LeftBoardPlayer2;
          *y = obj.getPointByIdx(0).gety();
          break;
@@ -224,7 +224,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
      case Rotate1:
      {   
          *x = obj.getPointByIdx(3).getx();
-         if (*x > rightBoardPlayer1)
+         if (*x > rightBoardPlayer1 + 5)
              *x = *x - LeftBoardPlayer2;
          *y = obj.getPointByIdx(3).gety();
         break;

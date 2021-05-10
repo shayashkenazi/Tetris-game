@@ -91,7 +91,7 @@ char* Square::FindPath(int row, int col, Board& playerBoard,int playerNumber)
 void Square::UpdateBestCurPosition(Objects& obj, int* x, int* y)
 {
     *x = obj.getPointByIdx(2).getx();
-    if (*x > rightBoardPlayer1)
+    if (*x > rightBoardPlayer1 + 5)
         *x = *x - LeftBoardPlayer2;
     *y = obj.getPointByIdx(2).gety();
    

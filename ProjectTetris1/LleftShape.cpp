@@ -496,7 +496,7 @@ char* LleftShape::FindPath(int row, int col, Board& playerBoard, int rotate,int 
              commands[i] = Left2;
          else
              commands[i] = Left1;
-         commands[i] = Left1;
+         
          counterLeft--;
          i++;
      }
@@ -523,7 +523,7 @@ void LleftShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     case Rotate0:
     {
         *x = obj.getPointByIdx(3).getx();
-        if (*x > rightBoardPlayer1)
+        if (*x > rightBoardPlayer1 +5)
             *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
         break;
@@ -531,7 +531,7 @@ void LleftShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     case Rotate1:
     {
         *x = obj.getPointByIdx(3).getx();
-        if (*x > rightBoardPlayer1)
+        if (*x > rightBoardPlayer1 + 5)
             *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(2).gety();
         break;
@@ -539,7 +539,7 @@ void LleftShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     case Rotate2:
     {
         *x = obj.getPointByIdx(3).getx();
-        if (*x > rightBoardPlayer1)
+        if (*x > rightBoardPlayer1 + 5)
             *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
         break;
@@ -547,7 +547,7 @@ void LleftShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     case Rotate3:
     {
         *x = obj.getPointByIdx(3).getx();
-        if (*x > rightBoardPlayer1)
+        if (*x > rightBoardPlayer1 + 5)
             *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
         break;

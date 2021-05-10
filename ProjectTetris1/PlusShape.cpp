@@ -366,7 +366,7 @@ void PlusShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     case Rotate0:
     {
         *x = obj.getPointByIdx(0).getx();
-        if (*x > rightBoardPlayer1)
+        if (*x > rightBoardPlayer1 + 5)
             *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(0).gety();
         break;
@@ -374,7 +374,7 @@ void PlusShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     case Rotate1:
     {
         *x = obj.getPointByIdx(3).getx();
-        if (*x > rightBoardPlayer1)
+        if (*x > rightBoardPlayer1 + 5)
             *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
         break;
@@ -382,7 +382,7 @@ void PlusShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     case Rotate2:
     {
         *x = obj.getPointByIdx(3).getx();
-        if (*x > rightBoardPlayer1)
+        if (*x > rightBoardPlayer1 + 5)
             *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
         break;
@@ -390,7 +390,7 @@ void PlusShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     case Rotate3:
     {
         *x = obj.getPointByIdx(2).getx();
-        if (*x > rightBoardPlayer1)
+        if (*x > rightBoardPlayer1 + 5)
             *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(2).gety();
         break;
@@ -402,12 +402,12 @@ void PlusShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
 char* PlusShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
     char* commands = new char[10];
-    int x = body[0].getx() - LeftBoardPlayer2;
+    int x = body[0].getx() - playerNumber *LeftBoardPlayer2;
     int y = body[0].gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
     if (rotate == Rotate1 || rotate == Rotate3 )
-        x = body[1].getx() - LeftBoardPlayer2;
+        x = body[1].getx() - playerNumber*LeftBoardPlayer2;
     Counter = col - x;
     if (Counter < 0)
         counterLeft = Counter * (-1);
