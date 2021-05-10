@@ -25,7 +25,7 @@ enum GameZoneBoard {
     Rows = 20,
     Cols = 14,
 
-    RAND = 4,
+    RAND = 8,
 
     Down = 0,
     Right = 1,
@@ -60,6 +60,8 @@ enum GameZoneBoard {
     ComputerVsComputer = 2,
     space = ' ',
 
+    RegularRoatate = 0,
+    _CheckRotate = 1,
     ESC = 27
 }; //  only the game zone area
 

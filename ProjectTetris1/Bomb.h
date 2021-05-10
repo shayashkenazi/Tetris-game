@@ -17,7 +17,8 @@ public:
     {
         return new Bomb(*this);
     }
-  
+    const Point& getBody()const { return body; }
+
     virtual void move(char direction = Drop1)override;
 
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer) const { return true; };
@@ -28,7 +29,10 @@ public:
         body.draw();
     }
     virtual const Point& getPointByIdx(int idx) const override { return body; };
-    virtual char* FindBestSpot(Board& playerBoard);
+    virtual char* FindBestSpot(Board& playerBoard, int level);
+    virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y);
 
+    void CreateDropBomb(Board& playerBoard);
+    char* FindPath(int row, int col, Board& playerBoard);
 };
 

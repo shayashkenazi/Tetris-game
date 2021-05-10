@@ -11,15 +11,15 @@ LleftShape::LleftShape(Point StartPoint, int direction)
     this->direction = direction;
 }
 
-void LleftShape::UpdateLleftShape(Point StartPoint, int direction) {
+void LleftShape::UpdateLleftShape(Point StartPoint, int direction, int CheckRotate) {
     StartPoint.setCh('@');
 
     switch (direction)
     {
     case Rotate0://
     {
-       
-        StartPoint = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());//if it is not the start row
+        if (CheckRotate == RegularRoatate)
+            StartPoint = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());//if it is not the start row
         body[0] = StartPoint;
         body[1] = Point(StartPoint.getx(), StartPoint.gety() + 1, StartPoint.getCh());
         body[2] = Point(StartPoint.getx() - 1, StartPoint.gety() + 1, StartPoint.getCh());
@@ -30,7 +30,10 @@ void LleftShape::UpdateLleftShape(Point StartPoint, int direction) {
     }
     case Rotate1:
     {
-        StartPoint = Point(StartPoint.getx() - 1, StartPoint.gety() - 1, StartPoint.getCh());
+        if (CheckRotate == RegularRoatate)
+        {
+            StartPoint = Point(StartPoint.getx() - 1, StartPoint.gety() - 1, StartPoint.getCh());
+        }
 
         body[0] = StartPoint;
         body[1] = Point(StartPoint.getx(), StartPoint.gety() + 1, StartPoint.getCh());
@@ -43,7 +46,8 @@ void LleftShape::UpdateLleftShape(Point StartPoint, int direction) {
     }
     case Rotate2:
     {
-        StartPoint = Point(StartPoint.getx(), StartPoint.gety() + 1, StartPoint.getCh());
+        if (CheckRotate == RegularRoatate)
+            StartPoint = Point(StartPoint.getx(), StartPoint.gety() + 1, StartPoint.getCh());
 
         body[0] = StartPoint;
         body[1] = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());
@@ -55,6 +59,7 @@ void LleftShape::UpdateLleftShape(Point StartPoint, int direction) {
     }
     case Rotate3:
     {
+        
         body[0] = StartPoint;
         body[1] = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());
         body[2] = Point(StartPoint.getx() + 1, StartPoint.gety() + 1, StartPoint.getCh());
@@ -96,7 +101,7 @@ void LleftShape::RotateCounterWise()
     }
     case Rotate2:
     {
-        body[0] = Point(body[0].getx(), body[0].gety() - 1, body[0].getCh());
+        body[0] = Point(body[0].getx(), body[0].gety()-1 , body[0].getCh());//
         this->UpdateLleftShape(body[0], direction);
         break;
 
@@ -414,6 +419,122 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
     }
     }
     return true;
+}
+
+char* LleftShape::FindBestSpot(Board& playerBoard, int level)
+{
+    int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
+    Point StartPoint(3 + LeftBoardPlayer2, 1);
+    LleftShape* temp = new LleftShape(StartPoint);
+
+    for (int i = 0; i <= Rotate3; i++) {
+        temp->UpdateLleftShape(StartPoint, i, _CheckRotate);
+        for (int j = 1; j < rightBoardPlayer1 ; j++)
+        {
+            temp->CreateDropShape(playerBoard);
+            UpdateBestCurPosition(*temp, &x, &y);
+
+            if (level == easy) {
+                if (temp->CheckRow(playerBoard, y))
+                     return  FindPath(y, x, playerBoard,i);
+            }
+            if (max_depth < y)
+            {
+                max_depth = y;
+                best_col = x;
+                Best_Rotate = i;
+            }
+
+            StartPoint.setX(StartPoint.getx() + 1);
+            temp->UpdateLleftShape(StartPoint, i,_CheckRotate);
+        }
+        StartPoint.setX(1 + LeftBoardPlayer2);
+        StartPoint.setY(1);
+       
+    }
+    delete temp;
+    return  FindPath(max_depth, best_col, playerBoard, Best_Rotate);
+}
+
+char* LleftShape::FindPath(int row, int col, Board& playerBoard, int rotate)
+{
+
+      char*  commands = new char[10];
+     int x = body[3].getx() - LeftBoardPlayer2;
+     int y = body[3].gety();
+     int i = 0;
+     int counterRight= 0, counterLeft = 0,Counter, CounterRotate = rotate;  
+     if(rotate == Rotate3)
+         x = body[1].getx() - LeftBoardPlayer2;
+     else if(rotate != Rotate0 && rotate!= Rotate2)
+          x = body[2].getx() - LeftBoardPlayer2;
+     else if(rotate == Rotate2)
+         x = body[2].getx() - LeftBoardPlayer2;
+     Counter = col - x;
+     if (Counter < 0)
+         counterLeft = Counter * (-1);
+     else if (Counter > 0)
+         counterRight = Counter;
+    
+     if (rotate != 0 && !this->CheckRotate(Computer_Player, playerBoard) )
+     {
+         CounterRotate++;
+     }
+     while (CounterRotate)
+     {
+         commands[i] = RotateClockWise2;
+         CounterRotate--;
+         i++;
+     }     
+     while (counterLeft)
+     {
+         commands[i] = Left1;
+         counterLeft--;
+         i++;
+     }
+     while (counterRight)
+     {
+         commands[i] = Right1;
+         counterRight--;
+         i++;
+     }
+     
+    
+     commands[i] = '\0';
+     return commands;
+
+}
+
+void LleftShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
+{
+    switch (obj.getDirection())
+    {
+    case Rotate0:
+    {
+        *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+        *y = obj.getPointByIdx(3).gety();
+        break;
+    }
+    case Rotate1:
+    {
+        *x = obj.getPointByIdx(2).getx() - LeftBoardPlayer2;
+        *y = obj.getPointByIdx(2).gety();
+        break;
+    }
+    case Rotate2:
+    {
+        *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+        *y = obj.getPointByIdx(3).gety();
+        break;
+    }
+    case Rotate3:
+    {
+        *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+        *y = obj.getPointByIdx(3).gety();
+        break;
+    }
+    }
+    
 }
 
 

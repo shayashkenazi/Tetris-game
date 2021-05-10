@@ -455,6 +455,60 @@ void Shape::RotateCounterWise()
    
 }
 
+bool Shape::CheckRow(Board& playerBoard, int row)
+{
+    int x;
+    for (int i = 0; i < BodyPointSize; i++)
+    {
+        x = body[i].getx() - LeftBoardPlayer2;
+        if (x <= LeftBoardPlayer1 || x >= rightBoardPlayer1)
+            return false;
+    }
+
+    for (int i=0 ; i < BodyPointSize ; i++)
+        playerBoard.setPointAtBoard(this->getPointByIdx(i), this->getColor());
+
+    for (int i = 1; i < rightBoardPlayer1; i++)
+    {
+        if (playerBoard.getCharAtBoard(row, i) == ' ')
+        {
+            for (int j = 0; j < 4; j++)
+                    playerBoard.setPointAtBoard(Point(this->getPointByIdx(j).getx(), this->getPointByIdx(j).gety(), ' '), LIGHTGREY);
+            return false;
+        }
+    }
+
+    for (int i = 0; i < BodyPointSize; i++)
+            playerBoard.setPointAtBoard(Point(this->getPointByIdx(i).getx(), this->getPointByIdx(i).gety(), ' '), LIGHTGREY);
+    return true;
+}
+void Shape::CreateDropShape(Board& playerBoard)
+{
+    int x, y;
+    bool flag = true;
+    while (flag) {
+        for (int i = 0; i < BodyPointSize; i++) {
+
+            x = body[i].getx() - LeftBoardPlayer2;
+            y = body[i].gety() + 1;
+            if (x <= LeftBoardPlayer1 || x >= rightBoardPlayer1)
+            {
+                flag = false;
+            }
+            if (playerBoard.getCharAtBoard(y, x) != ' ')
+                flag = false;
+        }
+        if (flag)
+        {
+            for (int i = 0; i < SIZE; i++)
+            {
+                body[i].move();
+            }
+        }
+
+    }
+}
+
 const Shape& Shape::operator=(const Shape& other)
 {
     for (int i = 0; i < SIZE; i++)
@@ -465,11 +519,7 @@ const Shape& Shape::operator=(const Shape& other)
 
     return *this;
 }
- 
-/*int Shape::FindRowRating(Point point, Board& playerBoard)
-{
 
-}*/
 
 
 

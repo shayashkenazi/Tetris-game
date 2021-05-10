@@ -11,14 +11,15 @@ RowShape::RowShape(Point StartPoint, int direction)
     this->direction = direction;
 }
 
-void RowShape::UpdateRowShape(Point StartPoint, int direction)
+void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
 {
     //send body[1]
     switch (direction)
     {
     case Rotate0:
     {
-        if (body[0].getx() != 0)//if it is not the start row
+
+        if (body[0].getx() != 0 && CheckRotate == RegularRoatate)//if it is not the start row
             StartPoint = Point(StartPoint.getx() - 2, StartPoint.gety() + 2, StartPoint.getCh());
         body[0] = StartPoint;
         body[1] = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());
@@ -30,7 +31,8 @@ void RowShape::UpdateRowShape(Point StartPoint, int direction)
     }
     case Rotate1:
     {
-        StartPoint = Point(StartPoint.getx() + 2, StartPoint.gety() - 2, StartPoint.getCh());
+        if (CheckRotate == RegularRoatate)
+            StartPoint = Point(StartPoint.getx() + 2, StartPoint.gety() - 2, StartPoint.getCh());
         body[0] = StartPoint;
         body[1] = Point(StartPoint.getx(), StartPoint.gety() + 1, StartPoint.getCh());
         body[2] = Point(StartPoint.getx(), StartPoint.gety() + 2, StartPoint.getCh());
@@ -167,78 +169,108 @@ void RowShape::UpdateRowShape(Point StartPoint, int direction)
      return CheckRotate(playerNumber, boardGameForPlayer); 
  }
 
- char* RowShape::FindBestSpot(Board& playerBoard)
+ char* RowShape::FindBestSpot(Board& playerBoard,int level)
  {
-     char* path = nullptr;
-     int point_rating = 0, depth_rating = 0, row_rating = 0;
+   
+     // int point_rating = 0, depth_rating = 0, row_rating = 0;
 
+     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
+     Point StartPoint(1 + LeftBoardPlayer2, 1);
+     RowShape* temp = new RowShape(StartPoint);
 
-     for (int i = Bottom - 1; i > 1; i--)
-     {
-         for (int j = 1; j < rightBoardPlayer1; j++)
+     for (int i = 0; i <= Rotate1; i++) {
+         temp->UpdateRowShape(StartPoint, i, _CheckRotate);
+        
+         for (int j = 1; j < rightBoardPlayer1 ; j++)
          {
-             if (playerBoard.getCharAtBoard(i, j) == space && playerBoard.getCharAtBoard(i, j + 1) == space && playerBoard.getCharAtBoard(i, j + 2) == space && playerBoard.getCharAtBoard(i, j + 3) == space)
-             {
-                if (FindPath(&path, i, j, playerBoard, Rotate0))
-                  return path;
+             temp->CreateDropShape(playerBoard);
+             UpdateBestCurPosition(*temp, &x, &y);
+             if (level == easy) {
+                 //  if (CheckRow(playerBoard, y))
+                   //    return  FindPath(y, x, playerBoard,i);
              }
-         }
-         for (int j = 1; j < rightBoardPlayer1; j++)
-         {
-             if (playerBoard.getCharAtBoard(i, j) == space && playerBoard.getCharAtBoard(i -1, j) == space && playerBoard.getCharAtBoard(i -2, j) == space && playerBoard.getCharAtBoard(i-3, j) == space)
+             if (max_depth < y)
              {
-                 if (FindPath(&path, i, j, playerBoard, Rotate1))
-                       return path;
+                 max_depth = y;
+                 best_col = x;
+                 Best_Rotate = i;
              }
+
+             StartPoint.setX(StartPoint.getx() + 1);
+             temp->UpdateRowShape(StartPoint, i, _CheckRotate);
          }
+         
+         StartPoint.setX( LeftBoardPlayer2 + 1);
+         StartPoint.setY(1);
+        
+         
+        
      }
+     delete temp;
+     return  FindPath(max_depth, best_col, playerBoard, Best_Rotate);
+ }
+
+ void RowShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
+ {
+     switch (obj.getDirection())
+     {
+     case Rotate0:
+     {
+         *x = obj.getPointByIdx(0).getx() - LeftBoardPlayer2;
+         *y = obj.getPointByIdx(0).gety();
+         break;
+     }
+     case Rotate1:
+     {   *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+         *y = obj.getPointByIdx(3).gety();
+         break;
+     }
+     }
+     
+
  }
 
  
- bool RowShape::FindPath(char** path, int row, int col, Board& playerBoard, int rotate)
+ char* RowShape::FindPath(int row, int col, Board& playerBoard, int rotate)
  {
-     //this->UpdateRowShape(rotate);
-     char*  commands = new char[10];
+     char* commands = new char[10];
      int x = body[0].getx() - LeftBoardPlayer2;
      int y = body[0].gety();
      int i = 0;
-
-     while (x != col && y != row)
+     int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
+     if (rotate != Rotate0)
+         x = body[2].getx() - LeftBoardPlayer2;
+ 
+     Counter = col - x;
+     if (Counter < 0)
+         counterLeft = Counter * (-1);
+     else if (Counter > 0)
+         counterRight = Counter;
+    
+     if (rotate != 0 && !this->CheckRotate(Computer_Player, playerBoard))
      {
-         if (rotate == Rotate0) {
-             if (col < x && playerBoard.getCharAtBoard(x - 1, y) == space)
-             {
-                 commands[i]= Left1;
-                 x--;
-             }
-             else if (col > x && playerBoard.getCharAtBoard(x + 1, y) == space)
-             {
-                 commands[i] = Right1;
-                 x++;
-             }
-         }
-         else if (rotate == Rotate1) {
-             if ( playerBoard.getCharAtBoard(x, y-1) == space)
-             {
-                 commands[i] = RotateClockWise2;
-                 rotate--;
-                 x = x + 2;
-                 y = y - 2;
-             }
-             else {
-                 commands[i] = MoveDown;
-               
-             }
-
-         }
-         y++;
+         CounterRotate = CounterRotate + 2;
+     }
+     while (CounterRotate)
+     {
+         commands[i] = RotateClockWise2;
+         CounterRotate--;
          i++;
      }
+     while (counterLeft)
+     {
+         commands[i] = Left1;
+         counterLeft--;
+         i++;
+     }
+     while (counterRight)
+     {
+         commands[i] = Right1;
+         counterRight--;
+         i++;
+     }
+
+
      commands[i] = '\0';
-     *path = commands;
-     if (*path) 
-         return true;
-   
-     else
-         return false;
+     return commands;
  }

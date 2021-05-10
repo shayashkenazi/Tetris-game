@@ -26,6 +26,11 @@ public:
     const char getCh() const { return ch; }
      
     void setCh(char _ch) { ch = _ch; } //Sets points char
+    void setX(int _x) { x = _x; } 
+    void setY(int _y) { y = _y; } 
+
+
+
     void draw(char ch) const; //Draws a point to the screen by char
     void draw() const;//Draws a point to the screen 
 

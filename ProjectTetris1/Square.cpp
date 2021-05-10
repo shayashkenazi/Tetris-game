@@ -9,6 +9,14 @@ Square::Square(Point StartPoint, int direction)  {
     serialNumber = _Square; // update the serial number of the shape
 }
 
+void Square::UpdateSquareShape(Point& StartPoint, int direction)
+{
+    body[0] = StartPoint;
+    body[1] = Point(StartPoint.getx() + 1, StartPoint.gety(), StartPoint.getCh());
+    body[2] = Point(StartPoint.getx(), StartPoint.gety() + 1, StartPoint.getCh());
+    body[3] = Point(StartPoint.getx() + 1, StartPoint.gety() + 1, StartPoint.getCh());
+}
+
 void Square::RotateClockWise()
 {
 }
@@ -17,52 +25,70 @@ void Square::RotateCounterWise()
 {
 }
 
-char* Square::FindBestSpot(Board& playerBoard)
+char* Square::FindBestSpot(Board& playerBoard, int level)
 {
-    char* path = nullptr;
-    int point_rating = 0, depth_rating = 0, row_rating = 0;
+    int max_depth = 0, best_col = 1, x = 0, y = 0;
+    Point StartPoint(1 + LeftBoardPlayer2, 1);
+    Square* temp = new Square(StartPoint);
 
-
-    for (int i = Bottom-1; i > 1; i--)
+    for (int j = 1; j < rightBoardPlayer1 - 1; j++)
     {
-        for (int j = 1; j < rightBoardPlayer1; j++)
-        {
-            if (playerBoard.getCharAtBoard(i, j) == space && playerBoard.getCharAtBoard(i, j + 1) == space)
-            {
-                if (playerBoard.getCharAtBoard(i - 1, j) == space && playerBoard.getCharAtBoard(i - 1, j + 1) == space)
-                {
-                    if(path = FindPath(i, j, playerBoard))
-                        return path;
-                }
-                
-            }
+
+        temp->CreateDropShape(playerBoard);
+        UpdateBestCurPosition(*temp, &x, &y);
+        if (level == easy) {
+                // if (CheckRow(playerBoard, y))
+              //   return  FindPath(y, x, playerBoard);
         }
+        if (max_depth < y)
+        {
+            max_depth = y;
+            best_col = x;
+        }
+
+        StartPoint.setX(StartPoint.getx() + 1);
+        temp->UpdateSquareShape(StartPoint);
     }
+    delete temp;
+    return  FindPath(max_depth, best_col, playerBoard);
 }
+
 char* Square::FindPath(int row, int col, Board& playerBoard)
 {
     char* commands = new char[10];
     int x = body[2].getx() - LeftBoardPlayer2;
     int y = body[2].gety();
     int i = 0;
-
-    while (x != col && y != row)
+    int counterRight = 0, counterLeft = 0, Counter;
+    Counter = col - x;
+    if (Counter < 0)
+        counterLeft = Counter * (-1);
+    else if (Counter > 0)
+        counterRight = Counter;
+ 
+    while (counterLeft)
     {
-        if (col < x && playerBoard.getCharAtBoard(x - 1, y) == space)
-        {
-            commands[i] = Left1;
-            x--;
-        }
-        else if (col > x && playerBoard.getCharAtBoard(x + 1, y) == space)
-        {
-            commands[i] = Right1;
-            x++;
-        }
-        y++;
+        commands[i] = Left1;
+        counterLeft--;
         i++;
     }
+    while (counterRight)
+    {
+        commands[i] = Right1;
+        counterRight--;
+        i++;
+    }
+
+
     commands[i] = '\0';
     return commands;
+}
+
+void Square::UpdateBestCurPosition(Objects& obj, int* x, int* y)
+{
+    *x =obj.getPointByIdx(2).getx() - LeftBoardPlayer2;
+    *y = obj.getPointByIdx(2).gety();
+   
 }
 
 //

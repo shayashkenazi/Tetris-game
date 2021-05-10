@@ -5,6 +5,8 @@ class Square : public Shape
 {
 public:
     Square(Point StartPoint, int direction = Rotate0);
+    void UpdateSquareShape(Point& StartPoint, int direction = Rotate0);
+
 
 
     virtual void RotateClockWise() override;
@@ -16,7 +18,8 @@ public:
     }
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer)const override { return true; };
     virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const override { return true; };
-    virtual char* FindBestSpot(Board& playerBoard);
+    virtual char* FindBestSpot(Board& playerBoard, int level);
     char* FindPath(int row, int col, Board& playerBoard);
+    virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y);
 };
 

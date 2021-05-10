@@ -78,11 +78,14 @@ void Board::Explosion(const Point& point)
     int x, y;
     x = point.getx() - _BombExplosion;
     y = point.gety() - _BombExplosion;
+   
     if (x > rightBoardPlayer1)
 	   x = x - LeftBoardPlayer2;
+    
 
     for (int i= 0; i < _BombExplosionLoop; i++)
     {
+
 	   for (int j = 0; j < _BombExplosionLoop; j++)
 	   {
 		  if ((y + i) > TopBoard && (y + i) < Bottom && (x + j) > LeftBoardPlayer1 && (x + j) < rightBoardPlayer1)

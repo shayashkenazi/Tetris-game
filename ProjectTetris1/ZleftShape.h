@@ -5,7 +5,7 @@ class ZleftShape : public Shape
 {
 public:
     ZleftShape(Point StartPoint, int direction = Rotate0);//Creates Z left by direction
-    void UpdateZleftShape(Point StartPoint, int direction = Rotate0);//Creates Z left by direction
+    void UpdateZleftShape(Point& StartPoint, int direction = Rotate0, int CheckRotate = RegularRoatate);//Creates Z left by direction
 
 
 
@@ -18,7 +18,8 @@ public:
     }
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer)const override;
     virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const override;
-    virtual char* FindBestSpot(Board& playerBoard) { return nullptr; }
-
+    virtual char* FindBestSpot(Board& playerBoard, int level);
+    virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y);
+    char* FindPath(int row, int col, Board& playerBoard, int rotate);
 };
 

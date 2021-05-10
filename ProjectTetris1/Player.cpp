@@ -49,7 +49,7 @@ void Player::UpdateBoard(const Objects& shape)
     if (typeid(shape) == typeid(Bomb))
     {
         boardGameForPlayer.Explosion(shape.getPointByIdx(0));
-        UpdateBoardExplosion(shape.getPointByIdx(0));
+        //        UpdateBoardExplosion(shape.getPointByIdx(0));
         
     }
     else {

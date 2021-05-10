@@ -12,10 +12,10 @@ ShapesArray::ShapesArray(int _player) : player(_player)
 {
     AllShapesArray = new Objects *[NumOfShapes];
     if (player == Player1) {
-
-        AllShapesArray[0] = new Square(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard +1));
-        AllShapesArray[1] = new LleftShape(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1));
-        AllShapesArray[2] = new LrightShape(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1));
+        Point point(LeftBoardPlayer1 + rightBoardPlayer1 / 2, TopBoard + 1);
+        AllShapesArray[0] = new Square(point);
+        AllShapesArray[1] = new LleftShape(point);
+        AllShapesArray[2] = new LrightShape(point);
         AllShapesArray[3] = new RowShape(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1));
         AllShapesArray[4] = new ZleftShape(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1));
         AllShapesArray[5] = new ZrightShape(Point((LeftBoardPlayer1 + rightBoardPlayer1) / 2, TopBoard + 1));
@@ -25,7 +25,8 @@ ShapesArray::ShapesArray(int _player) : player(_player)
     }
     if (player == Player2 || player == Computer_Player)
     {
-        AllShapesArray[0] = new Square(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard +1));
+
+        AllShapesArray[0] = new Square(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1));
         AllShapesArray[1] = new LleftShape(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1));
         AllShapesArray[2] = new LrightShape(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1));
         AllShapesArray[3] = new RowShape(Point((LeftBoardPlayer2 + rightBoardPlayer2) / 2, TopBoard + 1));

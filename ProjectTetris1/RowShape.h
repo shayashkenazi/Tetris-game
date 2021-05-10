@@ -6,7 +6,7 @@ class RowShape : public Shape
 public:
     RowShape(Point StartPoint, int direction = Rotate0);
     
-    void UpdateRowShape(Point StartPoint, int direction = Rotate0);
+    void UpdateRowShape(Point& StartPoint, int direction = Rotate0, int CheckRotate = RegularRoatate);
 
     virtual void RotateClockWise() override;
     virtual void RotateCounterWise() override;
@@ -17,8 +17,9 @@ public:
     }
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer)const override;
     virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const override;
-    virtual char* FindBestSpot(Board& playerBoard);
+    virtual char* FindBestSpot(Board& playerBoard, int level);
+    virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y);
 
-    bool FindPath(char** path, int rox, int col, Board& playerBoard,int rotate);
+    char* FindPath( int row, int col, Board& playerBoard,int rotate);
 };
 

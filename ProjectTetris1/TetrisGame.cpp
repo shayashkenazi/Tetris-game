@@ -37,16 +37,13 @@ void TetrisGame::RandomShape(Objects** S, int player)
 {
 	int randShape;
 	randShape = rand() % RAND;
-	if (randShape == 1 )
-		randShape = 3;
-	if (randShape == 2)
-		randShape = 3;
+	
     Objects* TempPointerShape;
     TempPointerShape = *S;
    if(player == Player1)
-	  *S =  ThePlayers[Player1]->getShapesarray().getShape(_RowShape)->Clone();
+	  *S =  ThePlayers[Player1]->getShapesarray().getShape(randShape)->Clone();
    else
-	*S = ThePlayers[Player2]->getShapesarray().getShape(randShape)->Clone();
+	*S = ThePlayers[Player2]->getShapesarray().getShape(_LleftShape)->Clone();
  
    delete TempPointerShape;
 }
@@ -306,7 +303,7 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 		RandomShape(S1, Player1);
 		RandomShape(S2, Player2);
 	}
-	char* computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame());
+	char* computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy);
 
 	//Prints boards
 	ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
@@ -349,10 +346,10 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 			ThePlayers[Player2]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 			gotoxy(LeftBoardPlayer2, 0);
 			ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
-			computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame());
+			computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy);
 			index = 0;
 		}
-		Sleep(200);
+		Sleep(50);
 	} while (key != ESC);
 
 }

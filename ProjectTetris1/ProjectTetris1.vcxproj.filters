@@ -15,126 +15,126 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Board.cpp">
+    <ClCompile Include="Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Bomb.cpp">
+    <ClCompile Include="Bomb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\ComputerPlayer.cpp">
+    <ClCompile Include="ComputerPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\gotoxy.cpp">
+    <ClCompile Include="gotoxy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\HumanPlayer.cpp">
+    <ClCompile Include="HumanPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\LleftShape.cpp">
+    <ClCompile Include="LleftShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\LrightShape.cpp">
+    <ClCompile Include="LrightShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Menu.cpp">
+    <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Objects.cpp">
+    <ClCompile Include="Objects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Player.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\PlusShape.cpp">
+    <ClCompile Include="PlusShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Point.cpp">
+    <ClCompile Include="Point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\RowShape.cpp">
+    <ClCompile Include="RowShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Shape.cpp">
+    <ClCompile Include="Shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\ShapesArray.cpp">
+    <ClCompile Include="ShapesArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Square.cpp">
+    <ClCompile Include="Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\TetrisGame.cpp">
+    <ClCompile Include="TetrisGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\ZleftShape.cpp">
+    <ClCompile Include="ZleftShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\ZrightShape.cpp">
+    <ClCompile Include="ZrightShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Board.h">
+    <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Bomb.h">
+    <ClInclude Include="Bomb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\ComputerPlayer.h">
+    <ClInclude Include="ComputerPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\enum.h">
+    <ClInclude Include="enum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\gotoxy.h">
+    <ClInclude Include="gotoxy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\HumanPlayer.h">
+    <ClInclude Include="HumanPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\LleftShape.h">
+    <ClInclude Include="LleftShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\LrightShape.h">
+    <ClInclude Include="LrightShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Menu.h">
+    <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Objects.h">
+    <ClInclude Include="Objects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Player.h">
+    <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\PlusShape.h">
+    <ClInclude Include="PlusShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Point.h">
+    <ClInclude Include="Point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\RowShape.h">
+    <ClInclude Include="RowShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Shape.h">
+    <ClInclude Include="Shape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\ShapesArray.h">
+    <ClInclude Include="ShapesArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Square.h">
+    <ClInclude Include="Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\TetrisGame.h">
+    <ClInclude Include="TetrisGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\ZleftShape.h">
+    <ClInclude Include="ZleftShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\ZrightShape.h">
+    <ClInclude Include="ZrightShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

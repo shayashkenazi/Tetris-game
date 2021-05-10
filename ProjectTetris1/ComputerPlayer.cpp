@@ -4,7 +4,7 @@
 
 char* ComputerPlayer:: CommandsString(Objects& obj)
 {
-	char* commands = obj.FindBestSpot(boardGameForPlayer);
+	char* commands = obj.FindBestSpot(boardGameForPlayer,easy);
 	return commands;
 }
 
