@@ -38,13 +38,13 @@ void TetrisGame::RandomShape(Objects** S, int player)
 	int randShape;
 	randShape = rand() % RAND;
 	if (randShape == 1 )
-		randShape = 0;
+		randShape = 3;
 	if (randShape == 2)
 		randShape = 3;
     Objects* TempPointerShape;
     TempPointerShape = *S;
    if(player == Player1)
-	  *S =  ThePlayers[Player1]->getShapesarray().getShape(_Square)->Clone();
+	  *S =  ThePlayers[Player1]->getShapesarray().getShape(_RowShape)->Clone();
    else
 	*S = ThePlayers[Player2]->getShapesarray().getShape(randShape)->Clone();
  
