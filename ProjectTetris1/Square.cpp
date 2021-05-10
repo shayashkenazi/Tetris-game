@@ -54,7 +54,7 @@ char* Square::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 char* Square::FindPath(int row, int col, Board& playerBoard,int playerNumber)
 {
     char* commands = new char[10];
-    int x = body[2].getx() - LeftBoardPlayer2;
+    int x = body[2].getx() - playerNumber *LeftBoardPlayer2;
     int y = body[2].gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter;

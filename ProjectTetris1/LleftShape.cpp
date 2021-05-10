@@ -468,7 +468,7 @@ char* LleftShape::FindPath(int row, int col, Board& playerBoard, int rotate,int 
      if(rotate == Rotate3)
          x = body[1].getx() - playerNumber * LeftBoardPlayer2;
      else if(rotate != Rotate0 && rotate!= Rotate2)
-          x = body[2].getx() - playerNumber * LeftBoardPlayer2;
+          x = body[2].getx() + 1 - playerNumber * LeftBoardPlayer2;
      else if(rotate == Rotate2)
          x = body[2].getx() - playerNumber * LeftBoardPlayer2;
      Counter = col - x;

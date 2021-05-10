@@ -67,7 +67,9 @@ void Bomb::CreateDropBomb(Board& playerBoard)
     bool flag = true;
     int x, y;
     while (flag) {
-        x = body.getx() - LeftBoardPlayer2;
+        x = body.getx();
+        if(x > rightBoardPlayer1 +5)
+            x= x-LeftBoardPlayer2;
         y = body.gety() + 1;
 
         if (playerBoard.getCharAtBoard(y, x) != ' ')
