@@ -328,7 +328,7 @@ bool PlusShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) 
 char* PlusShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
-    Point StartPoint(1 + LeftBoardPlayer2, 2);
+    Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 2);
     PlusShape* temp = new PlusShape(StartPoint);
 
     for (int i = 0; i <= Rotate3; i++) {
@@ -338,7 +338,7 @@ char* PlusShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
             temp->CreateDropShape(playerBoard);
             UpdateBestCurPosition(*temp, &x, &y);
             if (temp->CheckRow(playerBoard, y))
-                return  FindPath(y, x, playerBoard, i);
+                return  FindPath(y, x, playerBoard, i,playerNumber);
 
             if (max_depth < y)
             {
@@ -351,12 +351,12 @@ char* PlusShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
             StartPoint.setX(StartPoint.getx() + 1);
             temp->UpdatePlusShape(StartPoint, i, _CheckRotate);
         }
-        StartPoint.setX(1 + LeftBoardPlayer2);
+        StartPoint.setX(1 + playerNumber*LeftBoardPlayer2);
         StartPoint.setY(1);
 
     }
     delete temp;
-    return  FindPath(max_depth, best_col, playerBoard, Best_Rotate);
+    return  FindPath(max_depth, best_col, playerBoard, Best_Rotate, playerNumber);
 }
 
 void PlusShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
@@ -420,19 +420,28 @@ char* PlusShape::FindPath(int row, int col, Board& playerBoard, int rotate,int p
     }
     while (CounterRotate)
     {
-        commands[i] = RotateClockWise2;
+        if (playerNumber == Computer_Player2)
+            commands[i] = RotateClockWise2;
+        else
+            commands[i] = RotateClockWise1;
         CounterRotate--;
         i++;
     }
     while (counterLeft)
     {
-        commands[i] = Left1;
+        if (playerNumber == Computer_Player2)
+            commands[i] = Left2;
+        else
+            commands[i] = Left1;
         counterLeft--;
         i++;
     }
     while (counterRight)
     {
-        commands[i] = Right1;
+        if (playerNumber == Computer_Player2)
+            commands[i] = Right2;
+        else
+            commands[i] = Right1;
         counterRight--;
         i++;
     }

@@ -17,6 +17,8 @@ void main()
     Color c = LIGHTGREY;
     setTextColor(c);
     
+    int x = 4;
+   
 
     TetrisGame g;
     hideCursor();

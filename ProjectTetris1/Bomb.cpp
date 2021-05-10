@@ -49,7 +49,7 @@ char* Bomb::FindBestSpot(Board& playerBoard,int level, int playerNumber)
     }
     
     delete temp;
-    return  FindPath(max_depth, best_col, playerBoard);
+    return  FindPath(max_depth, best_col, playerBoard, playerNumber);
 }
 
 void Bomb::UpdateBestCurPosition(Objects& obj, int* x, int* y)
@@ -96,13 +96,18 @@ char* Bomb::FindPath(int row, int col, Board& playerBoard, int playerNumber)
 
     while (counterLeft)
     {
-        
+        if(playerNumber == Computer_Player2)
+            commands[i] = Left2;
+        else
         commands[i] = Left1;
         counterLeft--;
         i++;
     }
     while (counterRight)
     {
+        if (playerNumber == Computer_Player2)
+            commands[i] = Right2;
+        else
         commands[i] = Right1;
         counterRight--;
         i++;

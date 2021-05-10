@@ -460,7 +460,10 @@ bool Shape::CheckRow(Board& playerBoard, int row)
     int x;
     for (int i = 0; i < BodyPointSize; i++)
     {
-        x = body[i].getx() - LeftBoardPlayer2;
+
+        x = body[i].getx();
+        if (x > rightBoardPlayer1 )
+            -LeftBoardPlayer2;
         if (x <= LeftBoardPlayer1 || x >= rightBoardPlayer1)
             return false;
     }
@@ -490,7 +493,7 @@ void Shape::CreateDropShape(Board& playerBoard)
         for (int i = 0; i < BodyPointSize; i++) {
 
             x = body[i].getx();
-            if(x> rightBoardPlayer1)
+            if(x> rightBoardPlayer1 + 5)
                x = x -LeftBoardPlayer2;
             y = body[i].gety() + 1;
             if (x <= LeftBoardPlayer1 || x >= rightBoardPlayer1)

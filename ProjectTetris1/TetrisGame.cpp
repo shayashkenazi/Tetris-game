@@ -391,7 +391,7 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 			ThePlayers[Player2]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 			gotoxy(LeftBoardPlayer2, 0);
 			ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
-			computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy);
+			computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy ,Computer_Player2);
 			index = 0;
 		}
 		Sleep(5);
@@ -411,21 +411,23 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 	   RandomShape(S2, Player2);
     }
 
-    char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy);
-
-    char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy);
-
+    
 
     //Prints boards
     ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
     gotoxy(LeftBoardPlayer2, 0);
     ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
+    char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
+
+    char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
+
 
     do {
 	   if (_kbhit())
 	   {
 		  hideCursor();
 		  key = _getch();
+	   
 	   }
 	   //Checks if a shape reached the top of the board
 	   if (!ThePlayers[Player1]->CheckGameOver(**S1) || !ThePlayers[Player2]->CheckGameOver(**S2))
@@ -461,7 +463,7 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  ThePlayers[Player1]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 		  gotoxy(0, 0);
 		  ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);//Prints updated board
-		  computer_commands1 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy);
+		  computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
 		  index1 = 0;
 	   }
 	   if (ThePlayers[Player2]->IsPossible(**S2, MoveDown))//Drops shape by one step
@@ -473,7 +475,7 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  ThePlayers[Player2]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 		  gotoxy(LeftBoardPlayer2, 0);
 		  ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
-		  computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy);
+		  computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
 		  index2 = 0;
 	   }
 	   Sleep(200);

@@ -186,7 +186,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
              temp->CreateDropShape(playerBoard);
              UpdateBestCurPosition(*temp, &x, &y);
              if (temp->CheckRow(playerBoard, y))
-                 return  FindPath(y, x, playerBoard, i);
+                 return  FindPath(y, x, playerBoard, i, playerNumber);
 
              if (max_depth < y)
              {
@@ -206,7 +206,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
         
      }
      delete temp;
-     return  FindPath(max_depth, best_col, playerBoard, Best_Rotate);
+     return  FindPath(max_depth, best_col, playerBoard, Best_Rotate, playerNumber);
  }
 
  void RowShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
@@ -257,19 +257,29 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
      }
      while (CounterRotate)
      {
-         commands[i] = RotateClockWise2;
+         if (playerNumber == Computer_Player2)
+             commands[i] = RotateClockWise2;
+         else
+             commands[i] = RotateClockWise1;
          CounterRotate--;
          i++;
      }
      while (counterLeft)
      {
-         commands[i] = Left1;
+         if (playerNumber == Computer_Player2)
+             commands[i] = Left2;
+         else
+             commands[i] = Left1;
          counterLeft--;
          i++;
      }
      while (counterRight)
      {
-         commands[i] = Right1;
+         if (playerNumber == Computer_Player2)
+             commands[i] = Right2;
+         else
+             commands[i] = Right1;
+         
          counterRight--;
          i++;
      }

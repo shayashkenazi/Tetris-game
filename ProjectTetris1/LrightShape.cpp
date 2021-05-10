@@ -421,7 +421,7 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
             temp->CreateDropShape(playerBoard);
             UpdateBestCurPosition(*temp, &x, &y);
             if (temp->CheckRow(playerBoard, y))
-                return  FindPath(y, x, playerBoard, i);
+                return  FindPath(y, x, playerBoard, i, playerNumber);
 
             if (max_depth < y)
             {
@@ -444,7 +444,7 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
        
     }
     delete temp;
-    return  FindPath(max_depth, best_col, playerBoard, Best_Rotate);
+    return  FindPath(max_depth, best_col, playerBoard, Best_Rotate, playerNumber);
 }
 
 char* LrightShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
@@ -469,19 +469,30 @@ char* LrightShape::FindPath(int row, int col, Board& playerBoard, int rotate,int
     }
     while (CounterRotate)
     {
-        commands[i] = RotateClockWise2;
+        if (playerNumber == Computer_Player2)
+            commands[i] = RotateClockWise2;
+        else
+            commands[i] = RotateClockWise1;
+        
         CounterRotate--;
         i++;
     }
     while (counterLeft)
     {
-        commands[i] = Left1;
+
+        if (playerNumber == Computer_Player2)
+            commands[i] = Left2;
+        else
+            commands[i] = Left1;
         counterLeft--;
         i++;
     }
     while (counterRight)
     {
-        commands[i] = Right1;
+        if (playerNumber == Computer_Player2)
+            commands[i] = Right2;
+        else
+            commands[i] = Right1;
         counterRight--;
         i++;
     }
