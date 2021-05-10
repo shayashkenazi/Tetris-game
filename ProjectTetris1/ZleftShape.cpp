@@ -141,7 +141,7 @@ bool ZleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
     return CheckRotate(playerNumber, boardGameForPlayer);
 }
 
-char* ZleftShape::FindBestSpot(Board& playerBoard, int level)
+char* ZleftShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
     Point StartPoint(1 + LeftBoardPlayer2, 1);
@@ -154,10 +154,8 @@ char* ZleftShape::FindBestSpot(Board& playerBoard, int level)
         {
             temp->CreateDropShape(playerBoard);
             UpdateBestCurPosition(*temp, &x, &y);
-            if (level == easy) {
-                //  if (CheckRow(playerBoard, y))
-                  //    return  FindPath(y, x, playerBoard,i);
-            }
+            if (temp->CheckRow(playerBoard, y))
+                return  FindPath(y, x, playerBoard, i);
             if (max_depth < y)
             {
                 max_depth = y;
@@ -185,22 +183,27 @@ void ZleftShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     {
     case Rotate0:
     {
-        *x = obj.getPointByIdx(2).getx() - LeftBoardPlayer2;
+        *x = obj.getPointByIdx(2).getx();
+        if (*x > rightBoardPlayer1)
+            *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(2).gety();
         break;
     }
     case Rotate1:
-    {   *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+    {  
+        *x = obj.getPointByIdx(3).getx();
+        if (*x > rightBoardPlayer1)
+            *x = *x - LeftBoardPlayer2;
          *y = obj.getPointByIdx(3).gety();
     break;
     }
     }
 }
 
-char* ZleftShape::FindPath(int row, int col, Board& playerBoard, int rotate)
+char* ZleftShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
     char* commands = new char[10];
-    int x = body[2].getx() - LeftBoardPlayer2;
+    int x = body[2].getx() - playerNumber * LeftBoardPlayer2;
     int y = body[2].gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
@@ -213,7 +216,7 @@ char* ZleftShape::FindPath(int row, int col, Board& playerBoard, int rotate)
     else if (Counter > 0)
         counterRight = Counter;
 
-    if (rotate != 0 && !this->CheckRotate(Computer_Player, playerBoard))
+    if (rotate != 0 && !this->CheckRotate(playerNumber, playerBoard))
     {
         CounterRotate++;
     }

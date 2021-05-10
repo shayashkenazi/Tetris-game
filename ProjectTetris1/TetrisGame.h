@@ -16,12 +16,14 @@ private:
 
 public:
     //TetrisGame() {};
-    TetrisGame(int gameType = 0);
+    TetrisGame();
     ~TetrisGame();
 
     void createPlayers(int gameType);
     void RunPlayerVsPlayer(Objects** S1, Objects** S2);
     void RunPlayerVsComputer(Objects** S1, Objects** S2);
+    void RunComputerVsComputer(Objects** S1, Objects** S2);
+
 
 
     void Start(); //Game menu

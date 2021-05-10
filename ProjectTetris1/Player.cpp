@@ -2,7 +2,7 @@
 
 Player::Player(int player) : boardGameForPlayer(), shapesarray(player), playerNumber(player)
 {
-    if (playerNumber == Player1)
+    if (playerNumber == Player1 || playerNumber == Computer_Player1)
     {
         KeyboardKeys[0] = Drop1;
         KeyboardKeys[1] = Drop1B;
@@ -15,7 +15,7 @@ Player::Player(int player) : boardGameForPlayer(), shapesarray(player), playerNu
         KeyboardKeys[8] = RotateCounterClockWise1;
         KeyboardKeys[9] = RotateCounterClockWise1B;
     }
-    if (playerNumber == Player2 )
+    if (playerNumber == Player2 || playerNumber == Computer_Player2)
     {
         KeyboardKeys[0] = Drop2;
         KeyboardKeys[1] = Drop2B;

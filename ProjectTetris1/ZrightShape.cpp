@@ -145,7 +145,7 @@ bool ZrightShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer
 }
 
 
-char* ZrightShape::FindBestSpot(Board& playerBoard, int level)
+char* ZrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
     Point StartPoint(1 + LeftBoardPlayer2, 2);
@@ -158,10 +158,8 @@ char* ZrightShape::FindBestSpot(Board& playerBoard, int level)
         {
             temp->CreateDropShape(playerBoard);
             UpdateBestCurPosition(*temp, &x, &y);
-            if (level == easy) {
-                //  if (CheckRow(playerBoard, y))
-                  //    return  FindPath(y, x, playerBoard,i);
-            }
+            if (temp->CheckRow(playerBoard, y))
+                return  FindPath(y, x, playerBoard, i);
             if (max_depth < y)
             {
                 max_depth = y;
@@ -189,29 +187,34 @@ void ZrightShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     {
     case Rotate0:
     {
-        *x = obj.getPointByIdx(0).getx() - LeftBoardPlayer2;
+        *x = obj.getPointByIdx(0).getx();
+        if (*x > rightBoardPlayer1)
+            *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(0).gety();
         break;
     }
     case Rotate1:
-    {   *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+    {   
+        *x = obj.getPointByIdx(3).getx();
+        if (*x > rightBoardPlayer1)
+            *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
-    break;
+        break;
     }
     }
 }
 
-char* ZrightShape::FindPath(int row, int col, Board& playerBoard, int rotate)
+char* ZrightShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
     char* commands = new char[10];
-    int x = body[0].getx() - LeftBoardPlayer2;
+    int x = body[0].getx() - playerNumber * LeftBoardPlayer2;
     int y = body[0].gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
     //   if (rotate != Rotate0)
       //     x = body[1].getx() - LeftBoardPlayer2;
     if (rotate == Rotate1)
-        x = body[3].getx() - LeftBoardPlayer2;
+        x = body[3].getx() - playerNumber * LeftBoardPlayer2;
 
     Counter = col - x;
     if (Counter < 0)
@@ -219,7 +222,7 @@ char* ZrightShape::FindPath(int row, int col, Board& playerBoard, int rotate)
     else if (Counter > 0)
         counterRight = Counter;
 
-    if (rotate != 0 && !this->CheckRotate(Computer_Player, playerBoard))
+    if (rotate != 0 && !this->CheckRotate(playerNumber, playerBoard))
     {
         CounterRotate++;
     }

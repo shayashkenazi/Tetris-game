@@ -28,7 +28,7 @@ public:
 
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer) const = 0;
     virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const = 0;
-    virtual char* FindBestSpot(Board& playerBoard,int level) = 0;
+    virtual char* FindBestSpot(Board& playerBoard,int level, int playerNumber = Computer_Player2) = 0;
 
     virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y) = 0;
 

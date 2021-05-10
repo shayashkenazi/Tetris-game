@@ -16,20 +16,17 @@ void Bomb::move(char direction)
 
 }
 
-char* Bomb::FindBestSpot(Board& playerBoard,int level)
+char* Bomb::FindBestSpot(Board& playerBoard,int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
     int mid = (LeftBoardPlayer1 + rightBoardPlayer1) / 2,abs1,abs2;
-    Point StartPoint(1 + LeftBoardPlayer2, 1);
+    Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 1);
     Bomb* temp = new Bomb(StartPoint);
     for (int i = 1; i < rightBoardPlayer1; i++)
     {
         temp->CreateDropBomb(playerBoard);
         UpdateBestCurPosition(*temp, &x, &y);
-        if (level == easy) {
-            //  if (CheckRow(playerBoard, y))
-              //    return  FindPath(y, x, playerBoard,i);
-        }
+       
 
         if (max_depth == 0 || max_depth > y)
         {
@@ -47,7 +44,7 @@ char* Bomb::FindBestSpot(Board& playerBoard,int level)
             }
         }
         
-        temp->body.setX(i + LeftBoardPlayer2 + 1);
+        temp->body.setX(i + playerNumber*LeftBoardPlayer2 + 1);
         temp->body.setY(1);
     }
     
@@ -57,7 +54,11 @@ char* Bomb::FindBestSpot(Board& playerBoard,int level)
 
 void Bomb::UpdateBestCurPosition(Objects& obj, int* x, int* y)
 {
-    *x = obj.getPointByIdx(0).getx() - LeftBoardPlayer2;
+    
+    *x = obj.getPointByIdx(0).getx();
+    if(*x > rightBoardPlayer1)
+        *x = *x -LeftBoardPlayer2;
+    
     *y = obj.getPointByIdx(0).gety();
 }
 
@@ -79,10 +80,10 @@ void Bomb::CreateDropBomb(Board& playerBoard)
     }
 }
 
-char* Bomb::FindPath(int row, int col, Board& playerBoard)
+char* Bomb::FindPath(int row, int col, Board& playerBoard, int playerNumber)
 {
     char* commands = new char[10];
-    int x = body.getx() - LeftBoardPlayer2;
+    int x = body.getx() - playerNumber * LeftBoardPlayer2;
     int y = body.gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter;
@@ -95,6 +96,7 @@ char* Bomb::FindPath(int row, int col, Board& playerBoard)
 
     while (counterLeft)
     {
+        
         commands[i] = Left1;
         counterLeft--;
         i++;

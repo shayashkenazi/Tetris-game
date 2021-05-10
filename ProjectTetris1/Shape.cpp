@@ -489,7 +489,9 @@ void Shape::CreateDropShape(Board& playerBoard)
     while (flag) {
         for (int i = 0; i < BodyPointSize; i++) {
 
-            x = body[i].getx() - LeftBoardPlayer2;
+            x = body[i].getx();
+            if(x> rightBoardPlayer1)
+               x = x -LeftBoardPlayer2;
             y = body[i].gety() + 1;
             if (x <= LeftBoardPlayer1 || x >= rightBoardPlayer1)
             {

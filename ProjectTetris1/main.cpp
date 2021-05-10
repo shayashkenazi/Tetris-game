@@ -18,7 +18,7 @@ void main()
     setTextColor(c);
     
 
-    TetrisGame g(1);
+    TetrisGame g;
     hideCursor();
     g.Start();
 

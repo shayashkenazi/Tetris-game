@@ -408,10 +408,10 @@ bool LrightShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer
     return true;
 }
 
-char* LrightShape::FindBestSpot(Board& playerBoard, int level)
+char* LrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
-    Point StartPoint(1 + LeftBoardPlayer2, 1);
+    Point StartPoint(1 + playerNumber *LeftBoardPlayer2, 1);
     LrightShape* temp = new LrightShape(StartPoint);
 
     for (int i = 0; i <= Rotate3; i++) {
@@ -420,10 +420,9 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level)
         {
             temp->CreateDropShape(playerBoard);
             UpdateBestCurPosition(*temp, &x, &y);
-            if (level == easy) {
-                //  if (CheckRow(playerBoard, y))
-                  //    return  FindPath(y, x, playerBoard,i);
-            }
+            if (temp->CheckRow(playerBoard, y))
+                return  FindPath(y, x, playerBoard, i);
+
             if (max_depth < y)
             {
                 max_depth = y;
@@ -440,7 +439,7 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level)
             StartPoint.setX(StartPoint.getx() + 1);
             temp->UpdateLrightShape(StartPoint, i, _CheckRotate);
         }
-        StartPoint.setX(1 + LeftBoardPlayer2);
+        StartPoint.setX(1 + playerNumber*LeftBoardPlayer2);
         StartPoint.setY(1);
        
     }
@@ -448,23 +447,23 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level)
     return  FindPath(max_depth, best_col, playerBoard, Best_Rotate);
 }
 
-char* LrightShape::FindPath(int row, int col, Board& playerBoard, int rotate)
+char* LrightShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
 
     char* commands = new char[10];
-    int x = body[0].getx() - LeftBoardPlayer2;
+    int x = body[0].getx() - playerNumber * LeftBoardPlayer2;
     int y = body[0].gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
     if (rotate == Rotate2)
-         x = body[0].getx() + 1 - LeftBoardPlayer2; //check if +2
+         x = body[0].getx() + 1 - playerNumber * LeftBoardPlayer2; //check if +2
     Counter = col - x;
     if (Counter < 0)
         counterLeft = Counter * (-1);
     else if (Counter > 0)
         counterRight = Counter;
    
-    if (rotate != 0 && !this->CheckRotate(Computer_Player, playerBoard))
+    if (rotate != 0 && !this->CheckRotate(playerNumber, playerBoard))
     {
         CounterRotate++;
     }
@@ -498,25 +497,33 @@ void LrightShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     {
     case Rotate0:
     {
-        *x = obj.getPointByIdx(1).getx() - LeftBoardPlayer2;
+        *x = obj.getPointByIdx(1).getx();
+        if (*x > rightBoardPlayer1)
+            *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(1).gety();
         break;
     }
     case Rotate1:
     {
-        *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+        *x = obj.getPointByIdx(3).getx();
+        if (*x > rightBoardPlayer1)
+            *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
         break;
     }
     case Rotate2:
     {
-        *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+        *x = obj.getPointByIdx(3).getx();
+        if (*x > rightBoardPlayer1)
+            *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
         break;
     }
     case Rotate3:
     {
-        *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+        *x = obj.getPointByIdx(3).getx();
+        if (*x > rightBoardPlayer1)
+            *x = *x - LeftBoardPlayer2;
         *y = obj.getPointByIdx(3).gety();
         break;
     }

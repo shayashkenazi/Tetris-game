@@ -2,9 +2,9 @@
 #include "TetrisGame.h"
 
 
-TetrisGame::TetrisGame(int gameType)
+TetrisGame::TetrisGame()
 {
-	createPlayers(gameType);
+	
 }
 TetrisGame::~TetrisGame()
 {
@@ -43,7 +43,7 @@ void TetrisGame::RandomShape(Objects** S, int player)
    if(player == Player1)
 	  *S =  ThePlayers[Player1]->getShapesarray().getShape(randShape)->Clone();
    else
-	*S = ThePlayers[Player2]->getShapesarray().getShape(_LleftShape)->Clone();
+	*S = ThePlayers[Player2]->getShapesarray().getShape(randShape)->Clone();
  
    delete TempPointerShape;
 }
@@ -58,7 +58,12 @@ void TetrisGame::createPlayers(int gameType)
 	else if (gameType == HumanVsComputer)
 	{
 		ThePlayers[0] = new HumanPlayer(Player1);
-		ThePlayers[1] = new ComputerPlayer(easy);
+		ThePlayers[1] = new ComputerPlayer(easy,Computer_Player2);
+	}
+	else if (gameType == ComputerVsComputer)
+	{
+	    ThePlayers[0] = new ComputerPlayer(easy, Computer_Player1);
+	    ThePlayers[1] = new ComputerPlayer(easy, Computer_Player2);
 	}
 }
 
@@ -83,8 +88,9 @@ void TetrisGame::Start()
 		  clrscr();
 		  switch (input)
 		  {
-		  case start:
+		  case startHumanVsHuman:
 		  {
+			 createPlayers(HumanVsHuman);
 			 InitPlayersBoards();
 			 if (colorsInput == 1)
 				InitColors();			 			 
@@ -97,9 +103,45 @@ void TetrisGame::Start()
 			 gameoverflag = conGame;
 			 break;
 		  }
+		  case startHumanVsComputer:
+		  {
+			 createPlayers(HumanVsComputer);
+			 InitPlayersBoards();
+			 if (colorsInput == 1)
+				InitColors();
+			 S1 = nullptr;
+			 S2 = nullptr;
+
+			 //RunPlayerVsPlayer(&S1, &S2);
+
+			 RunPlayerVsComputer(&S1, &S2);
+			 gameoverflag = conGame;
+			 break;
+		  }
+		  case startComputerVsComputer:
+		  {
+			 createPlayers(ComputerVsComputer);
+
+			 InitPlayersBoards();
+			 if (colorsInput == 1)
+				InitColors();
+			 S1 = nullptr;
+			 S2 = nullptr;
+
+			 //RunPlayerVsPlayer(&S1, &S2);
+
+			 RunComputerVsComputer(&S1, &S2);
+			 gameoverflag = conGame;
+			 break;
+		  }
 		  case Continue:
 		  {
-			 RunPlayerVsPlayer(&S1,&S2);
+			 if (typeid(ThePlayers[0]) == typeid(ComputerPlayer))
+				RunComputerVsComputer(&S1, &S2);
+			 else if(typeid(ThePlayers[2]) == typeid(Player))
+				RunPlayerVsPlayer(&S1,&S2);
+			 else
+				RunPlayerVsComputer(&S1, &S2);
 			 break;
 		  }
 		  case PresentInstructionskeys:
@@ -295,7 +337,7 @@ void TetrisGame::RunPlayerVsPlayer(Objects** S1, Objects** S2)
 void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 {
 	char key = 0;
-	int index = 0;
+	int index= 0;
 	int randShape = rand() % RAND;
 
 	if (*S1 == nullptr && *S2 == nullptr) {
@@ -327,6 +369,9 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 		char direction = computer_commands[index];
 		key = PlayerVsComputerLoop(S1, S2, direction);
 		index++;
+
+
+
 		if (ThePlayers[Player1]->IsPossible(**S1, MoveDown))//Drops shape by one step
 			(*S1)->move(MoveDown);
 		else //If shape reached bottom, update the shape in the board and randomly pick new shape
@@ -349,7 +394,88 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 			computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy);
 			index = 0;
 		}
-		Sleep(50);
+		Sleep(5);
 	} while (key != ESC);
 
+}
+
+void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
+{
+    char key =0;
+    int index1 = 0 , index2 = 0;
+    int randShape = rand() % RAND;
+
+    if (*S1 == nullptr && *S2 == nullptr) {
+
+	   RandomShape(S1, Player1);
+	   RandomShape(S2, Player2);
+    }
+
+    char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy);
+
+    char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy);
+
+
+    //Prints boards
+    ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
+    gotoxy(LeftBoardPlayer2, 0);
+    ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
+
+    do {
+	   if (_kbhit())
+	   {
+		  hideCursor();
+		  key = _getch();
+	   }
+	   //Checks if a shape reached the top of the board
+	   if (!ThePlayers[Player1]->CheckGameOver(**S1) || !ThePlayers[Player2]->CheckGameOver(**S2))
+	   {
+		  printGameOver();
+		  return;
+	   }
+	   (*S1)->draw();
+	   (*S2)->draw();
+
+	   //Clears the input buffer for more fluid gaming
+	   HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
+	   FlushConsoleInputBuffer(hStdIn);
+
+	   char direction1 = computer_commands1[index1];
+	   char direction2 = computer_commands2[index2];
+
+	   //key1 = ComputerVsComputerLoop(S1, S2, direction1);
+	   //key2 = ComputerVsComputerLoop(S1, S2, direction2);
+	   if (ThePlayers[Player1]->IsPossible(**S1, direction1))//Drops shape by one step
+		  (*S1)->move(direction1);
+	   if (ThePlayers[Player2]->IsPossible(**S2, direction2))
+		  (*S2)->move(direction2);
+	  
+	   index1++;
+	   index2++;
+	   if (ThePlayers[Player1]->IsPossible(**S1, MoveDown))//Drops shape by one step
+		  (*S1)->move(MoveDown);
+	   else //If shape reached bottom, update the shape in the board and randomly pick new shape
+	   {
+		  ThePlayers[Player1]->UpdateBoard(**S1);
+		  RandomShape(S1, Player1);
+		  ThePlayers[Player1]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
+		  gotoxy(0, 0);
+		  ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);//Prints updated board
+		  computer_commands1 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy);
+		  index1 = 0;
+	   }
+	   if (ThePlayers[Player2]->IsPossible(**S2, MoveDown))//Drops shape by one step
+		  (*S2)->move(MoveDown);
+	   else//If shape reached bottom, update the shape in the board and randomly pick new shape
+	   {
+		  ThePlayers[Player2]->UpdateBoard(**S2);
+		  RandomShape(S2, Player2);
+		  ThePlayers[Player2]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
+		  gotoxy(LeftBoardPlayer2, 0);
+		  ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
+		  computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy);
+		  index2 = 0;
+	   }
+	   Sleep(200);
+    } while (key != ESC);
 }

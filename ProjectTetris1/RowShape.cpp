@@ -169,13 +169,13 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
      return CheckRotate(playerNumber, boardGameForPlayer); 
  }
 
- char* RowShape::FindBestSpot(Board& playerBoard,int level)
+ char* RowShape::FindBestSpot(Board& playerBoard,int level, int playerNumber)
  {
    
      // int point_rating = 0, depth_rating = 0, row_rating = 0;
 
      int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
-     Point StartPoint(1 + LeftBoardPlayer2, 1);
+     Point StartPoint(1 + playerNumber * LeftBoardPlayer2, 1);
      RowShape* temp = new RowShape(StartPoint);
 
      for (int i = 0; i <= Rotate1; i++) {
@@ -185,10 +185,9 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
          {
              temp->CreateDropShape(playerBoard);
              UpdateBestCurPosition(*temp, &x, &y);
-             if (level == easy) {
-                 //  if (CheckRow(playerBoard, y))
-                   //    return  FindPath(y, x, playerBoard,i);
-             }
+             if (temp->CheckRow(playerBoard, y))
+                 return  FindPath(y, x, playerBoard, i);
+
              if (max_depth < y)
              {
                  max_depth = y;
@@ -200,7 +199,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
              temp->UpdateRowShape(StartPoint, i, _CheckRotate);
          }
          
-         StartPoint.setX( LeftBoardPlayer2 + 1);
+         StartPoint.setX(playerNumber * LeftBoardPlayer2 + 1);
          StartPoint.setY(1);
         
          
@@ -216,14 +215,19 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
      {
      case Rotate0:
      {
-         *x = obj.getPointByIdx(0).getx() - LeftBoardPlayer2;
+         *x = obj.getPointByIdx(0).getx();
+         if (*x > rightBoardPlayer1)
+             *x = *x - LeftBoardPlayer2;
          *y = obj.getPointByIdx(0).gety();
          break;
      }
      case Rotate1:
-     {   *x = obj.getPointByIdx(3).getx() - LeftBoardPlayer2;
+     {   
+         *x = obj.getPointByIdx(3).getx();
+         if (*x > rightBoardPlayer1)
+             *x = *x - LeftBoardPlayer2;
          *y = obj.getPointByIdx(3).gety();
-         break;
+        break;
      }
      }
      
@@ -231,15 +235,15 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
  }
 
  
- char* RowShape::FindPath(int row, int col, Board& playerBoard, int rotate)
+ char* RowShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
  {
      char* commands = new char[10];
-     int x = body[0].getx() - LeftBoardPlayer2;
+     int x = body[0].getx() - playerNumber * LeftBoardPlayer2;
      int y = body[0].gety();
      int i = 0;
      int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
      if (rotate != Rotate0)
-         x = body[2].getx() - LeftBoardPlayer2;
+         x = body[2].getx() - playerNumber * LeftBoardPlayer2;
  
      Counter = col - x;
      if (Counter < 0)
@@ -247,7 +251,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
      else if (Counter > 0)
          counterRight = Counter;
     
-     if (rotate != 0 && !this->CheckRotate(Computer_Player, playerBoard))
+     if (rotate != 0 && !this->CheckRotate(playerNumber, playerBoard))
      {
          CounterRotate = CounterRotate + 2;
      }

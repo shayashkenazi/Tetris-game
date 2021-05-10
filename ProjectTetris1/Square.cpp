@@ -25,7 +25,7 @@ void Square::RotateCounterWise()
 {
 }
 
-char* Square::FindBestSpot(Board& playerBoard, int level)
+char* Square::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0;
     Point StartPoint(1 + LeftBoardPlayer2, 1);
@@ -36,10 +36,8 @@ char* Square::FindBestSpot(Board& playerBoard, int level)
 
         temp->CreateDropShape(playerBoard);
         UpdateBestCurPosition(*temp, &x, &y);
-        if (level == easy) {
-                // if (CheckRow(playerBoard, y))
-              //   return  FindPath(y, x, playerBoard);
-        }
+        if (temp->CheckRow(playerBoard, y))
+            return  FindPath(y, x, playerBoard);
         if (max_depth < y)
         {
             max_depth = y;
@@ -53,7 +51,7 @@ char* Square::FindBestSpot(Board& playerBoard, int level)
     return  FindPath(max_depth, best_col, playerBoard);
 }
 
-char* Square::FindPath(int row, int col, Board& playerBoard)
+char* Square::FindPath(int row, int col, Board& playerBoard,int playerNumber)
 {
     char* commands = new char[10];
     int x = body[2].getx() - LeftBoardPlayer2;
@@ -86,7 +84,9 @@ char* Square::FindPath(int row, int col, Board& playerBoard)
 
 void Square::UpdateBestCurPosition(Objects& obj, int* x, int* y)
 {
-    *x =obj.getPointByIdx(2).getx() - LeftBoardPlayer2;
+    *x = obj.getPointByIdx(2).getx();
+    if (*x > rightBoardPlayer1)
+        *x = *x - LeftBoardPlayer2;
     *y = obj.getPointByIdx(2).gety();
    
 }

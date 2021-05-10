@@ -9,19 +9,23 @@ void Menu::PresentMenu(int pause) const
 	cout << "TETRIS";
 	gotoxy(5, 9);
 
-	cout << "(1) Start a new game \n";
+	cout << "(1) Start a new game - Human vs Human\n";
+	cout << "(2) Start a new game - Human vs Computer \n";
+	cout << "(3) Start a new game - Computer vs Computer \n";
+
+
 
 	int space_for_row = 0;
 	if (pause)
 	{
 		space_for_row = 1;
-		gotoxy(5, 10);
-		cout << "(2) Continue the paused game\n ";
+		gotoxy(5, 12);
+		cout << "(4) Continue the paused game\n ";
 	}
 
-	gotoxy(5, 10 + space_for_row);
+	gotoxy(5, 12 + space_for_row);
 	cout << "(8) Present instructions and keys\n";
-	gotoxy(5, 11 + space_for_row);
+	gotoxy(5, 13 + space_for_row);
 	cout << "(9) EXIT " << endl;
 }
 

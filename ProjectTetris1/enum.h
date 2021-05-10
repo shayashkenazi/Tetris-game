@@ -4,7 +4,8 @@ enum GameZoneBoard {
 
     Player1 = 0,
     Player2 = 1,
-    Computer_Player = 2,
+    Computer_Player1 =0 ,
+    Computer_Player2 = 1,
     LeftBoardPlayer1 = 0,
     rightBoardPlayer1 = 13,
     LeftBoardPlayer2 = 25,
@@ -17,8 +18,10 @@ enum GameZoneBoard {
     hard = 2,
     startGame = 0,
     conGame = 1,
-    start = 1,
-    Continue = 2,
+    startHumanVsHuman = 1,
+    startHumanVsComputer = 2,
+    startComputerVsComputer = 3,
+    Continue = 4,
     PresentInstructionskeys = 8,
     EXIT = 9,
 

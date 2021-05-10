@@ -29,10 +29,10 @@ public:
         body.draw();
     }
     virtual const Point& getPointByIdx(int idx) const override { return body; };
-    virtual char* FindBestSpot(Board& playerBoard, int level);
+    virtual char* FindBestSpot(Board& playerBoard, int level,int playerNumber = Computer_Player2);
     virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y);
 
     void CreateDropBomb(Board& playerBoard);
-    char* FindPath(int row, int col, Board& playerBoard);
+    char* FindPath(int row, int col, Board& playerBoard, int playerNumber = Computer_Player2);
 };
 

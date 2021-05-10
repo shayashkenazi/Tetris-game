@@ -30,7 +30,7 @@ public:
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer)const = 0;
     virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const = 0;
     
-    virtual char* FindBestSpot(Board& playerBoard, int level) = 0;
+    virtual char* FindBestSpot(Board& playerBoard, int level, int playerNumber = Computer_Player2) = 0;
     
     bool CheckLleftRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a counter clockwise rotation of L left is possible according to the current board
     bool CheckLRightRotateCounterClockWise(int playerNumber, Board& boardGameForPlayer)const;//Returns true if a counter clockwise rotation of L right is possible according to the current board
