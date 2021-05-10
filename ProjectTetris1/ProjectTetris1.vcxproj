@@ -18,6 +18,50 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Board.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Bomb.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\ComputerPlayer.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\gotoxy.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\HumanPlayer.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\LleftShape.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\LrightShape.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\main.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Menu.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Objects.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Player.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\PlusShape.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Point.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\RowShape.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Shape.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\ShapesArray.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\Square.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\TetrisGame.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\ZleftShape.cpp" />
+    <ClCompile Include="\\Mac\Home\Desktop\מדמח\newTetris\ZrightShape.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Board.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Bomb.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\ComputerPlayer.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\enum.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\gotoxy.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\HumanPlayer.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\LleftShape.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\LrightShape.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Menu.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Objects.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Player.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\PlusShape.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Point.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\RowShape.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Shape.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\ShapesArray.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\Square.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\TetrisGame.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\ZleftShape.h" />
+    <ClInclude Include="\\Mac\Home\Desktop\מדמח\newTetris\ZrightShape.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -138,50 +182,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Bomb.cpp" />
-    <ClCompile Include="ComputerPlayer.cpp" />
-    <ClCompile Include="gotoxy.cpp" />
-    <ClCompile Include="HumanPlayer.cpp" />
-    <ClCompile Include="LleftShape.cpp" />
-    <ClCompile Include="LrightShape.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Objects.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlusShape.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="RowShape.cpp" />
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="ShapesArray.cpp" />
-    <ClCompile Include="Square.cpp" />
-    <ClCompile Include="TetrisGame.cpp" />
-    <ClCompile Include="ZleftShape.cpp" />
-    <ClCompile Include="ZrightShape.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Bomb.h" />
-    <ClInclude Include="ComputerPlayer.h" />
-    <ClInclude Include="enum.h" />
-    <ClInclude Include="gotoxy.h" />
-    <ClInclude Include="HumanPlayer.h" />
-    <ClInclude Include="LleftShape.h" />
-    <ClInclude Include="LrightShape.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Objects.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlusShape.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="RowShape.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="ShapesArray.h" />
-    <ClInclude Include="Square.h" />
-    <ClInclude Include="TetrisGame.h" />
-    <ClInclude Include="ZleftShape.h" />
-    <ClInclude Include="ZrightShape.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
