@@ -10,7 +10,11 @@ void Menu::PresentMenu(int pause) const
 	gotoxy(5, 9);
 
 	cout << "(1) Start a new game - Human vs Human\n";
+	gotoxy(5, 10);
+
 	cout << "(2) Start a new game - Human vs Computer \n";
+	gotoxy(5, 11);
+
 	cout << "(3) Start a new game - Computer vs Computer \n";
 
 
@@ -42,11 +46,19 @@ void Menu::PresentInstructions() const
 
 	gotoxy(30, 14);
 	cout << "The controls are as below:\n";
-	gotoxy(0, 18);
+	gotoxy(4, 18);
 	cout << "Right:\n";
+	gotoxy(4, 19);
+
 	cout << "Left:\n";
+	gotoxy(4, 20);
+
 	cout << "Drop:\n";
+	gotoxy(4, 21);
+
 	cout << "Rotate clockwise:\n";
+	gotoxy(4, 22);
+
 	cout << "Rotate counter clockwise:\n";
 
 	gotoxy(30, 16);
@@ -87,6 +99,20 @@ void Menu::PresentEnd() const
 
 void Menu::PresentColorOptions() const
 {
-	cout << "(1) For game with colors\n(2) For game without colors " << endl;
+	gotoxy(5, 9);
+
+	cout << "(1) For game with colors\n";
+	gotoxy(5, 10);
+
+	cout << "(2) For game without colors " << endl;
 }
 
+void Menu::PresentDifficultyOptions() const
+{
+	gotoxy(5, 9);
+
+	cout << "Choose Computer Difficulty:\n";
+	cout << "(1) Easy\n";
+	cout << "(2) Medium \n";
+	cout << "(3) Hard \n";
+}

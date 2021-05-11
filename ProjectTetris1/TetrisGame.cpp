@@ -37,7 +37,7 @@ void TetrisGame::RandomShape(Objects** S, int player)
 {
 	int randShape;
 	randShape = rand() % RAND;
-	
+
     Objects* TempPointerShape;
     TempPointerShape = *S;
    if(player == Player1)
@@ -66,7 +66,6 @@ void TetrisGame::createPlayers(int gameType)
 	    ThePlayers[1] = new ComputerPlayer(easy, Computer_Player2);
 	}
 }
-
 
 void TetrisGame::Start()
 { 
@@ -111,15 +110,15 @@ void TetrisGame::Start()
 				InitColors();
 			 S1 = nullptr;
 			 S2 = nullptr;
-
-			 //RunPlayerVsPlayer(&S1, &S2);
-
+			 //GameMenu.PresentDifficultyOptions();
 			 RunPlayerVsComputer(&S1, &S2);
 			 gameoverflag = conGame;
 			 break;
 		  }
 		  case startComputerVsComputer:
 		  {
+			  //GameMenu.PresentDifficultyOptions();
+
 			 createPlayers(ComputerVsComputer);
 
 			 InitPlayersBoards();
@@ -128,7 +127,6 @@ void TetrisGame::Start()
 			 S1 = nullptr;
 			 S2 = nullptr;
 
-			 //RunPlayerVsPlayer(&S1, &S2);
 
 			 RunComputerVsComputer(&S1, &S2);
 			 gameoverflag = conGame;
@@ -276,7 +274,6 @@ char TetrisGame::PlayerVsComputerLoop(Objects** S1, Objects** S2, char key)
 	return key;
 }
 
-
 void TetrisGame::RunPlayerVsPlayer(Objects** S1, Objects** S2)
 {
 	char key = 0;
@@ -411,16 +408,12 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 	   RandomShape(S2, Player2);
     }
 
-    
-
     //Prints boards
     ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
     gotoxy(LeftBoardPlayer2, 0);
     ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
     char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
-
     char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
-
 
     do {
 	   if (_kbhit())
@@ -445,12 +438,12 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 	   char direction1 = computer_commands1[index1];
 	   char direction2 = computer_commands2[index2];
 
-	   //key1 = ComputerVsComputerLoop(S1, S2, direction1);
-	   //key2 = ComputerVsComputerLoop(S1, S2, direction2);
-	   if (ThePlayers[Player1]->IsPossible(**S1, direction1))//Drops shape by one step
-		  (*S1)->move(direction1);
-	   if (ThePlayers[Player2]->IsPossible(**S2, direction2))
-		  (*S2)->move(direction2);
+	
+			   if (ThePlayers[Player1]->IsPossible(**S1, direction1))//Drops shape by one step
+				   (*S1)->move(direction1);
+			   if (ThePlayers[Player2]->IsPossible(**S2, direction2))
+				   (*S2)->move(direction2);
+		   
 	  
 	   index1++;
 	   index2++;

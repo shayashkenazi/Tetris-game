@@ -460,7 +460,7 @@ char* LleftShape::FindBestSpot(Board& playerBoard, int level , int playerNumber)
 char* LleftShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
 
-      char*  commands = new char[10];
+      char*  commands = new char[20];
      int x = body[3].getx() - (playerNumber*LeftBoardPlayer2);
      int y = body[3].gety();
      int i = 0;
@@ -556,6 +556,6 @@ void LleftShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
     
 }
 
-
+//bool LleftShape::CheckHoles()
 
 

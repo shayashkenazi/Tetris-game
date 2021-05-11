@@ -147,7 +147,7 @@ bool ZrightShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer
 
 char* ZrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
-    int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
+    int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0, max_links = 0, curr_links=0;
     Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 2);
     ZrightShape* temp = new ZrightShape(StartPoint);
 
@@ -157,24 +157,35 @@ char* ZrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
         for (int j = 1; j < rightBoardPlayer1; j++)
         {
             temp->CreateDropShape(playerBoard);
+            curr_links = temp->CheckLinks(playerBoard);
             UpdateBestCurPosition(*temp, &x, &y);
             if (temp->CheckRow(playerBoard, y))
                 return  FindPath(y, x, playerBoard, i, playerNumber);
+            
+            
             if (max_depth < y)
             {
                 max_depth = y;
                 best_col = x;
                 Best_Rotate = i;
             }           
+            if (max_depth == y)
+            {
+                if (curr_links > max_links)
+                {
+                    max_links = curr_links;
+                    max_depth = y;
+                    best_col = x;
+                    Best_Rotate = i;
 
+                }
+            }
             StartPoint.setX(StartPoint.getx() + 1);
             temp->UpdateZrightShape(StartPoint, i, _CheckRotate);
         }
 
         StartPoint.setX(playerNumber *LeftBoardPlayer2 + 1);
         StartPoint.setY(1);
-
-
 
     }
     delete temp;
@@ -211,10 +222,9 @@ char* ZrightShape::FindPath(int row, int col, Board& playerBoard, int rotate,int
     int y = body[0].gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
-    //   if (rotate != Rotate0)
-      //     x = body[1].getx() - LeftBoardPlayer2;
+
     if (rotate == Rotate1)
-        x = body[3].getx() - playerNumber * LeftBoardPlayer2;
+        x = body[3].getx() -1 - playerNumber * LeftBoardPlayer2;
 
     Counter = col - x;
     if (Counter < 0)
@@ -262,6 +272,25 @@ char* ZrightShape::FindPath(int row, int col, Board& playerBoard, int rotate,int
     return commands;
 }
 
+int ZrightShape::CheckLinks(Board& playerBoard)
+{
+    int x = 0, y = 0, res=0;
+
+    for (int i = 0; i < BodyPointSize; i++)
+    {
+        x = getPointByIdx(i).getx();
+        if (x > rightBoardPlayer1 + 5)
+            x -= LeftBoardPlayer1;
+        y = getPointByIdx(i).gety();
+        if (playerBoard.getCharAtBoard(y, x + 1) == '@')
+            res++;
+        if (playerBoard.getCharAtBoard(y, x - 1) == '@')
+            res++;
+        if (playerBoard.getCharAtBoard(y+1, x) == '@')
+            res++;
+    }
+    return res;
+}
 
 
 

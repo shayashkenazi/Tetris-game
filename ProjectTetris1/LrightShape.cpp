@@ -429,11 +429,14 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
                 best_col = x;
                 Best_Rotate = i;
             }
-            else if (Best_Rotate == Rotate1 || Best_Rotate == Rotate2 && max_depth == y && i == Rotate3 )
+            else if ((Best_Rotate == Rotate1 || Best_Rotate == Rotate2))
             {
-                max_depth = y;
-                best_col = x;
-                Best_Rotate = i;
+                if (max_depth == y && i == Rotate3)
+                {
+                    max_depth = y;
+                    best_col = x;
+                    Best_Rotate = i;
+                }
             }
 
             StartPoint.setX(StartPoint.getx() + 1);

@@ -14,5 +14,7 @@ public:
     void PresentInstructions() const;//Presents instructions and controls to the screen
     void PresentEnd() const;
     void PresentColorOptions() const;
+    void PresentDifficultyOptions() const;
+
 };
 

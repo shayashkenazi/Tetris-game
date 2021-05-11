@@ -20,6 +20,6 @@ public :
     virtual char* FindBestSpot(Board& playerBoard, int level, int playerNumber = Computer_Player2);
     virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y);
     char* FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber = Computer_Player2);
-
+    int CheckLinks(Board& playerBoard);
 };
 

@@ -28,7 +28,7 @@ enum GameZoneBoard {
     Rows = 20,
     Cols = 14,
 
-    RAND = 8,
+    RAND = 7,
 
     Down = 0,
     Right = 1,
