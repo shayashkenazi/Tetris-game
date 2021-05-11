@@ -174,7 +174,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
    
      // int point_rating = 0, depth_rating = 0, row_rating = 0;
 
-     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
+     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0,curr_holes=0, min_holes=-1;
      Point StartPoint(1 + playerNumber * LeftBoardPlayer2, 1);
      RowShape* temp = new RowShape(StartPoint);
 
@@ -185,14 +185,27 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
          {
              temp->CreateDropShape(playerBoard);
              UpdateBestCurPosition(*temp, &x, &y);
-             if (temp->CheckRow(playerBoard, y))
+             if (temp->CheckRow(playerBoard, y, &curr_holes))
                  return  FindPath(y, x, playerBoard, i, playerNumber);
 
-             if (max_depth < y)
+             if (min_holes == -1)
+                 min_holes = curr_holes;
+             if (curr_holes < min_holes)
              {
+                 min_holes = curr_holes;
                  max_depth = y;
                  best_col = x;
                  Best_Rotate = i;
+             }
+             else if (curr_holes == min_holes)
+             {
+                 if (max_depth < y)
+                 {
+                     min_holes = curr_holes;
+                     max_depth = y;
+                     best_col = x;
+                     Best_Rotate = i;
+                 }
              }
 
              StartPoint.setX(StartPoint.getx() + 1);

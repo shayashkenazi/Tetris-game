@@ -40,16 +40,15 @@ public:
     virtual void RotateCounterWise() = 0; //Rotates the shape counter clock wise
     
     virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y) = 0;
-    bool CheckRow( Board& playerBoard, int row);
+    bool CheckRow(Board& playerBoard, int row, int* holes);
     void CreateDropShape(Board& playerBoard);
 
 
     const Shape& operator=(const Shape& other);
     
 
+    int CheckHoles(Board& playerBoard);
 
     virtual Shape* Clone()const = 0 {};
-    //int FindRawRating(Point point, Board& playerBoard);
-
 };
 

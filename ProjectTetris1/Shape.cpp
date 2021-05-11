@@ -455,21 +455,25 @@ void Shape::RotateCounterWise()
    
 }
 
-bool Shape::CheckRow(Board& playerBoard, int row)
+bool Shape::CheckRow(Board& playerBoard, int row, int* holes)
 {
-    int x;
+    int x,y;
     for (int i = 0; i < BodyPointSize; i++)
     {
-
+        y = body[i].gety();
         x = body[i].getx();
-        if (x > rightBoardPlayer1 )
-            -LeftBoardPlayer2;
+        if (y == 1)
+            return false;
+        if (x > rightBoardPlayer1)
+            x = x-LeftBoardPlayer2;
         if (x <= LeftBoardPlayer1 || x >= rightBoardPlayer1)
             return false;
     }
 
     for (int i=0 ; i < BodyPointSize ; i++)
         playerBoard.setPointAtBoard(this->getPointByIdx(i), this->getColor());
+
+    *holes = CheckHoles(playerBoard);
 
     for (int i = 1; i < rightBoardPlayer1; i++)
     {
@@ -523,6 +527,29 @@ const Shape& Shape::operator=(const Shape& other)
     color = other.color;
 
     return *this;
+}
+
+int Shape::CheckHoles(Board& playerBoard)
+{
+    int x = 0, y = 0, res = 0, i , j ,inc=1;
+   
+
+    for (i = 1; i < rightBoardPlayer1; i++)
+    {
+        for (j = 1; j < Bottom; j++)
+        {
+            if (playerBoard.getCharAtBoard(j, i) == '@')
+            {
+                while (playerBoard.getCharAtBoard(j + inc, i) == ' ')
+                {
+                    res++;
+                    inc++;
+                }
+                inc = 1;
+            }
+        }
+    }
+    return res;
 }
 
 

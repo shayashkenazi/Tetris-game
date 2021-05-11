@@ -242,8 +242,7 @@ char TetrisGame::PlayerVsPlayer(Objects** S1, Objects** S2)
 
 char TetrisGame::PlayerVsComputerLoop(Objects** S1, Objects** S2, char key)
 {
-	//char* computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame());
-	//char key = computer_commands[index];
+
 	if (ThePlayers[Player2]->IsPossible(**S2, key))
 		(*S2)->move(key);
 
@@ -412,10 +411,12 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
     ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
     gotoxy(LeftBoardPlayer2, 0);
     ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
-    char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
-    char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
+	char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
+	char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
 
+    
     do {
+		
 	   if (_kbhit())
 	   {
 		  hideCursor();
@@ -431,6 +432,7 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 	   (*S1)->draw();
 	   (*S2)->draw();
 
+
 	   //Clears the input buffer for more fluid gaming
 	   HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
 	   FlushConsoleInputBuffer(hStdIn);
@@ -439,14 +441,14 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 	   char direction2 = computer_commands2[index2];
 
 	
-			   if (ThePlayers[Player1]->IsPossible(**S1, direction1))//Drops shape by one step
-				   (*S1)->move(direction1);
-			   if (ThePlayers[Player2]->IsPossible(**S2, direction2))
-				   (*S2)->move(direction2);
+		 if (ThePlayers[Player1]->IsPossible(**S1, direction1))//Drops shape by one step
+		   (*S1)->move(direction1);
+		 if (ThePlayers[Player2]->IsPossible(**S2, direction2))
+		   (*S2)->move(direction2);
 		   
-	  
 	   index1++;
 	   index2++;
+
 	   if (ThePlayers[Player1]->IsPossible(**S1, MoveDown))//Drops shape by one step
 		  (*S1)->move(MoveDown);
 	   else //If shape reached bottom, update the shape in the board and randomly pick new shape

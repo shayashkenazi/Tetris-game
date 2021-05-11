@@ -134,7 +134,7 @@ bool Player::CheckGameOver(Objects& shape)
 {
     int col;
     
-    for (int col = 1; col < rightBoardPlayer1-1; col++)
+    for (int col = 1; col < rightBoardPlayer1; col++)
     {
         if (boardGameForPlayer.getCharAtBoard(TopBoard + 1, col) != ' ')
         {

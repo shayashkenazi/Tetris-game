@@ -327,7 +327,7 @@ bool PlusShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) 
 
 char* PlusShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
-    int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
+    int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0, curr_holes = 0,min_holes=-1;
     Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 2);
     PlusShape* temp = new PlusShape(StartPoint);
 
@@ -337,16 +337,28 @@ char* PlusShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
         {
             temp->CreateDropShape(playerBoard);
             UpdateBestCurPosition(*temp, &x, &y);
-            if (temp->CheckRow(playerBoard, y))
+            if (temp->CheckRow(playerBoard, y, &curr_holes))
                 return  FindPath(y, x, playerBoard, i,playerNumber);
 
-            if (max_depth < y)
+            if (min_holes == -1)
+                min_holes = curr_holes;
+            if (curr_holes < min_holes)
             {
+                min_holes = curr_holes;
                 max_depth = y;
                 best_col = x;
                 Best_Rotate = i;
             }
-            
+            else if (curr_holes == min_holes)
+            {
+                if (max_depth < y)
+                {
+                    min_holes = curr_holes;
+                    max_depth = y;
+                    best_col = x;
+                    Best_Rotate = i;
+                }
+            }
 
             StartPoint.setX(StartPoint.getx() + 1);
             temp->UpdatePlusShape(StartPoint, i, _CheckRotate);
@@ -402,7 +414,7 @@ void PlusShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
 char* PlusShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
     char* commands = new char[10];
-    int x = body[0].getx() - playerNumber *LeftBoardPlayer2;
+    int x = body[0].getx() - (playerNumber *LeftBoardPlayer2);
     int y = body[0].gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
