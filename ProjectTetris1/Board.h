@@ -20,6 +20,7 @@ public:
     void Explosion(const Point& point);
     void DropPoint(int x , int y);
 
+    bool CheckIfExistAtRow(int row);
     //Printing functions
     void PrintBoardGame(int player) const;
     

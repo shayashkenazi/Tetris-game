@@ -120,6 +120,16 @@ void Board::DropPoint(int x, int y)
     BoardColors[y][x] = color;
 }
 
+bool Board::CheckIfExistAtRow(int row)
+{
+    for (int i = 1; i < rightBoardPlayer1; i++)
+    {
+	   if (boardGame[row][i] != space)
+		  return true;
+    }
+	return false;
+}
+
 void Board::PrintBoardGame(int player) const
 {
      

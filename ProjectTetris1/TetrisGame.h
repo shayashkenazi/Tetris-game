@@ -24,7 +24,7 @@ public:
     void RunPlayerVsComputer(Objects** S1, Objects** S2);
     void RunComputerVsComputer(Objects** S1, Objects** S2);
 
-
+    void FastComputerLoop(Objects& S,char* computer_commands, int* index,int playerNumber);
 
     void Start(); //Game menu
     bool IsKeyboard1(char ch); //check if the key is of player 1

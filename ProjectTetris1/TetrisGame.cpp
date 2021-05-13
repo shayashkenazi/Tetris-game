@@ -400,7 +400,7 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
     char key =0;
     int index1 = 0 , index2 = 0;
     int randShape = rand() % RAND;
-
+    bool flag1 = true, flag2 = true;
     if (*S1 == nullptr && *S2 == nullptr) {
 
 	   RandomShape(S1, Player1);
@@ -413,15 +413,12 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
     ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
 	char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
 	char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
-
     
-    do {
-		
+    do {		
 	   if (_kbhit())
 	   {
 		  hideCursor();
-		  key = _getch();
-	   
+		  key = _getch();	   
 	   }
 	   //Checks if a shape reached the top of the board
 	   if (!ThePlayers[Player1]->CheckGameOver(**S1) || !ThePlayers[Player2]->CheckGameOver(**S2))
@@ -429,17 +426,15 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  printGameOver();
 		  return;
 	   }
+	
 	   (*S1)->draw();
 	   (*S2)->draw();
-
-
 	   //Clears the input buffer for more fluid gaming
 	   HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
 	   FlushConsoleInputBuffer(hStdIn);
 
 	   char direction1 = computer_commands1[index1];
 	   char direction2 = computer_commands2[index2];
-
 	
 		 if (ThePlayers[Player1]->IsPossible(**S1, direction1))//Drops shape by one step
 		   (*S1)->move(direction1);
@@ -449,8 +444,19 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 	   index1++;
 	   index2++;
 
+	   if (ThePlayers[Player1]->getBoardGame().CheckIfExistAtRow(10) && computer_commands1[index1] != 's' && flag1)
+	   {
+		  FastComputerLoop(**S1, computer_commands1, &index1,Player1);
+		  flag1 = false;
+	   }
+	   if (ThePlayers[Player2]->getBoardGame().CheckIfExistAtRow(10) && computer_commands2[index2] != 'k' && flag2)
+	   {
+		  FastComputerLoop(**S2, computer_commands2, &index2,Player2);
+		  flag2 = false;
+	   }
+
 	   if (ThePlayers[Player1]->IsPossible(**S1, MoveDown))//Drops shape by one step
-		  (*S1)->move(MoveDown);
+		  (*S1)->move(MoveDown);	   
 	   else //If shape reached bottom, update the shape in the board and randomly pick new shape
 	   {
 		  ThePlayers[Player1]->UpdateBoard(**S1);
@@ -460,6 +466,7 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);//Prints updated board
 		  computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
 		  index1 = 0;
+		  flag1 = true;
 	   }
 	   if (ThePlayers[Player2]->IsPossible(**S2, MoveDown))//Drops shape by one step
 		  (*S2)->move(MoveDown);
@@ -472,7 +479,29 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
 		  computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
 		  index2 = 0;
+		  flag2 = true;
 	   }
 	   Sleep(200);
     } while (key != ESC);
+}
+
+void TetrisGame::FastComputerLoop(Objects& S,char* computer_commands, int* index,int playerNumber)
+{
+    char direction;
+    for (int i = 0; i < 3; i++)
+    {
+	   direction = computer_commands[*index];
+	   if (ThePlayers[playerNumber]->IsPossible(S, direction)) {//Drops shape by one 
+		  S.move(direction);
+		  *index = (*index)++;
+		  S.draw();
+	   }
+	   else
+	   {
+		  S.move(MoveDown);
+	   
+	   }
+	   Sleep(40);
+    }
+
 }
