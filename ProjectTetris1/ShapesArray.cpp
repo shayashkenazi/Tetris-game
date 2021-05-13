@@ -40,7 +40,8 @@ ShapesArray::ShapesArray(int _player) : player(_player)
 
 ShapesArray::~ShapesArray()
 {
-    
+    for (int i = 0; i < NumOfShapes; i++)
+        delete AllShapesArray[i];
     delete[] AllShapesArray;
 }
 

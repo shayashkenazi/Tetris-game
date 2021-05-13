@@ -83,7 +83,7 @@ bool ZrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1)
         {
@@ -95,7 +95,7 @@ bool ZrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             y = getPointByIdx(3).gety() + 1;
             x = getPointByIdx(3).getx() - LeftBoardPlayer2;;
         }
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
 
         break;
@@ -115,7 +115,7 @@ bool ZrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(1).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1)
         {
@@ -127,7 +127,7 @@ bool ZrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             y = getPointByIdx(1).gety() + 1;
             x = getPointByIdx(1).getx() - 1 - LeftBoardPlayer2;;
         }
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
 
 

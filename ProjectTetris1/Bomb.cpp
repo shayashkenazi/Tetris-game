@@ -9,7 +9,7 @@ Bomb::Bomb(const Point& point, int _direction )
 void Bomb::move(char direction)
 {
 
-    body.draw(' ');
+    body.draw(space);
     body.move(direction);
     setTextColor(color);
     draw();
@@ -72,7 +72,7 @@ void Bomb::CreateDropBomb(Board& playerBoard)
             x= x-LeftBoardPlayer2;
         y = body.gety() + 1;
 
-        if (playerBoard.getCharAtBoard(y, x) != ' ')
+        if (playerBoard.getCharAtBoard(y, x) != space)
             flag = false;
 
         if (flag)

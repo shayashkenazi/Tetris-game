@@ -138,7 +138,7 @@ bool PlusShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(1).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
 
         break;
@@ -160,7 +160,7 @@ bool PlusShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
                 x = getPointByIdx(i).getx() - 1 - LeftBoardPlayer2;;
             }
 
-            if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
         }
         if (playerNumber == Player1) //check if the shape is on the left frame
@@ -174,7 +174,7 @@ bool PlusShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(1).getx() - 1 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
 
@@ -193,7 +193,7 @@ bool PlusShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(1).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
 
@@ -213,7 +213,7 @@ bool PlusShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
                 x = getPointByIdx(i).getx() + 1 - LeftBoardPlayer2;;
             }
 
-            if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
         }
 
@@ -241,7 +241,7 @@ bool PlusShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) 
             y = getPointByIdx(1).gety() + 1;
             x = getPointByIdx(1).getx() - LeftBoardPlayer2;
         }
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
     }
@@ -262,7 +262,7 @@ bool PlusShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) 
                 x = getPointByIdx(i).getx() - 1 - LeftBoardPlayer2;;
             }
 
-            if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
 
         }
@@ -277,7 +277,7 @@ bool PlusShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) 
             x = getPointByIdx(1).getx() - 1 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
     }
@@ -294,7 +294,7 @@ bool PlusShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) 
             x = getPointByIdx(1).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
 
         break;
@@ -313,7 +313,7 @@ bool PlusShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) 
             x = getPointByIdx(1).getx() + 1 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
 
         break;

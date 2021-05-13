@@ -29,7 +29,7 @@ enum GameZoneBoard {
     Cols = 14,
 
     RAND = 7,
-
+    RANDBOMB = 20,
     Down = 0,
     Right = 1,
     Left = 2,
@@ -40,6 +40,10 @@ enum GameZoneBoard {
 
     BodyPointSize = 4,
     CommandLoop = 10,
+    DirLoop =3,
+
+    Sleep1 = 200,
+
 
     _Square = 0,
     _LleftShape = 1,

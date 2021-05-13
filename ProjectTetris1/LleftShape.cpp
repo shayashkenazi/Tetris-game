@@ -136,7 +136,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1)
         {
@@ -148,7 +148,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             y = getPointByIdx(2).gety() - 2;
             x = getPointByIdx(2).getx() - LeftBoardPlayer2;
         }
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
 
         break;
@@ -172,7 +172,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
                     x = getPointByIdx(i).getx() - 1 - LeftBoardPlayer2;;
                 }
 
-                if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+                if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                     return false;
             }
         }
@@ -187,7 +187,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(1).getx() + 1 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
@@ -200,7 +200,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(1).getx() + 2 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
     }
@@ -217,7 +217,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(1).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
@@ -230,7 +230,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(1).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
 
@@ -248,7 +248,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(2).getx() - 1 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
@@ -261,7 +261,7 @@ bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             x = getPointByIdx(2).getx() - 2 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
 
@@ -290,7 +290,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
             x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1)
         {
@@ -302,7 +302,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
             y = getPointByIdx(1).gety() + 1;
             x = getPointByIdx(1).getx() - LeftBoardPlayer2;
         }
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
     }
@@ -323,7 +323,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
                 x = getPointByIdx(i).getx() - 1 - LeftBoardPlayer2;;
             }
 
-            if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
 
         }
@@ -338,7 +338,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
             x = getPointByIdx(3).getx() - 1 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
@@ -351,7 +351,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
             x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
     }
@@ -368,7 +368,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
             x = getPointByIdx(0).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
@@ -381,7 +381,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
             x = getPointByIdx(3).getx() + 1 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
 
@@ -399,7 +399,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
             x = getPointByIdx(0).getx() - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
@@ -412,7 +412,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
             x = getPointByIdx(1).getx() + 1 - LeftBoardPlayer2;;
         }
 
-        if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
         break;
 
@@ -428,6 +428,10 @@ char* LleftShape::FindBestSpot(Board& playerBoard, int level , int playerNumber)
     Point StartPoint(3 + playerNumber*LeftBoardPlayer2, 1);
     LleftShape* temp = new LleftShape(StartPoint);
 
+    if (level == easy)
+    {
+
+    }
     for (int i = 0; i <= Rotate3; i++) {
         temp->UpdateLleftShape(StartPoint, i, _CheckRotate);
         for (int j = 1; j < rightBoardPlayer1 ; j++)

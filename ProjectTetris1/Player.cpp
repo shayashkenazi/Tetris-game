@@ -90,7 +90,7 @@ bool Player::IsPossible(const Objects& shape, char movement)
             else
                 x = shape.getPointByIdx(i).getx() + 1 - LeftBoardPlayer2;
             y = shape.getPointByIdx(i).gety();
-            if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
         }
     }
@@ -101,7 +101,7 @@ bool Player::IsPossible(const Objects& shape, char movement)
             else
                 x = shape.getPointByIdx(i).getx() - 1 - LeftBoardPlayer2;
             y = shape.getPointByIdx(i).gety();
-            if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
         }
     }
@@ -113,7 +113,7 @@ bool Player::IsPossible(const Objects& shape, char movement)
                 x = shape.getPointByIdx(i).getx() - LeftBoardPlayer2;
 
             y = shape.getPointByIdx(i).gety() + 1;
-            if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+            if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
         }
     }
@@ -136,7 +136,7 @@ bool Player::CheckGameOver(Objects& shape)
     
     for (int col = 1; col < rightBoardPlayer1; col++)
     {
-        if (boardGameForPlayer.getCharAtBoard(TopBoard + 1, col) != ' ')
+        if (boardGameForPlayer.getCharAtBoard(TopBoard + 1, col) != space)
         {
             winner = 0;
             return false;
@@ -153,7 +153,7 @@ void Player::CheckRow()
         flag = true;
         for (int j = 1; j < Cols -1; j++)
         {
-            if (boardGameForPlayer.getCharAtBoard(i, j) == ' ')
+            if (boardGameForPlayer.getCharAtBoard(i, j) == space)
                 flag = false;
         }
 

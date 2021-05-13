@@ -85,7 +85,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
              x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
          }
 
-         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+         if (boardGameForPlayer.getCharAtBoard(y, x) != space)
              return false;
          if (playerNumber == Player1)
          {
@@ -97,7 +97,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
              y = getPointByIdx(2).gety() - 2;
              x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
          }
-         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+         if (boardGameForPlayer.getCharAtBoard(y, x) != space)
              return false;
          if (playerNumber == Player1)
          {
@@ -109,7 +109,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
              y = getPointByIdx(2).gety() + 1;
              x = getPointByIdx(2).getx() - LeftBoardPlayer2;;
          }
-         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+         if (boardGameForPlayer.getCharAtBoard(y, x) != space)
              return false;
 
          break;
@@ -129,7 +129,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
              x = getPointByIdx(2).getx() - 1 - LeftBoardPlayer2;;
          }
 
-         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+         if (boardGameForPlayer.getCharAtBoard(y, x) != space)
              return false;
          if (playerNumber == Player1)
          {
@@ -141,7 +141,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
              y = getPointByIdx(2).gety();
              x = getPointByIdx(2).getx() + 1 - LeftBoardPlayer2;;
          }
-         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+         if (boardGameForPlayer.getCharAtBoard(y, x) != space)
              return false;
          if (playerNumber == Player1)
          {
@@ -153,7 +153,7 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
              y = getPointByIdx(2).gety();
              x = getPointByIdx(2).getx() - 2 - LeftBoardPlayer2;;
          }
-         if (boardGameForPlayer.getCharAtBoard(y, x) != ' ')
+         if (boardGameForPlayer.getCharAtBoard(y, x) != space)
              return false;
 
          break;

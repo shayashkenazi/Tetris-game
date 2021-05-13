@@ -115,4 +115,5 @@ void Menu::PresentDifficultyOptions() const
 	cout << "(1) Easy\n";
 	cout << "(2) Medium \n";
 	cout << "(3) Hard \n";
+	
 }

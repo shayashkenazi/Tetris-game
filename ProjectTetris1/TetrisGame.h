@@ -9,7 +9,7 @@ class TetrisGame
 private:
 
     enum { NumOfPlayers =2};
-    Player** ThePlayers = new Player*[NumOfPlayers];
+    Player** ThePlayers;
 
     Menu GameMenu;
     int gameoverflag = startGame;
@@ -19,12 +19,13 @@ public:
     TetrisGame();
     ~TetrisGame();
 
-    void createPlayers(int gameType);
+    void createPlayers(int gameType,int level = HumanVsHuman);
     void RunPlayerVsPlayer(Objects** S1, Objects** S2);
     void RunPlayerVsComputer(Objects** S1, Objects** S2);
     void RunComputerVsComputer(Objects** S1, Objects** S2);
 
-    void FastComputerLoop(Objects& S,char* computer_commands, int* index,int playerNumber);
+    void FastComputerLoop(Objects& S,char* computer_commands, int& index,int playerNumber);
+
 
     void Start(); //Game menu
     bool IsKeyboard1(char ch); //check if the key is of player 1

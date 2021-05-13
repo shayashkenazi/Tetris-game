@@ -10,13 +10,13 @@ class Point {
 private:    
     int x ;
     int y;
-    char ch =' ';
+    char ch =space;
 
 
 public:
 
     //ctor
-    Point() :x(0),y(0),ch(' ') {};
+    Point() :x(0),y(0),ch(space) {};
     ~Point() {};
     Point(int _x, int _y, char _ch = '@') : x(_x), y(_y), ch(_ch) {};
 

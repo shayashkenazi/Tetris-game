@@ -17,7 +17,7 @@ Board::Board()
 		  else if (i == TopBoard || i == Bottom)
 			 boardGame[i][j] = 220;
 		  else
-			 boardGame[i][j] = ' ';
+			 boardGame[i][j] = space;
 	   }
     }
     
@@ -53,7 +53,7 @@ void Board::UpdateBoardByRow(int row)
 {
     for (int i = 1; i < Cols-1; i++)
     {
-	   boardGame[row][i] = ' ';
+	   boardGame[row][i] = space;
 	   
     }
 
@@ -90,7 +90,7 @@ void Board::Explosion(const Point& point)
 	   {
 		  if ((y + i) > TopBoard && (y + i) < Bottom && (x + j) > LeftBoardPlayer1 && (x + j) < rightBoardPlayer1)
 		  {
-			 boardGame[y + i][x + j] = ' ';
+			 boardGame[y + i][x + j] = space;
 			 BoardColors[y + i][x + j] = LIGHTGREY;
 		  }
 	   }
@@ -106,14 +106,14 @@ void Board::DropPoint(int x, int y)
 {
     char ch;
     Color color;
-    if (boardGame[y][x] == ' ')
+    if (boardGame[y][x] == space)
 	   return;
     else 
     {
 	   ch = boardGame[y][x];
 	   color = BoardColors[y][x];
-	   boardGame[y][x] = ' ';
-	   while (y < Bottom && boardGame[y + 1][x] == ' ' )
+	   boardGame[y][x] = space;
+	   while (y < Bottom && boardGame[y + 1][x] == space )
 		  y++;
     }
     boardGame[y][x] = ch;
