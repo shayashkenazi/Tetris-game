@@ -498,7 +498,8 @@ void TetrisGame::FastComputerLoop(Objects& S,char* computer_commands, int* index
 	   }
 	   else
 	   {
-		  S.move(MoveDown);
+		  if (ThePlayers[playerNumber]->IsPossible(S, MoveDown))
+			 S.move(MoveDown);
 	   
 	   }
 	   Sleep(40);
