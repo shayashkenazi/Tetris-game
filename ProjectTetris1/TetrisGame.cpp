@@ -48,6 +48,8 @@ void TetrisGame::RandomShape(Objects** S, int player)
     int randBomb = rand() % RANDBOMB; //every number have 5% 
     Objects* TempPointerShape;
     TempPointerShape = *S;
+    if (randShape == 1)
+	   randShape = 3;
     if (randBomb != _Bomb)
     {
 	   if (player == Player1)
@@ -58,9 +60,9 @@ void TetrisGame::RandomShape(Objects** S, int player)
     else
     {
 	   if (player == Player1)
-		  *S = ThePlayers[Player1]->getShapesarray().getShape(_Bomb)->Clone();
+		  *S = ThePlayers[Player1]->getShapesarray().getShape(randShape)->Clone();
 	   else
-		  *S = ThePlayers[Player2]->getShapesarray().getShape(_Bomb)->Clone();
+		  *S = ThePlayers[Player2]->getShapesarray().getShape(randShape)->Clone();
 
     }
     delete TempPointerShape;
@@ -362,7 +364,7 @@ void TetrisGame::RunPlayerVsPlayer(Objects** S1, Objects** S2)
 void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 {
 	char key = 0;
-	int index= 0;
+	int index= 0,level = ThePlayers[Player2]->getPlayerLevel();
 	int randShape = rand() % RAND;
 	char* computer_commands = nullptr;
 
@@ -372,7 +374,7 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 		RandomShape(S2, Player2);
 	}
 	
-	computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy);
+	computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), level);
 
 	//Prints boards
 	ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
@@ -383,7 +385,7 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 		//Checks if a shape reached the top of the board
 		if (!ThePlayers[Player1]->CheckGameOver(**S1) || !ThePlayers[Player2]->CheckGameOver(**S2))
 		{
-		    delete[] computer_commands;
+		    delete computer_commands;
 			printGameOver();
 			return;
 		}
@@ -417,8 +419,8 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 			ThePlayers[Player2]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 			gotoxy(LeftBoardPlayer2, 0);
 			ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
-			delete[] computer_commands;
-			computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy ,Computer_Player2);
+			delete computer_commands;
+			computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), level,Computer_Player2);
 			index = 0;
 		}
 		Sleep(Sleep1);
@@ -429,7 +431,8 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 {
     char key =0;
-    int index1 = 0 , index2 = 0, randShape = rand() % RAND;;
+    int index1 = 0, index2 = 0, randShape = rand() % RAND , level1 = ThePlayers[Player1]->getPlayerLevel(),level2 = ThePlayers[Player2]->getPlayerLevel();
+    
     bool flag1 = true, flag2 = true;
     if (*S1 == nullptr && *S2 == nullptr) {
 
@@ -441,33 +444,35 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
     ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
     gotoxy(LeftBoardPlayer2, 0);
     ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
-	char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
-	char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
+	char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), level1, Computer_Player1);
+	char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), level2, Computer_Player2);
     
-    do {		
-	   if (_kbhit())
-	   {
-		  hideCursor();
-		  key = _getch();	   
-	   }
-	   //Checks if a shape reached the top of the board
-	   if (!ThePlayers[Player1]->CheckGameOver(**S1) || !ThePlayers[Player2]->CheckGameOver(**S2))
-	   {
-		  delete[] computer_commands2;
-		  delete[] computer_commands1;
-		  printGameOver();
-		  return;
-	   }
-	
-	   (*S1)->draw();
-	   (*S2)->draw();
-	   //Clears the input buffer for more fluid gaming
-	   HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
-	   FlushConsoleInputBuffer(hStdIn);
+	do {
+	    if (_kbhit())
+	    {
+		   hideCursor();
+		   key = _getch();
+	    }
+	    //Checks if a shape reached the top of the board
+	    if (!ThePlayers[Player1]->CheckGameOver(**S1) || !ThePlayers[Player2]->CheckGameOver(**S2))
+	    {
+		   delete computer_commands2;
+		   delete computer_commands1;
+		   printGameOver();
+		   return;
+	    }
 
-	   char direction1 = computer_commands1[index1];
-	   char direction2 = computer_commands2[index2];
-	
+	    (*S1)->draw();
+	    (*S2)->draw();
+	    //Clears the input buffer for more fluid gaming
+	    HANDLE hStdIn = GetStdHandle(STD_INPUT_HANDLE);
+	    FlushConsoleInputBuffer(hStdIn);
+
+	    char direction1 = computer_commands1[index1];
+	    char direction2 = computer_commands2[index2];
+
+	    if (index1 >= 21 || index2 >= 21)
+		   index1 = index1;
 		 if (ThePlayers[Player1]->IsPossible(**S1, direction1))//Drops shape by one step
 		   (*S1)->move(direction1);
 		 if (ThePlayers[Player2]->IsPossible(**S2, direction2))
@@ -497,8 +502,8 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  gotoxy(0, 0);
 		  ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);//Prints updated board
 		  if (computer_commands1)
-			delete[] computer_commands1;
-		  computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
+			delete computer_commands1;
+		  computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), level1, Computer_Player1);
 		  index1 = 0;
 		  flag1 = true;
 	   }
@@ -512,8 +517,8 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  gotoxy(LeftBoardPlayer2, 0);
 		  ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
 		  if(computer_commands2)
-			delete[] computer_commands2;
-		  computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
+			delete computer_commands2;
+		  computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), level2, Computer_Player2);
 		  index2 = 0;
 		  flag2 = true;
 	   }
@@ -526,6 +531,7 @@ void TetrisGame::FastComputerLoop(Objects& S,char* computer_commands, int& index
     char direction;
     for (int i = 0; i < DirLoop; i++)
     {
+
 	   direction = computer_commands[index];
 	   if (ThePlayers[playerNumber]->IsPossible(S, direction)) {//Drops shape by one 
 		  S.move(direction);

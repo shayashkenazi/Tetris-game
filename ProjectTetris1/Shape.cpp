@@ -518,6 +518,15 @@ void Shape::CreateDropShape(Board& playerBoard)
     }
 }
 
+char* Shape::FindDropShapeMiddle()
+{
+    char* commands = new char[10];
+    for (int i = 0; i < CommandLoop-1; i++)
+        commands[i] = MoveDown;
+    commands[CommandLoop-1] = '\0';
+    return commands;
+}
+
 const Shape& Shape::operator=(const Shape& other)
 {
     for (int i = 0; i < SIZE; i++)

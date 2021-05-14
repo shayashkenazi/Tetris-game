@@ -58,7 +58,7 @@ char* Bomb::FindBestSpot(Board& playerBoard,int level, int playerNumber)
     else
     {
         int i;
-        char* commandString = new char[10];
+        char* commandString = new char[Bottom + Rotate3];
         for ( i = 0; i < CommandLoop -1; i++)
             commandString[i] = MoveDown;
 
@@ -99,7 +99,7 @@ void Bomb::CreateDropBomb(Board& playerBoard)
 
 char* Bomb::FindPath(int row, int col, Board& playerBoard, int playerNumber)
 {
-    char* commands = new char[10];
+    char* commands = new char[Bottom + Rotate3];
     int x = body.getx() - playerNumber * LeftBoardPlayer2;
     int y = body.gety();
     int i = 0;

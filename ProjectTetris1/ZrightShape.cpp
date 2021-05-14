@@ -150,7 +150,16 @@ char* ZrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0, min_holes = -1, curr_holes=0;
     Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 2);
     ZrightShape* temp = new ZrightShape(StartPoint);
-
+    int rand_easy = rand() % 10;
+    int rand_medium = rand() % 40;
+    if (rand_easy == easy && level == easy)
+    {
+        return FindDropShapeMiddle();
+    }
+    if (rand_medium == medium && level == medium)
+    {
+        return FindDropShapeMiddle();
+    }
     for (int i = 0; i <= Rotate1; i++) {
         temp->UpdateZrightShape(StartPoint, i, _CheckRotate);
 
@@ -218,7 +227,7 @@ void ZrightShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
 
 char* ZrightShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
-    char* commands = new char[10];
+    char* commands = new char[Bottom+Rotate3];
     int x = body[0].getx() - playerNumber * LeftBoardPlayer2;
     int y = body[0].gety();
     int i = 0;

@@ -166,19 +166,7 @@ bool LrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
         }
-        if (playerNumber == Player1) //check if the shape is on the left frame
-        {
-            y = getPointByIdx(0).gety();
-            x = getPointByIdx(0).getx() - 1;
-        }
-        else
-        {
-            y = getPointByIdx(0).gety();
-            x = getPointByIdx(0).getx() - 1 - LeftBoardPlayer2;;
-        }
-
-        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
-            return false;
+       
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
             y = getPointByIdx(1).gety() + 1;
@@ -243,19 +231,7 @@ bool LrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
         }
-        if (playerNumber == Player1) //check if the shape is on the left frame
-        {
-            y = getPointByIdx(2).gety();
-            x = getPointByIdx(2).getx() + 1;
-        }
-        else
-        {
-            y = getPointByIdx(2).gety();
-            x = getPointByIdx(2).getx() + 1 - LeftBoardPlayer2;;
-        }
-
-        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
-            return false;
+  
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
             y = getPointByIdx(3).gety() - 1;
@@ -414,16 +390,17 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
     Point StartPoint(1 + playerNumber *LeftBoardPlayer2, 1);
     int rand_easy = rand() % 10;
     int rand_medium = rand() % 40;
-    LrightShape* temp = new LrightShape(StartPoint);
+   
 
-    if (rand_easy == easy)
+    if (rand_easy == easy && level == easy)
     {
-        Point StartPoint(LeftBoardPlayer1 + rightBoardPlayer1 / 2, 2, 1);
-
-        temp->UpdateLrightShape(StartPoint)
-        //return FindPath()
+        return FindDropShapeMiddle();
     }
-    if(rand_medium == medium)
+    if (rand_medium == medium && level == medium)
+    {
+        return FindDropShapeMiddle();
+    }
+    LrightShape* temp = new LrightShape(StartPoint);
 
 
     for (int i = 0; i <= Rotate3; i++) {
@@ -471,7 +448,7 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 char* LrightShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
 
-    char* commands = new char[10];
+    char* commands = new char[Bottom + Rotate3];
     int x = body[0].getx() - playerNumber * LeftBoardPlayer2;
     int y = body[0].gety();
     int i = 0;

@@ -163,19 +163,7 @@ bool PlusShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
             if (boardGameForPlayer.getCharAtBoard(y, x) != space)
                 return false;
         }
-        if (playerNumber == Player1) //check if the shape is on the left frame
-        {
-            y = getPointByIdx(1).gety();
-            x = getPointByIdx(1).getx() - 1;
-        }
-        else
-        {
-            y = getPointByIdx(1).gety();
-            x = getPointByIdx(1).getx() - 1 - LeftBoardPlayer2;;
-        }
-
-        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
-            return false;
+       
         break;
 
 
@@ -266,19 +254,7 @@ bool PlusShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer) 
                 return false;
 
         }
-        if (playerNumber == Player1) //check if the shape is on the left frame
-        {
-            y = getPointByIdx(1).gety();
-            x = getPointByIdx(1).getx() - 1;
-        }
-        else
-        {
-            y = getPointByIdx(1).gety();
-            x = getPointByIdx(1).getx() - 1 - LeftBoardPlayer2;;
-        }
-
-        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
-            return false;
+        
         break;
     }
     case Rotate2: // from 2 -> 1
@@ -331,6 +307,16 @@ char* PlusShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
     Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 2);
     PlusShape* temp = new PlusShape(StartPoint);
 
+    int rand_easy = rand() % 10;
+    int rand_medium = rand() % 40;
+    if (rand_easy == easy && level == easy)
+    {
+        return FindDropShapeMiddle();
+    }
+    if (rand_medium == medium && level == medium)
+    {
+        return FindDropShapeMiddle();
+    }
     for (int i = 0; i <= Rotate3; i++) {
         temp->UpdatePlusShape(StartPoint, i, _CheckRotate);
         for (int j = 1; j < rightBoardPlayer1; j++)
@@ -413,7 +399,7 @@ void PlusShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
 
 char* PlusShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
-    char* commands = new char[10];
+    char* commands = new char[Bottom + Rotate3];
     int x = body[0].getx() - (playerNumber *LeftBoardPlayer2);
     int y = body[0].gety();
     int i = 0;

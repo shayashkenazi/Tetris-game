@@ -43,6 +43,7 @@ public:
     bool CheckRow(Board& playerBoard, int row, int* holes);
     void CreateDropShape(Board& playerBoard);
 
+    char* FindDropShapeMiddle();
 
     const Shape& operator=(const Shape& other);
     

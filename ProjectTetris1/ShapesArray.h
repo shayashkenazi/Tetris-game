@@ -13,7 +13,8 @@ private:
 
 public:
     //Creates all shapes
-    ShapesArray(int _player=1) ;
+    ShapesArray(int _player=1);
+    ShapesArray(const ShapesArray& other);
     ~ShapesArray();
 
     Objects* getShape(int idx) { return AllShapesArray[idx]; } //Returns shape by index  //TODO : CHECK

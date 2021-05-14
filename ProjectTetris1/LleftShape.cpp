@@ -327,19 +327,7 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
                 return false;
 
         }
-        if (playerNumber == Player1) //check if the shape is on the left frame
-        {
-            y = getPointByIdx(3).gety();
-            x = getPointByIdx(3).getx() - 1;
-        }
-        else
-        {
-            y = getPointByIdx(3).gety();
-            x = getPointByIdx(3).getx() - 1 - LeftBoardPlayer2;;
-        }
-
-        if (boardGameForPlayer.getCharAtBoard(y, x) != space)
-            return false;
+       
         if (playerNumber == Player1) //check if the shape is on the left frame
         {
             y = getPointByIdx(2).gety() - 1;
@@ -424,13 +412,18 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
 char* LleftShape::FindBestSpot(Board& playerBoard, int level , int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0, curr_holes=0, min_holes=-1;
-
+    int rand_easy = rand() % 10;
+    int rand_medium = rand() % 40;
     Point StartPoint(3 + playerNumber*LeftBoardPlayer2, 1);
     LleftShape* temp = new LleftShape(StartPoint);
-
-    if (level == easy)
+   
+    if (rand_easy == easy && level == easy)
     {
-
+        return FindDropShapeMiddle();
+    }
+    if (rand_medium == medium && level == medium)
+    {
+        return FindDropShapeMiddle();
     }
     for (int i = 0; i <= Rotate3; i++) {
         temp->UpdateLleftShape(StartPoint, i, _CheckRotate);
@@ -477,7 +470,7 @@ char* LleftShape::FindBestSpot(Board& playerBoard, int level , int playerNumber)
 char* LleftShape::FindPath(int row, int col, Board& playerBoard, int rotate,int playerNumber )
 {
 
-      char*  commands = new char[20];
+      char*  commands = new char[Bottom + Rotate3];
      int x = body[3].getx() - (playerNumber*LeftBoardPlayer2);
      int y = body[3].gety();
      int i = 0;
