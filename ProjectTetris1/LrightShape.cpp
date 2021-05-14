@@ -412,7 +412,19 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0, min_holes = -1, curr_holes = 0;
     Point StartPoint(1 + playerNumber *LeftBoardPlayer2, 1);
+    int rand_easy = rand() % 10;
+    int rand_medium = rand() % 40;
     LrightShape* temp = new LrightShape(StartPoint);
+
+    if (rand_easy == easy)
+    {
+        Point StartPoint(LeftBoardPlayer1 + rightBoardPlayer1 / 2, 2, 1);
+
+        temp->UpdateLrightShape(StartPoint)
+        //return FindPath()
+    }
+    if(rand_medium == medium)
+
 
     for (int i = 0; i <= Rotate3; i++) {
         temp->UpdateLrightShape(StartPoint, i, _CheckRotate);

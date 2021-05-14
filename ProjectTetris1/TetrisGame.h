@@ -19,7 +19,7 @@ public:
     TetrisGame();
     ~TetrisGame();
 
-    void createPlayers(int gameType,int level = HumanVsHuman);
+    void createPlayers(int gameType,int level = easy);
     void RunPlayerVsPlayer(Objects** S1, Objects** S2);
     void RunPlayerVsComputer(Objects** S1, Objects** S2);
     void RunComputerVsComputer(Objects** S1, Objects** S2);

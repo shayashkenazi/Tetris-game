@@ -18,9 +18,10 @@ public:
     
     const int getWinner() const;
     char* getKeys() { return KeyboardKeys; }
-    
     Board& getBoardGame() { return boardGameForPlayer; } //Returns Board
     ShapesArray& getShapesarray(){ return shapesarray ;} //Returns shapes array
+    virtual int getPlayerLevel() { return easy; }
+
     const void printboard() const; //Prints board to screen
     void UpdateBoard(const Objects& shape);// Updates a shape to be permanent in the board
     void UpdateBoardExplosion(const Point& point);

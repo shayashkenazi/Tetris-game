@@ -20,36 +20,51 @@ char* Bomb::FindBestSpot(Board& playerBoard,int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
     int mid = (LeftBoardPlayer1 + rightBoardPlayer1) / 2,abs1,abs2;
-    Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 1);
-    Bomb* temp = new Bomb(StartPoint);
-    for (int i = 1; i < rightBoardPlayer1; i++)
+    
+    if (level == hard)
     {
-        temp->CreateDropBomb(playerBoard);
-        UpdateBestCurPosition(*temp, &x, &y);
-       
+        Point StartPoint(1 + playerNumber * LeftBoardPlayer2, 1);
+        Bomb* temp = new Bomb(StartPoint);
 
-        if (max_depth == 0 || max_depth > y)
+        for (int i = 1; i < rightBoardPlayer1; i++)
         {
-            max_depth = y;
-            best_col = x;
-        }
-        else if (max_depth == y) //check aprox to mid
-        {
-            (best_col - mid) < 0 ? abs1 = (best_col - mid) * (-1) : abs1 = (best_col - mid);
-            (x - mid) < 0 ? abs2 = (x - mid) * (-1) : abs2 = (x - mid);
-            if (abs2 < abs1 )
+            temp->CreateDropBomb(playerBoard);
+            UpdateBestCurPosition(*temp, &x, &y);
+
+
+            if (max_depth == 0 || max_depth > y)
             {
                 max_depth = y;
                 best_col = x;
             }
+            else if (max_depth == y) //check aprox to mid
+            {
+                (best_col - mid) < 0 ? abs1 = (best_col - mid) * (-1) : abs1 = (best_col - mid);
+                (x - mid) < 0 ? abs2 = (x - mid) * (-1) : abs2 = (x - mid);
+                if (abs2 < abs1)
+                {
+                    max_depth = y;
+                    best_col = x;
+                }
+            }
+
+            temp->body.setX(i + playerNumber * LeftBoardPlayer2 + 1);
+            temp->body.setY(1);
         }
-        
-        temp->body.setX(i + playerNumber*LeftBoardPlayer2 + 1);
-        temp->body.setY(1);
+
+        delete temp;
+        return  FindPath(max_depth, best_col, playerBoard, playerNumber);
     }
-    
-    delete temp;
-    return  FindPath(max_depth, best_col, playerBoard, playerNumber);
+    else
+    {
+        int i;
+        char* commandString = new char[10];
+        for ( i = 0; i < CommandLoop -1; i++)
+            commandString[i] = MoveDown;
+
+        commandString[i] = '\0';
+        return commandString;
+    }
 }
 
 void Bomb::UpdateBestCurPosition(Objects& obj, int* x, int* y)

@@ -129,7 +129,7 @@ void TetrisGame::Start()
 		  {
 			 GameMenu.PresentDifficultyOptions();
 			 _kbhit();
-			 levelInput = _getch() - '0';
+			 levelInput = _getch() - '0' -1;
 			 clrscr();
 			 createPlayers(HumanVsComputer, levelInput);
 			 InitPlayersBoards();
@@ -364,13 +364,15 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 	char key = 0;
 	int index= 0;
 	int randShape = rand() % RAND;
+	char* computer_commands = nullptr;
 
 	if (*S1 == nullptr && *S2 == nullptr) {
 
 		RandomShape(S1, Player1);
 		RandomShape(S2, Player2);
 	}
-	char* computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy);
+	
+	computer_commands = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(),easy);
 
 	//Prints boards
 	ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
@@ -395,8 +397,6 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 		char direction = computer_commands[index];
 		key = PlayerVsComputerLoop(S1, S2, direction);
 		index++;
-
-
 
 		if (ThePlayers[Player1]->IsPossible(**S1, MoveDown))//Drops shape by one step
 			(*S1)->move(MoveDown);
@@ -496,7 +496,8 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  ThePlayers[Player1]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 		  gotoxy(0, 0);
 		  ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);//Prints updated board
-		  delete[] computer_commands1;
+		  if (computer_commands1)
+			delete[] computer_commands1;
 		  computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), easy, Computer_Player1);
 		  index1 = 0;
 		  flag1 = true;
@@ -510,7 +511,8 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 		  ThePlayers[Player2]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 		  gotoxy(LeftBoardPlayer2, 0);
 		  ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);//Prints updated board
-		  delete[] computer_commands2;
+		  if(computer_commands2)
+			delete[] computer_commands2;
 		  computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), easy, Computer_Player2);
 		  index2 = 0;
 		  flag2 = true;
