@@ -117,7 +117,6 @@ void LleftShape::RotateCounterWise()
 
 }
 
-
 bool LleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
@@ -412,8 +411,8 @@ bool LleftShape::CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)
 char* LleftShape::FindBestSpot(Board& playerBoard, int level , int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0, curr_holes=0, min_holes=-1;
-    int rand_easy = rand() % 10;
-    int rand_medium = rand() % 40;
+    int rand_easy = rand() % easy_missing_percentage;
+    int rand_medium = rand() % medium_missing_percentage;
     Point StartPoint(3 + playerNumber*LeftBoardPlayer2, 1);
     LleftShape* temp = new LleftShape(StartPoint);
    
@@ -563,9 +562,5 @@ void LleftShape::UpdateBestCurPosition(Objects& obj, int* x, int* y)
         break;
     }
     }
-    
 }
-
-//bool LleftShape::CheckHoles()
-
 

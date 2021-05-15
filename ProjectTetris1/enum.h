@@ -4,7 +4,7 @@ enum GameZoneBoard {
 
     Player1 = 0,
     Player2 = 1,
-    Computer_Player1 =0 ,
+    Computer_Player1 = 0,
     Computer_Player2 = 1,
     LeftBoardPlayer1 = 0,
     rightBoardPlayer1 = 13,
@@ -13,8 +13,8 @@ enum GameZoneBoard {
     TopBoard = 0,
     Bottom = 19,
 
-    easy = 0, 
-    medium = 1, 
+    easy = 0,
+    medium = 1,
     hard = 2,
     startGame = 0,
     conGame = 1,
@@ -40,10 +40,16 @@ enum GameZoneBoard {
 
     BodyPointSize = 4,
     CommandLoop = 10,
-    DirLoop =3,
+    DirLoop = 3,
 
     Sleep1 = 200,
+    Sleep2 = 150,
+    Dropsleep = 10,
+    CommandLoopSleep = 50,
+    ColorGame = 1,
 
+    easy_missing_percentage = 10,
+    medium_missing_percentage = 40,
 
     _Square = 0,
     _LleftShape = 1,

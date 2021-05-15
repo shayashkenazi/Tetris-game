@@ -6,15 +6,14 @@ Shape::Shape()
 
 Shape::Shape(const Shape& other)
 {
-
     for (int i = 0; i < SIZE; i++)
         body[i] = other.body[i];
 
     direction = other.direction;
     serialNumber = other.serialNumber;
     color = other.color;
-
 }
+
 Shape::~Shape()
 {
 
@@ -41,7 +40,7 @@ void Shape::draw() const
 
 void Shape::move(char direction)
 {
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < BodyPointSize; i++)
     {
         body[i].draw(space);
     }
@@ -54,7 +53,7 @@ void Shape::move(char direction)
         RotateCounterWise();
     }
     else {
-        for (int i = 0; i < SIZE; i++)
+        for (int i = 0; i < BodyPointSize; i++)
         {
             body[i].move(direction);
         }
@@ -489,6 +488,7 @@ bool Shape::CheckRow(Board& playerBoard, int row, int* holes)
             playerBoard.setPointAtBoard(Point(this->getPointByIdx(i).getx(), this->getPointByIdx(i).gety(), space), LIGHTGREY);
     return true;
 }
+
 void Shape::CreateDropShape(Board& playerBoard)
 {
     int x, y;
@@ -520,7 +520,7 @@ void Shape::CreateDropShape(Board& playerBoard)
 
 char* Shape::FindDropShapeMiddle()
 {
-    char* commands = new char[10];
+    char* commands = new char[CommandLoop];
     for (int i = 0; i < CommandLoop-1; i++)
         commands[i] = MoveDown;
     commands[CommandLoop-1] = '\0';
@@ -529,11 +529,14 @@ char* Shape::FindDropShapeMiddle()
 
 const Shape& Shape::operator=(const Shape& other)
 {
-    for (int i = 0; i < SIZE; i++)
-        body[i] = other.body[i];
-    direction = other.direction;
-    serialNumber = other.serialNumber;
-    color = other.color;
+    if (this != &other)
+    {
+        for (int i = 0; i < BodyPointSize; i++)
+            body[i] = other.body[i];
+        direction = other.direction;
+        serialNumber = other.serialNumber;
+        color = other.color;
+    }
 
     return *this;
 }

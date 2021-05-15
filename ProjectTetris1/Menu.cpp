@@ -17,8 +17,6 @@ void Menu::PresentMenu(int pause) const
 
 	cout << "(3) Start a new game - Computer vs Computer \n";
 
-
-
 	int space_for_row = 0;
 	if (pause)
 	{
@@ -112,8 +110,14 @@ void Menu::PresentDifficultyOptions() const
 	gotoxy(5, 9);
 
 	cout << "Choose Computer Difficulty:\n";
+	gotoxy(5, 10);
+
 	cout << "(1) Easy\n";
+	gotoxy(5, 11);
+
 	cout << "(2) Medium \n";
+	gotoxy(5, 12);
+
 	cout << "(3) Hard \n";
 	
 }

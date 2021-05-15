@@ -29,11 +29,29 @@ Player::Player(int player) : boardGameForPlayer(), shapesarray(player), playerNu
         KeyboardKeys[9] = RotateCounterClockWise2B;
     }
 }
-
-
+ 
 Player::~Player()
 {
 }
+
+Player::Player(const Player& other)
+{
+    *this = other;
+}
+
+const Player& Player::operator=(const Player& other) 
+{
+    if (this != &other)
+    {
+        *this = Player(other.playerNumber);
+        this->boardGameForPlayer = other.boardGameForPlayer;
+        this->shapesarray = other.shapesarray;
+        this->playerNumber = other.playerNumber;
+        this->winner = other.winner;
+    }
+    return *this;
+}
+
 const int Player::getWinner() const
 {
     return winner;
@@ -49,11 +67,10 @@ void Player::UpdateBoard(const Objects& shape)
     if (typeid(shape) == typeid(Bomb))
     {
         boardGameForPlayer.Explosion(shape.getPointByIdx(0));
-        //        UpdateBoardExplosion(shape.getPointByIdx(0));
-        
+        UpdateBoardExplosion(shape.getPointByIdx(0));
     }
     else {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < BodyPointSize; i++)
         {
             boardGameForPlayer.setPointAtBoard(shape.getPointByIdx(i), shape.getColor());
         }
@@ -128,7 +145,6 @@ bool Player::IsPossible(const Objects& shape, char movement)
     }
     return true;
 }
-
 
 bool Player::CheckGameOver(Objects& shape)
 {

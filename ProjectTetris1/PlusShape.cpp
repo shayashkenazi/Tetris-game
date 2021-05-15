@@ -119,7 +119,6 @@ void PlusShape::RotateCounterWise()
     
 }
 
-
 bool PlusShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
@@ -307,8 +306,8 @@ char* PlusShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
     Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 2);
     PlusShape* temp = new PlusShape(StartPoint);
 
-    int rand_easy = rand() % 10;
-    int rand_medium = rand() % 40;
+    int rand_easy = rand() % easy_missing_percentage;
+    int rand_medium = rand() % medium_missing_percentage;
     if (rand_easy == easy && level == easy)
     {
         return FindDropShapeMiddle();
@@ -443,8 +442,6 @@ char* PlusShape::FindPath(int row, int col, Board& playerBoard, int rotate,int p
         counterRight--;
         i++;
     }
-
-
     commands[i] = '\0';
     return commands;
 }

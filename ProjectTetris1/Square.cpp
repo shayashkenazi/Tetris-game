@@ -30,8 +30,8 @@ char* Square::FindBestSpot(Board& playerBoard, int level, int playerNumber)
     int max_depth = 0, best_col = 1, x = 0, y = 0, curr_holes=0, min_holes = -1;
     Point StartPoint(1 + playerNumber *LeftBoardPlayer2, 1);
     Square* temp = new Square(StartPoint);
-    int rand_easy = rand() % 10;
-    int rand_medium = rand() % 40;
+    int rand_easy = rand() % easy_missing_percentage;
+    int rand_medium = rand() % medium_missing_percentage;
     if (rand_easy == easy && level == easy)
     {
         return FindDropShapeMiddle();

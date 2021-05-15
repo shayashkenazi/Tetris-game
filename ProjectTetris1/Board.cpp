@@ -45,8 +45,6 @@ void Board::setPointAtBoard(const Point& point,Color c)
 	   x = x - LeftBoardPlayer2;
     boardGame[y][x] = point.getCh();
     BoardColors[y][x] = c;
-
-    
 }
 
 void Board::UpdateBoardByRow(int row)
@@ -54,7 +52,6 @@ void Board::UpdateBoardByRow(int row)
     for (int i = 1; i < Cols-1; i++)
     {
 	   boardGame[row][i] = space;
-	   
     }
 
     for (int i = row; i > 2 ; i--)
@@ -94,12 +91,7 @@ void Board::Explosion(const Point& point)
 			 BoardColors[y + i][x + j] = LIGHTGREY;
 		  }
 	   }
-    
     }
-
-
-
-
 }
 
 void Board::DropPoint(int x, int y)

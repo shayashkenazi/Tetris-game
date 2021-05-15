@@ -46,7 +46,7 @@ void ZleftShape :: UpdateZleftShape(Point& StartPoint, int direction, int CheckR
 
 void ZleftShape::RotateClockWise()
 {
-    if (direction == 1) // TO DO : IF ROW == 1 ->> 0
+    if (direction == 1) 
         direction = 0;
     else
         direction++;
@@ -56,13 +56,12 @@ void ZleftShape::RotateClockWise()
 
 void ZleftShape::RotateCounterWise()
 {
-    if (direction == 0) // TO DO : IF ROW == 1 ->> 0
+    if (direction == 0) 
         direction = 1;
     else
         direction--;
     this -> UpdateZleftShape(body[0], direction);
 }
-
 
 bool ZleftShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
 {
@@ -146,8 +145,8 @@ char* ZleftShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0, curr_holes = 0, min_holes = -1;
     Point StartPoint(1 + playerNumber*LeftBoardPlayer2, 1);
     ZleftShape* temp = new ZleftShape(StartPoint);
-    int rand_easy = rand() % 10;
-    int rand_medium = rand() % 40;
+    int rand_easy = rand() % easy_missing_percentage;
+    int rand_medium = rand() % medium_missing_percentage;
     if (rand_easy == easy && level == easy)
     {
         return FindDropShapeMiddle();
@@ -231,8 +230,6 @@ char* ZleftShape::FindPath(int row, int col, Board& playerBoard, int rotate,int 
     int y = body[2].gety();
     int i = 0;
     int counterRight = 0, counterLeft = 0, Counter, CounterRotate = rotate;
- //   if (rotate != Rotate0)
-   //     x = body[1].getx() - LeftBoardPlayer2;
 
     Counter = col - x;
     if (Counter < 0)

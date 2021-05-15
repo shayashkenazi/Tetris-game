@@ -177,8 +177,8 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
      int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0,curr_holes=0, min_holes=-1;
      Point StartPoint(1 + playerNumber * LeftBoardPlayer2, 1);
      RowShape* temp = new RowShape(StartPoint);
-     int rand_easy = rand() % 10;
-     int rand_medium = rand() % 40;
+     int rand_easy = rand() % easy_missing_percentage;
+     int rand_medium = rand() % medium_missing_percentage;
      if (rand_easy == easy && level == easy)
      {
          return FindDropShapeMiddle();
@@ -305,8 +305,6 @@ void RowShape::UpdateRowShape(Point& StartPoint, int direction, int CheckRotate)
          counterRight--;
          i++;
      }
-
-    
      commands[i] = '\0';
      return commands;
  }

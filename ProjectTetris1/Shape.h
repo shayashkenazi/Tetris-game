@@ -20,10 +20,8 @@ public:
   virtual const Point& getPointByIdx(int idx) const override{ return body[idx]; } //Returns the wanted point in the body of the shape
   //const Color getColor() const{ return color; } //Returns shapes color
 
-
     void initShape();
     virtual void draw() const override ; // Printing the shape to the screen
-
 
     virtual void move(char direction = Drop1) override; //Moving the shape by direction (?)
 
@@ -47,7 +45,6 @@ public:
 
     const Shape& operator=(const Shape& other);
     
-
     int CheckHoles(Board& playerBoard);
 
     virtual Shape* Clone()const = 0 {};

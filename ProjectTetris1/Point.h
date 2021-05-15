@@ -30,7 +30,6 @@ public:
     void setY(int _y) { y = _y; } 
 
 
-
     void draw(char ch) const; //Draws a point to the screen by char
     void draw() const;//Draws a point to the screen 
 

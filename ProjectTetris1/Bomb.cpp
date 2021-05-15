@@ -19,7 +19,7 @@ void Bomb::move(char direction)
 char* Bomb::FindBestSpot(Board& playerBoard,int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0;
-    int mid = (LeftBoardPlayer1 + rightBoardPlayer1) / 2,abs1,abs2;
+    int mid = (LeftBoardPlayer1 + rightBoardPlayer1) / 2 ,abs1,abs2;
     
     if (level == hard)
     {

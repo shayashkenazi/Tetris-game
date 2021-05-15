@@ -109,7 +109,6 @@ void LrightShape::RotateCounterWise()
 
 }
 
-
 bool LrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
 {
     int x, y;
@@ -142,14 +141,10 @@ bool LrightShape::CheckRotate(int playerNumber, Board& boardGameForPlayer)const
         }
         if (boardGameForPlayer.getCharAtBoard(y, x) != space)
             return false;
-
-
         break;
-
     }
     case Rotate1:
     {
-
         for (int i = 0; i < 3; i++)
         {
             if (playerNumber == Player1) //check if the shape is on the left frame
@@ -388,8 +383,8 @@ char* LrightShape::FindBestSpot(Board& playerBoard, int level, int playerNumber)
 {
     int max_depth = 0, best_col = 1, x = 0, y = 0, Best_Rotate = 0, min_holes = -1, curr_holes = 0;
     Point StartPoint(1 + playerNumber *LeftBoardPlayer2, 1);
-    int rand_easy = rand() % 10;
-    int rand_medium = rand() % 40;
+    int rand_easy = rand() % easy_missing_percentage;
+    int rand_medium = rand() % medium_missing_percentage;
    
 
     if (rand_easy == easy && level == easy)

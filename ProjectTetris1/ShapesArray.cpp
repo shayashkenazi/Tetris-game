@@ -40,13 +40,22 @@ ShapesArray::ShapesArray(int _player) : player(_player)
 
 ShapesArray::ShapesArray(const ShapesArray& other)
 {
-    Objects ** temp = new Objects * [NumOfShapes];
-    for (int i = 0; i < NumOfShapes; i++)
+    *this = other;
+}
+
+const ShapesArray& ShapesArray::operator= (const ShapesArray& other)
+{
+    if (this != &other)
     {
-        temp[i] = other.AllShapesArray[i];
+        this->player = other.player;
+        Objects** temp = new Objects * [NumOfShapes];
+        for (int i = 0; i < NumOfShapes; i++)
+        {
+            temp[i] = other.AllShapesArray[i];
+        }
+        this->AllShapesArray = temp;
     }
-   this->AllShapesArray= temp; 
-   
+    return *this;
 }
 
 ShapesArray::~ShapesArray()

@@ -15,7 +15,9 @@ public:
 
     Player(int player);
     ~Player();
-    
+    Player(const Player& other);
+    const Player& operator=(const Player& other);
+
     const int getWinner() const;
     char* getKeys() { return KeyboardKeys; }
     Board& getBoardGame() { return boardGameForPlayer; } //Returns Board
