@@ -52,11 +52,6 @@ const Player& Player::operator=(const Player& other)
     return *this;
 }
 
-const int Player::getWinner() const
-{
-    return winner;
-}
-
 void const Player::printboard() const
 {
     boardGameForPlayer.PrintBoardGame(playerNumber);
@@ -67,7 +62,7 @@ void Player::UpdateBoard(const Objects& shape)
     if (typeid(shape) == typeid(Bomb))
     {
         boardGameForPlayer.Explosion(shape.getPointByIdx(0));
-        UpdateBoardExplosion(shape.getPointByIdx(0));
+        //UpdateBoardExplosion(shape.getPointByIdx(0));
     }
     else {
         for (int i = 0; i < BodyPointSize; i++)

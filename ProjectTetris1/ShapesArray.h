@@ -17,7 +17,7 @@ public:
     ShapesArray(const ShapesArray& other);
     ~ShapesArray();
 
-    Objects* getShape(int idx) { return AllShapesArray[idx]; } //Returns shape by index  //TODO : CHECK
+    Objects* getShape(int idx) const { return AllShapesArray[idx]; } //Returns shape by index  //TODO : CHECK
     void InitColorsShapesArray(); //Sets color to each shape
     const ShapesArray& operator= (const ShapesArray& other);
 };

@@ -441,7 +441,7 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 			computer_commands = UpdateComputerPlayersBoard(S2, level, Computer_Player2);
 			index = 0;
 		}
-		Sleep(Sleep1);
+		Sleep(CommandLoopSleep);
 	} while (key != ESC);
 
 }
@@ -498,12 +498,12 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 	   index1++;
 	   index2++;
 
-	   if (ThePlayers[Player1]->getBoardGame().CheckIfExistAtRow(Bottom-8) && computer_commands1[index1] != 's' && flag1)
+	   if (ThePlayers[Player1]->getBoardGame().CheckIfExistAtRow(Bottom-6) && computer_commands1[index1] != 's' && flag1)//moves shape faster to avoid getting stuck
 	   {
 		  FastComputerLoop(**S1, computer_commands1, index1,Player1);
 		  flag1 = false;
 	   }
-	   if (ThePlayers[Player2]->getBoardGame().CheckIfExistAtRow(Bottom - 8) && computer_commands2[index2] != 'k' && flag2)
+	   if (ThePlayers[Player2]->getBoardGame().CheckIfExistAtRow(Bottom - 6) && computer_commands2[index2] != 'k' && flag2)
 	   {
 		  FastComputerLoop(**S2, computer_commands2, index2,Player2);
 		  flag2 = false;
