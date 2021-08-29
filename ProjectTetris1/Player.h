@@ -10,6 +10,7 @@ protected:
     int playerNumber;
     char KeyboardKeys[10];
     int winner = 1;
+    int score = 0;
     
 public:
 
@@ -18,11 +19,12 @@ public:
     Player(const Player& other);
     const Player& operator=(const Player& other);
 
-    const int getWinner() const;
-    char* getKeys() { return KeyboardKeys; }
+    const int getWinner() const { return winner;  }
+    const char* getKeys()const { return KeyboardKeys; }
     Board& getBoardGame() { return boardGameForPlayer; } //Returns Board
-    ShapesArray& getShapesarray(){ return shapesarray ;} //Returns shapes array
-    virtual int getPlayerLevel() { return easy; }
+    const Board& getBoardGame()const { return boardGameForPlayer; } //Returns Board
+    ShapesArray& getShapesarray() { return shapesarray ;} //Returns shapes array
+    virtual const int getPlayerLevel()const { return easy; }
 
     const void printboard() const; //Prints board to screen
     void UpdateBoard(const Objects& shape);// Updates a shape to be permanent in the board
@@ -31,5 +33,6 @@ public:
     void CheckRow();//Checks if there is any rows that are full, if so deletes row
     bool IsPossible(const Objects& shape, char direction);//Checks if a given move input is possible
     bool CheckGameOver(Objects& shape);//Checks if a shape reached the top of the board
+    void PrintScore();
 };
 

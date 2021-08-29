@@ -296,6 +296,7 @@ char* TetrisGame::UpdateComputerPlayersBoard(Objects** S,int level, int playerNu
 	ThePlayers[playerNumber]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 	gotoxy(LeftBoardPlayer2*playerNumber, TopBoard);
 	ThePlayers[playerNumber]->getBoardGame().PrintBoardGame(playerNumber);//Prints updated board
+	ThePlayers[playerNumber]->PrintScore();
 	return (*S)->FindBestSpot(ThePlayers[playerNumber]->getBoardGame(), level, playerNumber);
 }
 
@@ -306,6 +307,7 @@ void TetrisGame::UpdatePlayersBoard(Objects** S, int playerNumber)
 	ThePlayers[playerNumber]->CheckRow(); //Checks if there is any rows that are full, if so deletes row
 	gotoxy(LeftBoardPlayer2*playerNumber, TopBoard);
 	ThePlayers[playerNumber]->getBoardGame().PrintBoardGame(playerNumber);//Prints updated board
+	ThePlayers[playerNumber]->PrintScore();
 	return;
 }
 
@@ -355,8 +357,10 @@ void TetrisGame::RunPlayerVsPlayer(Objects** S1, Objects** S2)
 	}
 	//Prints boards
 	ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
+	ThePlayers[Player1]->PrintScore();
 	gotoxy(LeftBoardPlayer2, 0);
 	ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
+	ThePlayers[Player2]->PrintScore();
 
 	do {
 		//Checks if a shape reached the top of the board
@@ -405,9 +409,10 @@ void TetrisGame::RunPlayerVsComputer(Objects** S1, Objects** S2)
 
 	//Prints boards
 	ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
+	ThePlayers[Player1]->PrintScore();
 	gotoxy(LeftBoardPlayer2, 0);
 	ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
-
+	ThePlayers[Player2]->PrintScore();
 	do {
 		//Checks if a shape reached the top of the board
 		if (!ThePlayers[Player1]->CheckGameOver(**S1) || !ThePlayers[Player2]->CheckGameOver(**S2))
@@ -459,8 +464,10 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
     }
     //Prints boards
     ThePlayers[Player1]->getBoardGame().PrintBoardGame(Player1);
+    ThePlayers[Player1]->PrintScore();
     gotoxy(LeftBoardPlayer2, 0);
     ThePlayers[Player2]->getBoardGame().PrintBoardGame(Player2);
+    ThePlayers[Player2]->PrintScore();
 	char* computer_commands1 = (*S1)->FindBestSpot(ThePlayers[Player1]->getBoardGame(), level1, Computer_Player1);
 	char* computer_commands2 = (*S2)->FindBestSpot(ThePlayers[Player2]->getBoardGame(), level2, Computer_Player2);
     
@@ -498,12 +505,12 @@ void TetrisGame::RunComputerVsComputer(Objects** S1, Objects** S2)
 	   index1++;
 	   index2++;
 
-	   if (ThePlayers[Player1]->getBoardGame().CheckIfExistAtRow(Bottom-8) && computer_commands1[index1] != 's' && flag1)
+	   if (ThePlayers[Player1]->getBoardGame().CheckIfExistAtRow(Bottom-6) && computer_commands1[index1] != 's' && flag1)
 	   {
 		  FastComputerLoop(**S1, computer_commands1, index1,Player1);
 		  flag1 = false;
 	   }
-	   if (ThePlayers[Player2]->getBoardGame().CheckIfExistAtRow(Bottom - 8) && computer_commands2[index2] != 'k' && flag2)
+	   if (ThePlayers[Player2]->getBoardGame().CheckIfExistAtRow(Bottom - 6) && computer_commands2[index2] != 'k' && flag2)
 	   {
 		  FastComputerLoop(**S2, computer_commands2, index2,Player2);
 		  flag2 = false;

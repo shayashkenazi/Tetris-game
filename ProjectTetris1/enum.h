@@ -8,7 +8,7 @@ enum GameZoneBoard {
     Computer_Player2 = 1,
     LeftBoardPlayer1 = 0,
     rightBoardPlayer1 = 13,
-    LeftBoardPlayer2 = 25,
+    LeftBoardPlayer2 = 30,
     rightBoardPlayer2 = 38,
     TopBoard = 0,
     Bottom = 19,

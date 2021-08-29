@@ -7,7 +7,7 @@ private:
 
 public:
 	ComputerPlayer(int _level,int player) : Player(player) , level(_level) {}
-	int getPlayerLevel() override { return level; }
+	const int getPlayerLevel()const override { return level; }
 
 };
 

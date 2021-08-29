@@ -25,14 +25,8 @@ Board::Board()
     {
 	   for (int j = 0; j < Cols; j++)
 	   {
-		  //if (i == TopBoard || j == LeftBoardPlayer1 || i == Bottom || j == rightBoardPlayer1)
-		  //{
 			 BoardColors[i][j] = LIGHTGREY;
-		//  }
-		
 	   }
-	   
-
     }
 }
 
@@ -124,8 +118,6 @@ bool Board::CheckIfExistAtRow(int row)
 
 void Board::PrintBoardGame(int player) const
 {
-     
-    
     for (int i = 0; i < Rows; i++)
     {
 	   for (int j = 0; j < Cols; j++)

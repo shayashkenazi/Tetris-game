@@ -15,7 +15,7 @@ private:
     int gameoverflag = startGame;
 
 public:
-    //TetrisGame() {};
+
     TetrisGame();
     ~TetrisGame();
     const TetrisGame& operator=(const TetrisGame& other);

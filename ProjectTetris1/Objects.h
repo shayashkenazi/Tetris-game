@@ -17,7 +17,7 @@ public:
     const int getSerialNumber() const { return serialNumber; } //Returns the shape's serial number
     const Color getColor() const { return color; } //Returns shapes color
     virtual const Point& getPointByIdx(int idx) const = 0; //Returns the wanted point in the body of the shape
-    const int  getDirection()const { return direction; }
+    const int getDirection()const { return direction; }
     virtual Objects* Clone()const = 0 {};
 
     void setColor(Color c) { color = c; }
@@ -28,7 +28,7 @@ public:
 
     virtual bool CheckRotate(int playerNumber, Board& boardGameForPlayer) const = 0;
     virtual bool CheckCounterRotate(int playerNumber, Board& boardGameForPlayer)const = 0;
-    virtual char* FindBestSpot(Board& playerBoard,int level, int playerNumber = Computer_Player2) = 0;
+    virtual char* FindBestSpot(Board& playerBoard,int level, int playerNumber = Computer_Player2) = 0;//finds the best ideal spot to place the current shape
 
     virtual void UpdateBestCurPosition(Objects& obj, int* x, int* y) = 0;
 

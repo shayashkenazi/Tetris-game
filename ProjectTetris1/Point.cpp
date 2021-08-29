@@ -3,12 +3,14 @@
 void Point::draw(char ch) const{
     gotoxy(x, y);
     cout << ch << endl;
+    hideCursor();
 }
 
 void Point::draw() const
 {
     gotoxy(x, y);
     cout << ch << endl;
+    hideCursor();
 }
 
 void Point::move(char direction) {

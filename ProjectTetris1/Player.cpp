@@ -52,11 +52,6 @@ const Player& Player::operator=(const Player& other)
     return *this;
 }
 
-const int Player::getWinner() const
-{
-    return winner;
-}
-
 void const Player::printboard() const
 {
     boardGameForPlayer.PrintBoardGame(playerNumber);
@@ -67,7 +62,7 @@ void Player::UpdateBoard(const Objects& shape)
     if (typeid(shape) == typeid(Bomb))
     {
         boardGameForPlayer.Explosion(shape.getPointByIdx(0));
-        UpdateBoardExplosion(shape.getPointByIdx(0));
+        //UpdateBoardExplosion(shape.getPointByIdx(0));
     }
     else {
         for (int i = 0; i < BodyPointSize; i++)
@@ -161,9 +156,24 @@ bool Player::CheckGameOver(Objects& shape)
     return true;
 }
 
+void Player::PrintScore()
+{
+    if (playerNumber != Computer_Player2)
+    {
+        gotoxy(LeftBoardPlayer1 , Bottom + 2);
+        cout << "Score - " << score;
+    }
+    else
+    {
+        gotoxy(LeftBoardPlayer2, Bottom + 2);
+        cout << "Score - " << score;
+    }
+}
+
 void Player::CheckRow()
 {
     bool flag; 
+    int countRows = 0;
     for (int i = 1; i < Rows-1; i++)
     {
         flag = true;
@@ -176,8 +186,10 @@ void Player::CheckRow()
         if (flag == true)
         {
             boardGameForPlayer.UpdateBoardByRow(i);
+            countRows++;
         }
     }
-    //printboard();
+    score += countRows * 100;
+    
 }
 
